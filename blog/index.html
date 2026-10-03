@@ -4,24 +4,31 @@ title: Blog
 description: یادداشت‌هایی درباره‌ی طراحی لوگو، برندینگ و هویت بصری.
 wide: true
 ---
+{% assign total = site.posts.size %}
 <div class="wrap wide">
-  <div class="page-head">
-    <div class="eyebrow">وبلاگ</div>
-    <h1>یادداشت‌ها</h1>
-    <p>درباره‌ی طراحی لوگو، برندینگ و هویت بصری.</p>
+  <div class="page-head head-row">
+    <div>
+      <div class="eyebrow">Blog</div>
+      <h1>یادداشت‌ها</h1>
+      <p>درباره‌ی طراحی لوگو، برندینگ و هویت بصری.</p>
+    </div>
+    <div class="count"><b>{% if total < 10 %}0{% endif %}{{ total }}</b><span>مطلب</span></div>
   </div>
 
-  {% if site.posts.size > 0 %}
+  {% if total > 0 %}
   <div class="post-grid">
     {% for post in site.posts %}
-    <a class="post-card" href="{{ post.url }}">
-      {% if post.image %}<img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">{% else %}<div class="ph"><i class="fa-solid fa-pen-nib"></i></div>{% endif %}
-      <div class="info">
-        <div>
-          <div class="meta">{{ post.date | date: "%Y/%m/%d" }}</div>
-          <h2>{{ post.title }}</h2>
-        </div>
-        <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+    {% include cover.html src=post.image %}
+    <a class="post-card" href="{{ post.url }}" style="--i: {{ forloop.index0 }}">
+      <div class="thumb">
+        {% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}<div class="ph">{{ post.title | slice: 0 }}</div>{% endif %}
+        <span class="date">{{ post.date | date: "%Y/%m/%d" }}</span>
+        <span class="num">{% if forloop.rindex < 10 %}0{% endif %}{{ forloop.rindex }}</span>
+      </div>
+      <div class="body">
+        <h2>{{ post.title }}</h2>
+        {% if post.description %}<p class="desc">{{ post.description }}</p>{% endif %}
+        <div class="foot"><span>ادامه مطلب</span><span class="go"><i class="fa-solid fa-arrow-right"></i></span></div>
       </div>
     </a>
     {% endfor %}
