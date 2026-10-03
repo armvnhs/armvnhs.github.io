@@ -1,0 +1,1 @@
+{% assign cover_url = include.src | strip %}{% if cover_url != '' %}{% unless cover_url contains '://' %}{% assign c0 = cover_url | slice: 0 %}{% if c0 != '/' %}{% assign cover_url = cover_url | prepend: '/' %}{% endif %}{% endunless %}{% endif %}
