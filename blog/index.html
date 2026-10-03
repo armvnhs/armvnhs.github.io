@@ -1,0 +1,30 @@
+---
+layout: default
+title: وبلاگ
+description: یادداشت‌هایی درباره‌ی طراحی لوگو، برندینگ و هویت بصری.
+---
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">وبلاگ</div>
+    <h1>یادداشت‌ها</h1>
+    <p>درباره‌ی طراحی لوگو، برندینگ و هویت بصری.</p>
+  </div>
+
+  {% if site.posts.size > 0 %}
+  <div>
+    {% for post in site.posts %}
+    <a class="post-row" href="{{ post.url }}">
+      <div>
+        <div class="meta">{{ post.date | date: "%Y/%m/%d" }}</div>
+        <h2>{{ post.title }}</h2>
+        {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+      </div>
+      <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty">هنوز مطلبی منتشر نشده.</p>
+  {% endif %}
+  <div class="list-end"></div>
+</div>
