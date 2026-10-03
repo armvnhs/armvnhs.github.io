@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arman Haghshenas — Graphic Designer</title>
 <meta name="description" content="Arman Haghshenas, Graphic Designer Portfolio">
+<meta name="theme-color" content="#111214">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Arman Haghshenas — Graphic Designer">
+<meta property="og:description" content="Logo design, branding and visual identity.">
+<meta property="og:image" content="https://armvnhs.github.io/assets/img/Profile.jpg">
 
-<link rel="icon" type="image/jpeg" href="assets/img/Icon.png">
+<link rel="icon" type="image/png" href="assets/img/Icon.png">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +41,7 @@
   }
 
   i { font-size: 18px; line-height: 1; }
-  h1, h2, h3, .exp-row h3 { font-family: 'SN Pro', sans-serif; }
+  h1, h2, h3 { font-family: 'SN Pro', sans-serif; }
   a { color: inherit; text-decoration: none; }
   ul { list-style: none; }
   ::selection { background: var(--accent); color: #fff; }
@@ -84,6 +89,8 @@
       transform: none;
       transition: none;
     }
+    .track { transition: none; }
+    .work-card { animation: none; opacity: 1; transform: none; }
   }
 
   /* Custom Cursor */
@@ -608,8 +615,8 @@
     .socials a:hover { background: #fff; border-color: #fff; color: #000; }
   }
 
-  /* Mobile */
-  @media (max-width: 860px) {
+  /* Mobile (narrow or short screens) */
+  @media (max-width: 860px), (max-height: 620px) {
     html, body {
       height: auto;
       overflow: auto;
@@ -672,14 +679,13 @@
       color: var(--accent);
     }
 
-    #contact .side-nav {
+    body.on-dark .side-nav {
       background: rgba(0,0,0,0.6);
       box-shadow: 0 4px 25px rgba(0,0,0,0.4);
     }
 
-    #contact .side-nav a.active {
-      color: #fff;
-    }
+    body.on-dark .side-nav a { color: rgba(255,255,255,.55); }
+    body.on-dark .side-nav a.active { color: #fff; }
 
     .work-header-row { flex-wrap: nowrap; }
 
@@ -815,7 +821,7 @@
         </div>
 
         <div class="exp-row">
-          <img src="assets/img//Experience/Aseman-Farda.jpg" alt="Chap Aseman Farda" loading="lazy">
+          <img src="assets/img/Experience/Aseman-Farda.jpg" alt="Chap Aseman Farda" loading="lazy">
           <div class="details">
             <h4>Chap Aseman Farda</h4>
             <div class="role">Print Design Services</div>
@@ -886,8 +892,10 @@
 
 <script>
   function isMobile() {
-    return window.matchMedia('(max-width: 860px)').matches;
+    return window.matchMedia('(max-width: 860px), (max-height: 620px)').matches;
   }
+
+  const projectList = typeof projects !== 'undefined' ? projects : [];
 
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -903,11 +911,13 @@
 
   function renderProjects(filter = 'all') {
     list.innerHTML = '';
-    const filtered = filter === 'all' ? projects : projects.filter(p => p.tag === filter);
+    const filtered = filter === 'all' ? projectList : projectList.filter(p => p.tag === filter);
 
     filtered.forEach((p, index) => {
       const card = document.createElement('a');
       card.href = p.link;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
       card.className = 'work-card';
       card.style.animationDelay = `${index * 0.05}s`;
       card.innerHTML = `
@@ -926,7 +936,7 @@
     workWrapper.scrollTo({ left: 0, behavior: 'smooth' });
   }
 
-  const categories = ['all', ...new Set(projects.map(p => p.tag))];
+  const categories = ['all', ...new Set(projectList.map(p => p.tag))];
   categories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className = `filter-btn ${cat === 'all' ? 'active' : ''}`;
@@ -938,6 +948,9 @@
     });
     filtersContainer.appendChild(btn);
   });
+
+  // Hide the filter when there is only one category
+  if (categories.length <= 2) filtersContainer.style.display = 'none';
 
   renderProjects('all');
 
@@ -961,6 +974,7 @@
   function setActiveDot(i) {
     dots.forEach(d => d.classList.remove('active'));
     if (dots[i]) dots[i].classList.add('active');
+    document.body.classList.toggle('on-dark', i === panels.length - 1);
   }
 
   function applyTransform() {
@@ -990,6 +1004,9 @@
 
     const scrollable = e.target.closest('.work-wrapper');
     if (scrollable) {
+      // Horizontal trackpad swipes scroll the project list natively
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
       const atLeft = scrollable.scrollLeft <= 0;
       const atRight = Math.ceil(scrollable.scrollLeft + scrollable.clientWidth) >= scrollable.scrollWidth;
 
@@ -1017,6 +1034,8 @@
 
   window.addEventListener('keydown', (e) => {
     if (isMobile()) return;
+    // Let buttons and links keep their own keyboard behavior
+    if (e.target.closest('button, a, input, textarea')) return;
     if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
       e.preventDefault();
       goTo(current + 1);
@@ -1024,6 +1043,13 @@
       e.preventDefault();
       goTo(current - 1);
     }
+  });
+
+  // Tab focus moves to the panel that contains the focused element
+  document.addEventListener('focusin', (e) => {
+    if (isMobile()) return;
+    const i = Array.from(panels).findIndex(p => p.contains(e.target));
+    if (i !== -1) goTo(i);
   });
 
   let touchStartY = null;
@@ -1060,18 +1086,17 @@
   applyTransform();
   setActiveDot(0);
 
-  if (isMobile()) {
-    const dotObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-          const idx = Array.from(panels).indexOf(entry.target);
-          setActiveDot(idx);
-        }
-      });
-    }, { threshold: 0.5 });
+  // Active section indicator for the scrolling (mobile) layout
+  const dotObserver = new IntersectionObserver((entries) => {
+    if (!isMobile()) return;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActiveDot(Array.from(panels).indexOf(entry.target));
+      }
+    });
+  }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
 
-    panels.forEach(p => dotObserver.observe(p));
-  }
+  panels.forEach(p => dotObserver.observe(p));
 
   (function initCustomCursor() {
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
