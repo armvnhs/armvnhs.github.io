@@ -881,10 +881,8 @@
 </section>
 </div>
 
-<script src="projects.js"></script>
-
 <script>
-  const projectList = typeof projects !== 'undefined' ? projects : [];
+  let projectList = [];
 
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -925,23 +923,35 @@
     workWrapper.scrollTo({ left: 0, behavior: 'smooth' });
   }
 
-  const categories = ['all', ...new Set(projectList.map(p => p.tag))];
-  categories.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = `filter-btn ${cat === 'all' ? 'active' : ''}`;
-    btn.textContent = cat === 'all' ? 'All' : cat;
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderProjects(cat);
+  function initProjects(data) {
+    projectList = Array.isArray(data) ? data : [];
+    filtersContainer.innerHTML = '';
+    filtersContainer.style.display = '';
+
+    const categories = ['all', ...new Set(projectList.map(p => p.tag))];
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = `filter-btn ${cat === 'all' ? 'active' : ''}`;
+      btn.textContent = cat === 'all' ? 'All' : cat;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderProjects(cat);
+      });
+      filtersContainer.appendChild(btn);
     });
-    filtersContainer.appendChild(btn);
-  });
 
-  // Hide the filter when there is only one category
-  if (categories.length <= 2) filtersContainer.style.display = 'none';
+    // Hide the filter when there is only one category
+    if (categories.length <= 2) filtersContainer.style.display = 'none';
 
-  renderProjects('all');
+    renderProjects('all');
+  }
+
+  // Projects are edited from the CMS and stored in projects.json
+  fetch('projects.json', { cache: 'no-cache' })
+    .then(r => r.json())
+    .then(initProjects)
+    .catch(() => initProjects([]));
 
   const slidePrev = document.getElementById('slidePrev');
   const slideNext = document.getElementById('slideNext');
