@@ -3,155 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سفارش لوگو — آرمان حق‌شناس</title>
-<meta name="description" content="درخواست طراحی لوگو از آرمان حق‌شناس — جزئیات برندت رو وارد کن و قیمت بگیر.">
-
-<link rel="icon" type="image/jpeg" href="../assets/img/Icon.png">
+<title>سفارش پروژه — آرمان حق‌شناس</title>
+<meta name="description" content="درخواست طراحی از آرمان حق‌شناس — چند سؤال کوتاه جواب بده و پیامت آماده می‌شه.">
+<meta name="theme-color" content="#111214">
+<link rel="icon" type="image/png" href="../assets/img/Icon.png">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<!-- اضافه شدن فونت استعداد از گوگل فونتز -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Estedad:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #ffffff;
-    --ink: #111214;
-    --ink-soft: #6B6E76;
-    --ink-faint: #AFB2BA;
-    --line: rgba(17,18,20,.12);
-    --accent: #000000;
-    --radius: 12px;
+    --bg: #ffffff; --ink: #111214; --ink-soft: #6B6E76; --ink-faint: #AFB2BA;
+    --line: rgba(17,18,20,.12); --accent: #000000; --radius: 12px;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
+  ::-webkit-scrollbar { display: none; }
   body {
-    /* اطمینان از قرار دادن نام دقیق فونت در CSS */
-    font-family: 'Estedad', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.8;
+    /* SN Pro for Latin (same as the main site), Estedad covers Persian glyphs */
+    font-family: 'SN Pro', 'Estedad', sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.8;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-family: 'Estedad', sans-serif; }
+  h1, h2, h3 { font-family: inherit; }
   a { color: inherit; text-decoration: none; }
   i { font-size: 16px; line-height: 1; }
   ::selection { background: var(--accent); color: #fff; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+
+  .cursor-dot, .cursor-ring {
+    position: fixed; top: 0; left: 0; border-radius: 50%; pointer-events: none;
+    z-index: 9999; transform: translate(-50%, -50%); opacity: 0; mix-blend-mode: difference;
+  }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; transition: opacity .2s; }
+  .cursor-ring {
+    width: 34px; height: 34px; border: 1.5px solid rgba(255,255,255,.8);
+    transition: width .3s var(--ease), height .3s var(--ease), background-color .3s var(--ease), opacity .3s;
+  }
+  .cursor-ring.hover { width: 62px; height: 62px; background: rgba(255,255,255,.15); }
+  .cursor-ring.click { width: 28px; height: 28px; }
+  body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button, body.has-custom-cursor label { cursor: none; }
 
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 6vw; }
-
-  .topbar {
-    padding: 26px 6vw;
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: 760px; margin: 0 auto;
-  }
-  .back-link {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13.5px; font-weight: 700; color: var(--ink-soft);
-    transition: color .2s;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .back-link:hover { color: var(--ink); }
-  }
+  .topbar { max-width: 760px; margin: 0 auto; padding: 26px 6vw; display: flex; align-items: center; }
+  .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: var(--ink-soft); transition: color .2s; }
   .back-link i { font-size: 13px; transform: scaleX(-1); }
+  @media (hover: hover) and (pointer: fine) { .back-link:hover { color: var(--ink); } }
 
-  .page-head { padding: 30px 0 50px; }
-  .eyebrow {
-    font-size: 13px; font-weight: 700; color: var(--accent);
-    display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
-  }
+  .eyebrow { font-size: 13px; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
   .eyebrow::before { content: ""; width: 24px; height: 1.5px; background: var(--accent); }
-  .page-head h1 {
-    font-size: clamp(30px, 5vw, 44px); font-weight: 800; letter-spacing: -.5px; line-height: 1.3;
-  }
-  .page-head p {
-    margin-top: 16px; font-size: 15.5px; color: var(--ink-soft); max-width: 520px; font-weight: 500;
-  }
 
-  form { padding-bottom: 100px; }
-  .field-group { margin-bottom: 30px; }
-  .field-group label.main-label {
-    display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 10px;
-  }
-  .field-group label.main-label .req { color: var(--ink-faint); font-weight: 600; margin-right: 4px; }
-  .field-group .hint { font-size: 12.5px; color: var(--ink-faint); margin-top: 8px; }
+  .page-head { padding: 20px 0 34px; }
+  .page-head h1 { font-size: clamp(32px, 5.4vw, 52px); font-weight: 800; letter-spacing: -.5px; line-height: 1.25; }
+  .page-head p { margin-top: 14px; font-size: 15.5px; color: var(--ink-soft); max-width: 520px; font-weight: 500; }
 
-  input[type="text"], input[type="email"], input[type="tel"], select, textarea {
-    width: 100%;
-    font-family: inherit;
-    font-size: 14.5px;
-    color: var(--ink);
-    background: #F7F7F8;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    transition: border-color .2s, background .2s;
-  }
-  input::placeholder, textarea::placeholder { color: var(--ink-faint); }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: var(--ink); background: #fff;
-  }
-  textarea { resize: vertical; min-height: 110px; }
+  .bar { display: flex; gap: 8px; margin-bottom: 40px; }
+  .bar i { flex: 1; height: 4px; border-radius: 4px; background: var(--line); position: relative; overflow: hidden; }
+  .bar i::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: right; transition: transform .6s var(--ease); }
+  .bar i.on::after { transform: scaleX(1); }
 
+  .step { animation: in .6s var(--ease); }
+  @keyframes in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .step h2 { font-size: clamp(22px, 3.4vw, 30px); font-weight: 800; margin-bottom: 26px; line-height: 1.4; }
+
+  .field-group { margin-bottom: 26px; }
+  .main-label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; }
+  .main-label .req { color: var(--ink-faint); font-weight: 600; margin-right: 4px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
-  select {
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23111214' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: left 16px center;
-    padding-left: 40px;
+  input[type="text"], input[type="tel"], select, textarea {
+    width: 100%; font-family: inherit; font-size: 14.5px; color: var(--ink);
+    background: #F7F7F8; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 16px; transition: border-color .2s, background .2s;
   }
+  input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); background: #fff; }
+  textarea { resize: vertical; min-height: 120px; }
+  select {
+    appearance: none; -webkit-appearance: none; padding-left: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23111214' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: left 16px center;
+  }
+
+  .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .svc { position: relative; }
+  .svc input, .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  .svc span {
+    display: flex; flex-direction: column; gap: 14px; min-height: 130px; padding: 22px;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    font-size: 16px; font-weight: 700; cursor: pointer; user-select: none; touch-action: manipulation;
+    transition: background .3s var(--ease), color .3s var(--ease), border-color .3s, transform .3s var(--ease);
+  }
+  .svc span i { font-size: 22px; }
+  .svc span small { font-size: 12.5px; font-weight: 500; color: var(--ink-soft); transition: color .3s; margin-top: -8px; }
+  .svc input:checked + span { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .svc input:checked + span small { color: rgba(255,255,255,.7); }
+  @media (hover: hover) and (pointer: fine) { .svc span:hover { border-color: var(--ink); transform: translateY(-3px); } }
 
   .pill-group { display: flex; flex-wrap: wrap; gap: 10px; }
   .pill { position: relative; }
-  .pill input { position: absolute; opacity: 0; pointer-events: none; }
   .pill span {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 10px 18px; border-radius: 30px;
-    border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--ink-soft);
-    cursor: pointer; transition: all .2s; user-select: none; touch-action: manipulation;
+    display: inline-flex; padding: 10px 18px; border-radius: 30px; border: 1px solid var(--line);
+    font-size: 13.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer;
+    transition: all .2s; user-select: none; touch-action: manipulation;
   }
-  .pill input:checked + span {
-    background: var(--ink); color: #fff; border-color: var(--ink);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .pill span:hover { border-color: var(--ink); }
-  }
+  .pill input:checked + span { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .svc input:focus-visible + span, .pill input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { .pill span:hover { border-color: var(--ink); } }
 
-  .submit-row { margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .divider { height: 1px; background: var(--line); margin: 34px 0; }
+  .err { color: #d93025; font-size: 13px; font-weight: 600; margin-top: 12px; }
+
+  .bubble {
+    white-space: pre-wrap; background: #F4F4F5; border: 1px solid var(--line);
+    border-radius: 18px 18px 18px 4px; padding: 20px 22px; font-size: 14px; line-height: 2;
+  }
+  .hint { font-size: 12.5px; color: var(--ink-faint); margin: 10px 0 26px; display: flex; align-items: center; gap: 8px; }
+
+  .actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 9px;
     font-size: 14.5px; font-weight: 700; padding: 16px 28px; border-radius: var(--radius);
-    border: none; cursor: pointer; font-family: inherit;
-    transition: background .2s, color .2s, transform .2s;
-    touch-action: manipulation; user-select: none;
+    border: 1px solid transparent; cursor: pointer; font-family: inherit;
+    transition: background .2s, color .2s, transform .2s; touch-action: manipulation; user-select: none;
   }
   .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--ink); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
   .btn-whatsapp { background: #25D366; color: #fff; }
   .btn-telegram { background: #229ED9; color: #fff; }
+  .btn-copy { background: #F4F4F5; color: var(--ink); }
   @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost:hover { border-color: var(--ink); }
     .btn-whatsapp:hover { background: #1ebe57; transform: translateY(-2px); }
     .btn-telegram:hover { background: #1c88ba; transform: translateY(-2px); }
+    .btn-copy:hover { background: #e9e9eb; }
   }
-  .submit-note {
-    margin-top: 16px; font-size: 12.5px; color: var(--ink-faint); display: flex; align-items: center; gap: 8px;
-  }
+  .spacer { flex: 1; }
+  .submit-note { margin: 18px 0 100px; font-size: 12.5px; color: var(--ink-faint); display: flex; align-items: center; gap: 8px; }
 
-  .section-divider {
-    height: 1px; background: var(--line); margin: 44px 0 34px;
+  .toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0;
+    background: var(--ink); color: #fff; font-size: 13.5px; font-weight: 600;
+    padding: 12px 22px; border-radius: 30px; transition: all .4s var(--ease); z-index: 1000; pointer-events: none;
   }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
   @media (max-width: 620px) {
     .two-col { grid-template-columns: 1fr; }
-    .page-head { padding: 16px 0 40px; }
+    .svc-grid { gap: 10px; }
+    .svc span { padding: 16px; min-height: 112px; font-size: 15px; }
+    .actions .btn { flex: 1 1 100%; }
+    .spacer { display: none; }
+    .cursor-dot, .cursor-ring { display: none !important; }
   }
 </style>
 </head>
 <body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
 
 <div class="topbar">
   <a href="../" class="back-link"><i class="fa-solid fa-arrow-left"></i> بازگشت به پرتفولیو</a>
@@ -159,155 +175,290 @@
 
 <div class="wrap">
   <div class="page-head">
-    <div class="eyebrow">درخواست لوگو</div>
-    <h1>بیا لوگوت رو طراحی کنیم.</h1>
-    <p>چند تا جزئیات درباره‌ی برندت و چیزی که مدنظرته وارد کن — باهات تماس می‌گیرم و قیمت و زمان‌بندی رو می‌گم.</p>
+    <div class="eyebrow">درخواست پروژه</div>
+    <h1>بیا پروژه‌ات رو شروع کنیم.</h1>
+    <p>سه مرحلهٔ کوتاه. آخرش یه پیام آماده می‌شه که با یک کلیک برام می‌فرستی.</p>
   </div>
 
-  <form id="logoForm">
+  <div class="bar" id="bar"><i class="on"></i><i></i><i></i></div>
 
-    <div class="field-group">
-      <label class="main-label" for="fullName">نام و نام‌خانوادگی <span class="req">*</span></label>
-      <input type="text" id="fullName" name="fullName" placeholder="اسمت رو بنویس" required>
-    </div>
+  <form id="reqForm" novalidate>
 
-    <div class="two-col">
+    <!-- Step 1 -->
+    <section class="step" data-step="0">
+      <h2>چه کاری لازم داری؟</h2>
+      <div class="svc-grid">
+        <label class="svc"><input type="radio" name="service" value="طراحی لوگو" data-key="logo"><span><i class="fa-solid fa-pen-nib"></i>لوگو<small>طراحی نشانه و لوگوتایپ</small></span></label>
+        <label class="svc"><input type="radio" name="service" value="هویت بصری (برندینگ)" data-key="brand"><span><i class="fa-solid fa-layer-group"></i>هویت بصری<small>لوگو، رنگ، فونت و ست اداری</small></span></label>
+        <label class="svc"><input type="radio" name="service" value="طراحی شبکه اجتماعی" data-key="social"><span><i class="fa-solid fa-share-nodes"></i>شبکهٔ اجتماعی<small>پست، استوری و کاور</small></span></label>
+        <label class="svc"><input type="radio" name="service" value="طراحی چاپی و بسته‌بندی" data-key="print"><span><i class="fa-solid fa-box-open"></i>چاپ و بسته‌بندی<small>کارت، بروشور، لیبل و جعبه</small></span></label>
+      </div>
+      <div class="err" id="svcErr" hidden>یکی از گزینه‌ها رو انتخاب کن.</div>
+      <div class="actions">
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-primary" data-next>ادامه <i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" data-step="1" hidden>
+      <h2>دربارهٔ پروژه بگو.</h2>
+
       <div class="field-group">
-        <label class="main-label" for="email">ایمیل <span class="req">*</span></label>
-        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+        <label class="main-label" for="brandName">اسم برند / کسب‌وکار <span class="req">*</span></label>
+        <input type="text" id="brandName" placeholder="مثلاً: کافه نورث‌لاین" required>
       </div>
+
       <div class="field-group">
-        <label class="main-label" for="phone">تلفن / واتساپ</label>
-        <input type="tel" id="phone" name="phone" placeholder="۰۹۱۲۳۴۵۶۷۸۹">
+        <label class="main-label" for="industry">حوزهٔ فعالیت</label>
+        <input type="text" id="industry" placeholder="مثلاً: غذا و نوشیدنی، تکنولوژی، پوشاک...">
       </div>
-    </div>
 
-    <div class="section-divider"></div>
-
-    <div class="field-group">
-      <label class="main-label" for="brandName">اسم برند / کسب‌وکار <span class="req">*</span></label>
-      <input type="text" id="brandName" name="brandName" placeholder="مثلاً: کافه نورث‌لاین" required>
-    </div>
-
-    <div class="field-group">
-      <label class="main-label" for="industry">حوزه‌ی فعالیت</label>
-      <input type="text" id="industry" name="industry" placeholder="مثلاً: غذا و نوشیدنی، تکنولوژی، پوشاک...">
-    </div>
-
-    <div class="field-group">
-      <label class="main-label">سبک لوگو <span class="req">(هر تعداد که می‌خوای انتخاب کن)</span></label>
-      <div class="pill-group" id="styleGroup">
-        <label class="pill"><input type="checkbox" name="style" value="مینیمال"><span>مینیمال</span></label>
-        <label class="pill"><input type="checkbox" name="style" value="مدرن"><span>مدرن</span></label>
-        <label class="pill"><input type="checkbox" name="style" value="کلاسیک / وینتیج"><span>کلاسیک / وینتیج</span></label>
-        <label class="pill"><input type="checkbox" name="style" value="بازیگوش"><span>بازیگوش</span></label>
-        <label class="pill"><input type="checkbox" name="style" value="لوکس"><span>لوکس</span></label>
-        <label class="pill"><input type="checkbox" name="style" value="جسورانه"><span>جسورانه</span></label>
-        <label class="pill"><input type="checkbox" name="style" value="دست‌نویس"><span>دست‌نویس</span></label>
+      <div class="field-group" data-for="logo brand">
+        <label class="main-label">سبک <span class="req">(هر تعداد که می‌خوای)</span></label>
+        <div class="pill-group">
+          <label class="pill"><input type="checkbox" name="style" value="مینیمال"><span>مینیمال</span></label>
+          <label class="pill"><input type="checkbox" name="style" value="مدرن"><span>مدرن</span></label>
+          <label class="pill"><input type="checkbox" name="style" value="کلاسیک / وینتیج"><span>کلاسیک / وینتیج</span></label>
+          <label class="pill"><input type="checkbox" name="style" value="بازیگوش"><span>بازیگوش</span></label>
+          <label class="pill"><input type="checkbox" name="style" value="لوکس"><span>لوکس</span></label>
+          <label class="pill"><input type="checkbox" name="style" value="جسورانه"><span>جسورانه</span></label>
+          <label class="pill"><input type="checkbox" name="style" value="دست‌نویس"><span>دست‌نویس</span></label>
+        </div>
       </div>
-    </div>
 
-    <div class="field-group">
-      <label class="main-label" for="colors">رنگ‌های موردنظر</label>
-      <input type="text" id="colors" name="colors" placeholder="مثلاً: مشکی و طلایی، یا انتخابش با خودم">
-    </div>
+      <div class="field-group" data-for="logo brand">
+        <label class="main-label" for="colors">رنگ‌های موردنظر</label>
+        <input type="text" id="colors" placeholder="مثلاً: مشکی و طلایی، یا انتخابش با خودم">
+      </div>
 
-    <div class="section-divider"></div>
+      <div class="field-group" data-for="social print">
+        <label class="main-label" for="extra">تعداد و مشخصات کار</label>
+        <input type="text" id="extra" placeholder="مثلاً: ۹ پست اینستاگرام ماهانه، یا ۱۰۰۰ کارت ویزیت">
+      </div>
 
-    <div class="two-col">
+      <div class="divider"></div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="main-label" for="budget">بودجه <span class="req">*</span></label>
+          <select id="budget" required>
+            <option value="" disabled selected>یه بازه انتخاب کن</option>
+            <option>زیر ۱٬۰۰۰٬۰۰۰ تومان</option>
+            <option>۱ تا ۳ میلیون تومان</option>
+            <option>۳ تا ۶ میلیون تومان</option>
+            <option>بیشتر از ۶ میلیون تومان</option>
+            <option>هنوز مشخص نیست</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="main-label" for="timeline">زمان‌بندی</label>
+          <select id="timeline">
+            <option value="" disabled selected>یه بازه انتخاب کن</option>
+            <option>هرچه زودتر</option>
+            <option>تا ۱ هفته</option>
+            <option>۲ تا ۳ هفته</option>
+            <option>بیش از ۱ ماه</option>
+            <option>زمان مشخصی ندارم</option>
+          </select>
+        </div>
+      </div>
+
       <div class="field-group">
-        <label class="main-label" for="budget">بودجه <span class="req">*</span></label>
-        <select id="budget" name="budget" required>
-          <option value="" disabled selected>یه بازه انتخاب کن</option>
-          <option value="زیر ۱٬۰۰۰٬۰۰۰ تومان">زیر ۱٬۰۰۰٬۰۰۰ تومان</option>
-          <option value="۱ تا ۳ میلیون تومان">۱ تا ۳ میلیون تومان</option>
-          <option value="۳ تا ۶ میلیون تومان">۳ تا ۶ میلیون تومان</option>
-          <option value="بیشتر از ۶ میلیون تومان">بیشتر از ۶ میلیون تومان</option>
-          <option value="هنوز مشخص نیست">هنوز مشخص نیست</option>
-        </select>
+        <label class="main-label" for="refs">لینک مرجع / الهام‌بخش</label>
+        <input type="text" id="refs" placeholder="لینک کار یا برندهایی که دوست داری (اختیاری)">
       </div>
+
       <div class="field-group">
-        <label class="main-label" for="timeline">زمان‌بندی</label>
-        <select id="timeline" name="timeline">
-          <option value="" disabled selected>یه بازه انتخاب کن</option>
-          <option value="هرچه زودتر">هرچه زودتر</option>
-          <option value="تا ۱ هفته">تا ۱ هفته</option>
-          <option value="۲ تا ۳ هفته">۲ تا ۳ هفته</option>
-          <option value="بیش از ۱ ماه">بیش از ۱ ماه</option>
-          <option value="زمان مشخصی ندارم">زمان مشخصی ندارم</option>
-        </select>
+        <label class="main-label" for="details">توضیحات <span class="req">*</span></label>
+        <textarea id="details" placeholder="دربارهٔ برندت، مخاطبت و چیزی که تو ذهنت هست بگو..." required></textarea>
       </div>
-    </div>
 
-    <div class="field-group">
-      <label class="main-label" for="refs">لینک مرجع / الهام‌بخش</label>
-      <input type="text" id="refs" name="refs" placeholder="لینک لوگو یا برندهایی که دوست داری (اختیاری)">
-    </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-prev><i class="fa-solid fa-arrow-right"></i> قبلی</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-primary" data-next>ادامه <i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+    </section>
 
-    <div class="field-group">
-      <label class="main-label" for="details">توضیحات پروژه <span class="req">*</span></label>
-      <textarea id="details" name="details" placeholder="درباره‌ی برندت، مخاطبت و چیزی که تو ذهنت هست بگو..." required></textarea>
-    </div>
+    <!-- Step 3 -->
+    <section class="step" data-step="2" hidden>
+      <h2>راه تماست رو بنویس و پیام رو بفرست.</h2>
 
-    <div class="submit-row">
-      <button type="submit" class="btn btn-whatsapp" data-channel="whatsapp">
-        <i class="fa-brands fa-whatsapp"></i> ارسال با واتساپ
-      </button>
-      <button type="submit" class="btn btn-telegram" data-channel="telegram">
-        <i class="fa-brands fa-telegram"></i> ارسال با تلگرام
-      </button>
-    </div>
-    <div class="submit-note"><i class="fa-solid fa-lock"></i> هیچ اطلاعاتی ذخیره نمی‌شه — فقط یه پیام آماده برات باز می‌شه که خودت بفرستیش.</div>
+      <div class="two-col">
+        <div class="field-group">
+          <label class="main-label" for="fullName">نام <span class="req">*</span></label>
+          <input type="text" id="fullName" placeholder="اسمت رو بنویس" required>
+        </div>
+        <div class="field-group">
+          <label class="main-label" for="phone">شمارهٔ تماس <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" inputmode="tel" required>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <label class="main-label">پیشنمایش پیامی که برام می‌فرستی</label>
+      <div class="bubble" id="preview"></div>
+      <div class="hint"><i class="fa-solid fa-lock"></i> هیچ اطلاعاتی ذخیره نمی‌شه — فقط یه پیام آماده برات باز می‌شه که خودت بفرستیش.</div>
+
+      <div class="actions" style="margin-top:0">
+        <button type="button" class="btn btn-whatsapp" data-send="whatsapp"><i class="fa-brands fa-whatsapp"></i> ارسال با واتساپ</button>
+        <button type="button" class="btn btn-telegram" data-send="telegram"><i class="fa-brands fa-telegram"></i> ارسال با تلگرام</button>
+        <button type="button" class="btn btn-copy" data-send="copy"><i class="fa-regular fa-copy"></i> کپی پیام</button>
+      </div>
+      <div class="actions" style="margin-top:22px">
+        <button type="button" class="btn btn-ghost" data-prev><i class="fa-solid fa-arrow-right"></i> قبلی</button>
+      </div>
+      <div style="height:90px"></div>
+    </section>
 
   </form>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
   const WHATSAPP_NUMBER = '989135957196';
   const TELEGRAM_USERNAME = 'armvnpv';
 
-  const form = document.getElementById('logoForm');
+  const form = document.getElementById('reqForm');
+  const steps = Array.from(form.querySelectorAll('.step'));
+  const bars = Array.from(document.querySelectorAll('#bar i'));
+  const preview = document.getElementById('preview');
+  const toastEl = document.getElementById('toast');
+  const $ = (id) => document.getElementById(id);
+  const val = (id) => $(id).value.trim();
+  let cur = 0;
 
-  function buildMessage() {
-    const get = (id) => document.getElementById(id).value.trim();
-    const styles = Array.from(document.querySelectorAll('input[name="style"]:checked')).map(el => el.value);
+  function serviceInput() { return form.querySelector('input[name="service"]:checked'); }
 
-    const lines = [
-      'درخواست سفارش لوگوی جدید',
-      '',
-      `نام: ${get('fullName')}`,
-      `ایمیل: ${get('email')}`,
-    ];
-    if (get('phone')) lines.push(`تلفن: ${get('phone')}`);
-    lines.push('');
-    lines.push(`برند: ${get('brandName')}`);
-    if (get('industry')) lines.push(`حوزه‌ی فعالیت: ${get('industry')}`);
-    if (styles.length) lines.push(`سبک: ${styles.join('، ')}`);
-    if (get('colors')) lines.push(`رنگ‌ها: ${get('colors')}`);
-    lines.push(`بودجه: ${get('budget')}`);
-    if (get('timeline')) lines.push(`زمان‌بندی: ${get('timeline')}`);
-    if (get('refs')) lines.push(`لینک مرجع: ${get('refs')}`);
-    lines.push('');
-    lines.push(`توضیحات: ${get('details')}`);
-
-    return lines.join('\n');
+  function applyService() {
+    const key = serviceInput()?.dataset.key;
+    form.querySelectorAll('[data-for]').forEach(el => {
+      el.hidden = !el.dataset.for.split(' ').includes(key);
+    });
   }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const submitter = e.submitter;
-    if (!form.reportValidity()) return;
+  function buildMessage() {
+    const svc = serviceInput();
+    const styles = Array.from(form.querySelectorAll('input[name="style"]:checked')).map(e => e.value);
+    const visible = (id) => !$(id).closest('[hidden]');
+    const L = ['درخواست سفارش جدید', ''];
+    L.push(`خدمت: ${svc ? svc.value : '—'}`);
+    L.push(`برند: ${val('brandName') || '—'}`);
+    if (val('industry')) L.push(`حوزهٔ فعالیت: ${val('industry')}`);
+    if (styles.length && svc && ['logo','brand'].includes(svc.dataset.key)) L.push(`سبک: ${styles.join('، ')}`);
+    if (val('colors') && visible('colors')) L.push(`رنگ‌ها: ${val('colors')}`);
+    if (val('extra') && visible('extra')) L.push(`مشخصات: ${val('extra')}`);
+    L.push(`بودجه: ${val('budget') || '—'}`);
+    if (val('timeline')) L.push(`زمان‌بندی: ${val('timeline')}`);
+    if (val('refs')) L.push(`مرجع: ${val('refs')}`);
+    L.push('', `توضیحات: ${val('details') || '—'}`, '');
+    L.push(`نام: ${val('fullName') || '—'}`);
+    L.push(`تماس: ${val('phone') || '—'}`);
+    return L.join('\n');
+  }
 
+  function renderPreview() { preview.textContent = buildMessage(); }
+
+  function show(n) {
+    cur = n;
+    steps.forEach((s, i) => s.hidden = i !== n);
+    bars.forEach((b, i) => b.classList.toggle('on', i <= n));
+    if (n === 2) renderPreview();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validStep(n) {
+    if (n === 0) {
+      const ok = !!serviceInput();
+      $('svcErr').hidden = ok;
+      return ok;
+    }
+    const fields = Array.from(steps[n].querySelectorAll('input, select, textarea'));
+    return fields.every(el => el.closest('[hidden]') || el.reportValidity());
+  }
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toastEl.classList.remove('show'), 2400);
+  }
+
+  async function copyText(text) {
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch {}
+      ta.remove();
+      return ok;
+    }
+  }
+
+  form.addEventListener('change', (e) => {
+    if (e.target.name === 'service') { $('svcErr').hidden = true; applyService(); }
+  });
+  form.addEventListener('input', () => { if (cur === 2) renderPreview(); });
+
+  form.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
+    if (validStep(cur)) show(cur + 1);
+  }));
+  form.querySelectorAll('[data-prev]').forEach(b => b.addEventListener('click', () => show(cur - 1)));
+
+  form.querySelectorAll('[data-send]').forEach(b => b.addEventListener('click', async () => {
+    if (!validStep(2)) return;
     const message = buildMessage();
-    const encoded = encodeURIComponent(message);
-    const channel = submitter ? submitter.getAttribute('data-channel') : 'whatsapp';
+    const channel = b.dataset.send;
+    const copied = await copyText(message);
+
+    if (channel === 'copy') { toast(copied ? 'پیام کپی شد' : 'کپی نشد، متن رو دستی کپی کن'); return; }
 
     const url = channel === 'telegram'
-      ? `https://t.me/${TELEGRAM_USERNAME}?text=${encoded}`
-      : `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+      ? `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`
+      : `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-    window.open(url, '_blank', 'noopener,noreferrer');
+    if (copied) toast('پیام کپی شد و گفت‌وگو باز می‌شه');
+    const w = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!w) window.location.href = url;
+  }));
+
+  form.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+      e.preventDefault();
+      if (cur < 2 && validStep(cur)) show(cur + 1);
+    }
   });
+
+  applyService();
+
+  (function initCustomCursor() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.body.classList.add('has-custom-cursor');
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, seen = false;
+    addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+      if (!seen) { seen = true; dot.style.opacity = 1; ring.style.opacity = 1; }
+    });
+    document.addEventListener('mouseleave', () => { seen = false; dot.style.opacity = 0; ring.style.opacity = 0; });
+    addEventListener('mousedown', () => ring.classList.add('click'));
+    addEventListener('mouseup', () => ring.classList.remove('click'));
+    (function raf() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(raf);
+    })();
+    const sel = 'a, button, label, select, .svc, .pill';
+    document.addEventListener('mouseover', (e) => { if (e.target.closest(sel)) ring.classList.add('hover'); });
+    document.addEventListener('mouseout', (e) => { if (e.target.closest(sel)) ring.classList.remove('hover'); });
+  })();
 </script>
 
 </body>
