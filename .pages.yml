@@ -1,12 +1,12 @@
 media:
   - name: blog
-    label: وبلاگ
+    label: Blog
     input: assets/img/blog
     output: /assets/img/blog
     rename: safe
     categories: [image]
   - name: projects
-    label: پروژه‌ها
+    label: Projects
     input: assets/img/Projects
     output: /assets/img/Projects
     rename: safe
@@ -14,49 +14,49 @@ media:
 
 content:
   - name: projects
-    label: پروژه‌های پورتفولیو
+    label: Portfolio Projects
     type: file
     path: projects.json
     format: json
     list: true
     fields:
       - name: title
-        label: عنوان پروژه
+        label: Title
         type: string
       - name: tag
-        label: دسته (مثلاً Logo یا Sticker)
+        label: Category
         type: string
       - name: img
-        label: تصویر کاور
+        label: Cover Image
         type: image
         options:
           media: projects
       - name: link
-        label: لینک پروژه (بهانس، اینستاگرام ...)
+        label: Project Link
         type: string
 
   - name: posts
-    label: مطالب وبلاگ
+    label: Blog Posts
     type: collection
     path: _posts
     filename: "{year}-{month}-{day}-{address}.md"
     fields:
       - name: title
-        label: عنوان
+        label: Title
         type: string
       - name: address
-        label: آدرس انگلیسی بدون تاریخ (مثلاً my-first-post)
+        label: URL Slug (English, no date)
         type: string
       - name: description
-        label: توضیح کوتاه
+        label: Short Description
         type: text
       - name: image
-        label: کاور
+        label: Cover Image
         type: image
         options:
           media: blog
       - name: body
-        label: متن مطلب
+        label: Content
         type: rich-text
         options:
           media: blog
