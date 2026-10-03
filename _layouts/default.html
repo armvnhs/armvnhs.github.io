@@ -54,35 +54,78 @@
 
   .wrap.wide, .topbar.wide { max-width: 1100px; }
 
+  /* Blog header */
+  .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 44px; }
+  .head-row h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.15; }
+  .count { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
+  .count b {
+    font-size: clamp(64px, 9vw, 124px); font-weight: 800; line-height: .85; letter-spacing: -3px;
+    color: transparent; -webkit-text-stroke: 1.5px var(--ink);
+  }
+  .count span { font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-top: 10px; }
+
   /* Post grid */
-  .post-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .post-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .post-card {
-    position: relative; display: block; aspect-ratio: 4 / 5; border-radius: var(--radius);
-    overflow: hidden; background: linear-gradient(135deg, #111214, #2b2d33); color: #fff;
+    display: flex; flex-direction: column; background: #fff;
+    border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+    animation: rise .8s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms);
+    transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .3s;
   }
-  .post-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s var(--ease); }
-  .post-card .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .post-card .ph i { font-size: 64px; color: rgba(255,255,255,.1); }
-  .post-card::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.12) 50%, rgba(0,0,0,0) 70%);
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  .thumb { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: linear-gradient(135deg, #111214, #2b2d33); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .9s var(--ease); }
+  .thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,0) 55%); }
+  .ph {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px); background-size: 16px 16px;
+    font-size: 120px; font-weight: 800; line-height: 1; color: rgba(255,255,255,.1);
   }
-  .post-card .info {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 20px;
-    display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;
+  .thumb .date {
+    position: absolute; z-index: 2; top: 14px; inset-inline-start: 14px;
+    background: rgba(255,255,255,.92); color: var(--ink); font-size: 11.5px; font-weight: 700;
+    padding: 2px 12px; border-radius: 20px; line-height: 1.9;
   }
-  .post-card .meta { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.72); line-height: 1.8; }
-  .post-card h2 { font-size: 16px; font-weight: 700; line-height: 1.7; }
+  .thumb .num {
+    position: absolute; z-index: 2; bottom: 10px; inset-inline-end: 16px;
+    font-size: 46px; font-weight: 800; line-height: 1; letter-spacing: -1px;
+    color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.9); transition: color .4s;
+  }
+  .post-card .body { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 18px; flex: 1; }
+  .post-card h2 { font-size: 17px; font-weight: 800; line-height: 1.7; }
+  .post-card .desc {
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.9;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .post-card .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: auto; padding-top: 14px; font-size: 12.5px; font-weight: 700;
+  }
   .post-card .go {
-    flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45);
-    display: flex; align-items: center; justify-content: center; transition: background .3s, color .3s, transform .3s;
+    width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; transition: all .4s var(--ease);
   }
-  .post-card .go i { font-size: 13px; }
+  .post-card .go i { font-size: 12px; }
   [dir="rtl"] .post-card .go i { transform: scaleX(-1); }
   @media (hover: hover) and (pointer: fine) {
-    .post-card:hover img { transform: scale(1.08); }
-    .post-card:hover .go { background: #fff; color: #000; transform: rotate(40deg); }
+    .post-card:hover { transform: translateY(-6px); border-color: var(--ink); box-shadow: 0 22px 44px rgba(17,18,20,.1); }
+    .post-card:hover .thumb img { transform: scale(1.08); }
+    .post-card:hover .num { color: #fff; }
+    .post-card:hover .go { background: var(--ink); color: #fff; border-color: var(--ink); transform: rotate(40deg); }
   }
+
+  .hero-cover { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; display: block; border-radius: 20px; background: #F4F4F5; }
+  .hero-wrap { padding-top: 6px; }
+
+  @media (max-width: 1000px) { .post-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) {
+    .post-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .post-card h2 { font-size: 15px; }
+    .post-card .body { padding: 14px; }
+    .thumb .num { font-size: 34px; }
+    .hero-cover { aspect-ratio: 16 / 10; border-radius: 16px; }
+  }
+  @media (max-width: 460px) { .post-grid { grid-template-columns: 1fr; } .head-row { align-items: flex-start; } }
 
   /* Article body */
   .prose { font-size: 16.5px; }
@@ -112,9 +155,6 @@
   .empty { padding: 40px 0 100px; color: var(--ink-soft); }
   .list-end { height: 100px; }
 
-  @media (max-width: 1000px) { .post-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 760px) { .post-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } .post-card .info { padding: 14px; } .post-card h2 { font-size: 14px; } }
-  @media (max-width: 400px) { .post-grid { grid-template-columns: 1fr; } }
 
   @media (max-width: 620px) { .post-nav { grid-template-columns: 1fr; } .post-nav .prev { grid-column: 1; } }
 </style>
