@@ -145,6 +145,8 @@
     .btn-copy:hover { background: #e9e9eb; }
   }
   .spacer { flex: 1; }
+  .send-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .nav-row { margin-top: 14px; }
   .submit-note { margin: 18px 0 100px; font-size: 12.5px; color: var(--ink-faint); display: flex; align-items: center; gap: 8px; }
 
   .toast {
@@ -159,6 +161,10 @@
     .svc-grid { gap: 10px; }
     .svc span { padding: 16px; min-height: 112px; font-size: 15px; }
     .actions .btn { flex: 1 1 100%; }
+    .send-row { gap: 10px; }
+    .send-row .btn { padding: 16px 10px; font-size: 14px; }
+    .nav-row { flex-wrap: nowrap; gap: 10px; }
+    .nav-row .btn { flex: 1 1 0; padding: 16px 10px; }
     .spacer { display: none; }
     .cursor-dot, .cursor-ring { display: none !important; }
   }
@@ -188,10 +194,10 @@
     <section class="step" data-step="0">
       <h2>چه کاری لازم داری؟</h2>
       <div class="svc-grid">
-        <label class="svc"><input type="radio" name="service" value="طراحی لوگو" data-key="logo"><span><i class="fa-solid fa-pen-nib"></i>لوگو<small>طراحی نشانه و لوگوتایپ</small></span></label>
-        <label class="svc"><input type="radio" name="service" value="هویت بصری (برندینگ)" data-key="brand"><span><i class="fa-solid fa-layer-group"></i>هویت بصری<small>لوگو، رنگ، فونت و ست اداری</small></span></label>
+        <label class="svc"><input type="radio" name="service" value="لوگو و هویت بصری" data-key="logo"><span><i class="fa-solid fa-pen-nib"></i>لوگو و هویت بصری<small>نشانه، رنگ، فونت و ست اداری</small></span></label>
+        <label class="svc"><input type="radio" name="service" value="پوستر و تراکت" data-key="poster"><span><i class="fa-solid fa-image"></i>پوستر و تراکت<small>پوستر، بروشور و مواد چاپی</small></span></label>
         <label class="svc"><input type="radio" name="service" value="طراحی شبکه اجتماعی" data-key="social"><span><i class="fa-solid fa-share-nodes"></i>شبکهٔ اجتماعی<small>پست، استوری و کاور</small></span></label>
-        <label class="svc"><input type="radio" name="service" value="طراحی چاپی و بسته‌بندی" data-key="print"><span><i class="fa-solid fa-box-open"></i>چاپ و بسته‌بندی<small>کارت، بروشور، لیبل و جعبه</small></span></label>
+        <label class="svc"><input type="radio" name="service" value="سایر" data-key="other"><span><i class="fa-solid fa-ellipsis"></i>سایر ...<small>هر چیز دیگه‌ای که تو ذهنته</small></span></label>
       </div>
       <div class="err" id="svcErr" hidden>یکی از گزینه‌ها رو انتخاب کن.</div>
       <div class="actions">
@@ -214,7 +220,7 @@
         <input type="text" id="industry" placeholder="مثلاً: غذا و نوشیدنی، تکنولوژی، پوشاک...">
       </div>
 
-      <div class="field-group" data-for="logo brand">
+      <div class="field-group" data-for="logo">
         <label class="main-label">سبک <span class="req">(هر تعداد که می‌خوای)</span></label>
         <div class="pill-group">
           <label class="pill"><input type="checkbox" name="style" value="مینیمال"><span>مینیمال</span></label>
@@ -227,14 +233,14 @@
         </div>
       </div>
 
-      <div class="field-group" data-for="logo brand">
+      <div class="field-group" data-for="logo">
         <label class="main-label" for="colors">رنگ‌های موردنظر</label>
         <input type="text" id="colors" placeholder="مثلاً: مشکی و طلایی، یا انتخابش با خودم">
       </div>
 
-      <div class="field-group" data-for="social print">
+      <div class="field-group" data-for="poster social other">
         <label class="main-label" for="extra">تعداد و مشخصات کار</label>
-        <input type="text" id="extra" placeholder="مثلاً: ۹ پست اینستاگرام ماهانه، یا ۱۰۰۰ کارت ویزیت">
+        <input type="text" id="extra" placeholder="مثلاً: ۹ پست اینستاگرام ماهانه، یا ۲ پوستر A3">
       </div>
 
       <div class="divider"></div>
@@ -302,13 +308,14 @@
       <div class="bubble" id="preview"></div>
       <div class="hint"><i class="fa-solid fa-lock"></i> هیچ اطلاعاتی ذخیره نمی‌شه — فقط یه پیام آماده برات باز می‌شه که خودت بفرستیش.</div>
 
-      <div class="actions" style="margin-top:0">
+      <div class="send-row">
         <button type="button" class="btn btn-whatsapp" data-send="whatsapp"><i class="fa-brands fa-whatsapp"></i> ارسال با واتساپ</button>
         <button type="button" class="btn btn-telegram" data-send="telegram"><i class="fa-brands fa-telegram"></i> ارسال با تلگرام</button>
-        <button type="button" class="btn btn-copy" data-send="copy"><i class="fa-regular fa-copy"></i> کپی پیام</button>
       </div>
-      <div class="actions" style="margin-top:22px">
+      <div class="actions nav-row">
         <button type="button" class="btn btn-ghost" data-prev><i class="fa-solid fa-arrow-right"></i> قبلی</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-copy" data-send="copy"><i class="fa-regular fa-copy"></i> کپی پیام</button>
       </div>
       <div style="height:90px"></div>
     </section>
@@ -348,7 +355,7 @@
     L.push(`خدمت: ${svc ? svc.value : '—'}`);
     L.push(`برند: ${val('brandName') || '—'}`);
     if (val('industry')) L.push(`حوزهٔ فعالیت: ${val('industry')}`);
-    if (styles.length && svc && ['logo','brand'].includes(svc.dataset.key)) L.push(`سبک: ${styles.join('، ')}`);
+    if (styles.length && svc && svc.dataset.key === 'logo') L.push(`سبک: ${styles.join('، ')}`);
     if (val('colors') && visible('colors')) L.push(`رنگ‌ها: ${val('colors')}`);
     if (val('extra') && visible('extra')) L.push(`مشخصات: ${val('extra')}`);
     L.push(`بودجه: ${val('budget') || '—'}`);
