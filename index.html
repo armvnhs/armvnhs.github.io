@@ -46,28 +46,21 @@
   ul { list-style: none; }
   ::selection { background: var(--accent); color: #fff; }
 
-  html, body { height: 100%; overflow: hidden; }
+  html { scroll-behavior: smooth; }
   ::-webkit-scrollbar { display: none; }
   html { scrollbar-width: none; -ms-overflow-style: none; }
 
-  .track {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    will-change: transform;
-    transition: transform 1.2s var(--ease);
-  }
+  .track { width: 100%; }
 
   .panel {
-    height: 100vh;
-    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 80px 8vw 50px;
     position: relative;
-    overflow: hidden;
   }
 
   .wrap { max-width: 1100px; margin: 0 auto; width: 100%; }
@@ -89,7 +82,7 @@
       transform: none;
       transition: none;
     }
-    .track { transition: none; }
+    html { scroll-behavior: auto; }
     .work-card { animation: none; opacity: 1; transform: none; }
   }
 
@@ -615,8 +608,8 @@
     .socials a:hover { background: #fff; border-color: #fff; color: #000; }
   }
 
-  /* Mobile (narrow or short screens) */
-  @media (max-width: 860px), (max-height: 620px) {
+  /* Mobile */
+  @media (max-width: 860px) {
     html, body {
       height: auto;
       overflow: auto;
@@ -891,10 +884,6 @@
 <script src="projects.js"></script>
 
 <script>
-  function isMobile() {
-    return window.matchMedia('(max-width: 860px), (max-height: 620px)').matches;
-  }
-
   const projectList = typeof projects !== 'undefined' ? projects : [];
 
   const items = document.querySelectorAll('.reveal');
@@ -965,11 +954,9 @@
     workWrapper.scrollBy({ left: 350, behavior: 'smooth' });
   });
 
-  const track = document.getElementById('track');
   const panels = document.querySelectorAll('.panel');
   const dots = document.querySelectorAll('[data-dot]');
-  let current = 0;
-  let animating = false;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setActiveDot(i) {
     dots.forEach(d => d.classList.remove('active'));
@@ -977,118 +964,19 @@
     document.body.classList.toggle('on-dark', i === panels.length - 1);
   }
 
-  function applyTransform() {
-    if (isMobile()) return;
-    track.style.transform = `translateY(-${current * window.innerHeight}px)`;
-  }
-
-  function goTo(i) {
-    if (isMobile()) return;
-    i = Math.max(0, Math.min(panels.length - 1, i));
-    if (i === current || animating) return;
-    animating = true;
-    current = i;
-    setActiveDot(current);
-    applyTransform();
-    window.clearTimeout(goTo._t);
-    goTo._t = window.setTimeout(() => {
-      animating = false;
-    }, 1200);
-  }
-
-  window.addEventListener('resize', applyTransform);
-
-  let wheelLock = false;
-  window.addEventListener('wheel', (e) => {
-    if (isMobile()) return;
-
-    const scrollable = e.target.closest('.work-wrapper');
-    if (scrollable) {
-      // Horizontal trackpad swipes scroll the project list natively
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-
-      const atLeft = scrollable.scrollLeft <= 0;
-      const atRight = Math.ceil(scrollable.scrollLeft + scrollable.clientWidth) >= scrollable.scrollWidth;
-
-      if (e.deltaY > 0 && !atRight) {
-        scrollable.scrollLeft += e.deltaY;
-        return;
-      }
-
-      if (e.deltaY < 0 && !atLeft) {
-        scrollable.scrollLeft += e.deltaY;
-        return;
-      }
-    }
-
-    e.preventDefault();
-    if (wheelLock || animating) return;
-    wheelLock = true;
-    window.setTimeout(() => {
-      wheelLock = false;
-    }, 1200);
-
-    if (e.deltaY > 0) goTo(current + 1);
-    else if (e.deltaY < 0) goTo(current - 1);
-  }, { passive: false });
-
-  window.addEventListener('keydown', (e) => {
-    if (isMobile()) return;
-    // Let buttons and links keep their own keyboard behavior
-    if (e.target.closest('button, a, input, textarea')) return;
-    if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
-      e.preventDefault();
-      goTo(current + 1);
-    } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
-      e.preventDefault();
-      goTo(current - 1);
-    }
-  });
-
-  // Tab focus moves to the panel that contains the focused element
-  document.addEventListener('focusin', (e) => {
-    if (isMobile()) return;
-    const i = Array.from(panels).findIndex(p => p.contains(e.target));
-    if (i !== -1) goTo(i);
-  });
-
-  let touchStartY = null;
-  window.addEventListener('touchstart', (e) => {
-    if (isMobile()) return;
-    if (e.target.closest('.work-wrapper')) return;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchend', (e) => {
-    if (isMobile()) return;
-    if (touchStartY === null) return;
-    const delta = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(delta) > 50) {
-      if (delta > 0) goTo(current + 1);
-      else goTo(current - 1);
-    }
-    touchStartY = null;
-  }, { passive: true });
-
+  // Smooth native scrolling to a section
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const id = link.getAttribute('href').slice(1);
-      if (isMobile()) {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
-      const idx = Array.from(panels).findIndex(p => p.id === id);
-      if (idx !== -1) goTo(idx);
+      document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   });
 
-  applyTransform();
   setActiveDot(0);
 
-  // Active section indicator for the scrolling (mobile) layout
+  // Active section indicator
   const dotObserver = new IntersectionObserver((entries) => {
-    if (!isMobile()) return;
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         setActiveDot(Array.from(panels).indexOf(entry.target));
