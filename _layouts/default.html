@@ -174,7 +174,8 @@
     font-size: 12px; font-weight: 700; padding: 1px 13px; border-radius: 20px; line-height: 2;
     -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
   }
-  .toc { position: sticky; top: 28px; }
+  .side-sticky { position: sticky; top: 28px; display: flex; flex-direction: column; gap: 16px; max-height: calc(100vh - 56px); overflow-y: auto; scrollbar-width: none; }
+  .side-sticky::-webkit-scrollbar { display: none; }
   .rel-list { display: flex; flex-direction: column; gap: 16px; }
   .rel { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; }
   .rel .t {
@@ -196,6 +197,7 @@
     .post-layout { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 40px; }
     .side { position: static; }
     .toc { display: none; }
+    .side-sticky { position: static; max-height: none; overflow: visible; }
   }
 
   .more { margin-top: 90px; }
@@ -250,8 +252,11 @@
 <body>
 
 <div class="topbar{% if page.wide %} wide{% endif %}">
+  {% if page.layout == 'post' %}
+  <a href="/blog/" class="back-link"><i class="fa-solid fa-arrow-left"></i> همهٔ مطالب</a>
+  {% else %}
   <a href="/" class="back-link"><i class="fa-solid fa-arrow-left"></i> بازگشت به پرتفولیو</a>
-  {% if page.layout == 'post' %}<a href="/blog/" class="back-link">همهٔ مطالب</a>{% endif %}
+  {% endif %}
 </div>
 
 {{ content }}
