@@ -260,8 +260,15 @@
 
   .btn-primary:active { transform: scale(.97); }
 
+  .btn-outline { border: 1px solid var(--line); color: var(--ink); background: transparent; }
+  .btn-outline:active { transform: scale(.97); }
+  .btn-outline-light { border: 1px solid rgba(255,255,255,.28); color: #fff; background: transparent; }
+  .btn-outline-light:active { transform: scale(.97); }
+
   @media (hover: hover) and (pointer: fine) {
     .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-outline:hover { background: var(--ink); color: #fff; border-color: var(--ink); transform: translateY(-2px); }
+    .btn-outline-light:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-2px); }
   }
 
   .scroll-cue {
@@ -526,6 +533,33 @@
     text-align: right;
   }
 
+  /* Order */
+  .order-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: center; }
+  .order-intro h2 { font-size: clamp(32px, 4.4vw, 56px); font-weight: 800; letter-spacing: -1px; line-height: 1.08; }
+  .order-intro p { margin-top: 18px; font-size: 16px; color: var(--ink-soft); max-width: 380px; font-weight: 500; }
+  .order-form { display: flex; flex-direction: column; gap: 14px; }
+  .order-form input, .order-form select, .order-form textarea {
+    width: 100%; font-family: inherit; font-size: 15px; color: var(--ink); background: #fff;
+    border: 1px solid var(--line); border-radius: 14px; padding: 17px 20px;
+    transition: border-color .2s; appearance: none; -webkit-appearance: none;
+  }
+  .order-form input::placeholder, .order-form textarea::placeholder { color: var(--ink-faint); }
+  .order-form select {
+    padding-right: 46px; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23111214' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 20px center;
+  }
+  .order-form select:invalid { color: var(--ink-faint); }
+  .order-form select option { color: var(--ink); }
+  .order-form input:focus, .order-form select:focus, .order-form textarea:focus { outline: none; border-color: var(--ink); }
+  .order-form textarea { resize: vertical; min-height: 150px; }
+  .order-submit { width: 100%; border: none; cursor: pointer; font-family: inherit; padding: 18px; border-radius: 14px; font-size: 15px; gap: 10px; }
+  .order-submit i { font-size: 18px; }
+  .order-alt { font-size: 13px; color: var(--ink-faint); font-weight: 500; text-align: center; margin-top: 2px; }
+  .link-btn { background: none; border: none; font: inherit; font-weight: 700; color: var(--ink-soft); cursor: pointer; text-decoration: underline; padding: 0; }
+  @media (hover: hover) and (pointer: fine) { .link-btn:hover { color: var(--ink); } }
+  @media (max-width: 860px) { .order-grid { grid-template-columns: 1fr; gap: 30px; } }
+
   /* Contact */
   #contact {
     background: var(--ink);
@@ -730,6 +764,7 @@
   <a href="#hero" class="active" data-dot>Home</a>
   <a href="#work" data-dot>Work</a>
   <a href="#resume" data-dot>Resume</a>
+  <a href="#order" data-dot>Order</a>
   <a href="#contact" data-dot>Contact</a>
 </nav>
 
@@ -848,6 +883,32 @@
   </div>
 </section>
 
+<section class="panel" id="order">
+  <div class="wrap">
+    <div class="order-grid">
+      <div class="order-intro">
+        <div class="eyebrow reveal">Order</div>
+        <h2 class="reveal">Start Your Project</h2>
+        <p class="reveal">Tell me what you need. Your message opens in Telegram, ready to send.</p>
+      </div>
+
+      <form class="order-form reveal" id="orderForm">
+        <input type="text" id="oName" placeholder="Your name" autocomplete="name" required>
+        <select id="oService" required>
+          <option value="" disabled selected>Service</option>
+          <option>Logo & Brand Identity</option>
+          <option>Poster & Flyer</option>
+          <option>Social Media Design</option>
+          <option>Other</option>
+        </select>
+        <textarea id="oDetails" placeholder="Tell me about your project" required></textarea>
+        <button type="submit" class="btn btn-primary order-submit">Send Order via Telegram <i class="fa-brands fa-telegram"></i></button>
+        <div class="order-alt" id="orderNote">or <button type="button" class="link-btn" id="orderWa">send it via WhatsApp</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <section class="panel" id="contact">
   <div class="wrap">
     <div class="eyebrow reveal">Contact</div>
@@ -860,6 +921,7 @@
       <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">
         <i class="fa-brands fa-telegram"></i> Message on Telegram
       </a>
+      <a href="/blog/" class="btn btn-outline-light"><i class="fa-solid fa-book-open"></i> Read the Blog</a>
     </div>
 
     <div class="info reveal">
@@ -995,6 +1057,32 @@
   }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
 
   panels.forEach(p => dotObserver.observe(p));
+
+  // Order form: opens a ready message in Telegram or WhatsApp
+  (function initOrderForm() {
+    const form = document.getElementById('orderForm');
+    const note = document.getElementById('orderNote');
+    const noteHTML = note.innerHTML;
+    const val = (id) => document.getElementById(id).value.trim();
+
+    async function send(channel) {
+      if (!form.reportValidity()) return;
+      const msg = `New order request\n\nName: ${val('oName')}\nService: ${val('oService')}\n\nProject:\n${val('oDetails')}`;
+      let copied = false;
+      try { await navigator.clipboard.writeText(msg); copied = true; } catch (e) {}
+      const url = channel === 'whatsapp'
+        ? `https://wa.me/989135957196?text=${encodeURIComponent(msg)}`
+        : `https://t.me/armvnpv?text=${encodeURIComponent(msg)}`;
+      if (copied) {
+        note.textContent = 'Message copied. If the chat opens empty, just paste it.';
+        setTimeout(() => { note.innerHTML = noteHTML; document.getElementById('orderWa').addEventListener('click', () => send('whatsapp')); }, 5000);
+      }
+      if (!window.open(url, '_blank', 'noopener,noreferrer')) window.location.href = url;
+    }
+
+    form.addEventListener('submit', (e) => { e.preventDefault(); send('telegram'); });
+    document.getElementById('orderWa').addEventListener('click', () => send('whatsapp'));
+  })();
 
   (function initCustomCursor() {
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
