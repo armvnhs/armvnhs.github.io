@@ -6,6 +6,7 @@ description: "این یک متن تستی کامل با ساختار استان�
 image: /assets/img/blog/what-is-graphic-design-header.jpg
 tags:
   - دیزاین
+  - گرافیک
 ---
 # تیتر سطح اول (H1): اصول بنیادین دیزاین مدرن
 
