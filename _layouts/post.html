@@ -3,21 +3,64 @@ layout: default
 ---
 {% include cover.html src=page.image %}
 {% assign body_check = content | strip %}
-{% assign words = content | number_of_words %}
-{% if cover_url != '' %}<div class="wrap wide hero-wrap"><img class="hero-cover" src="{{ cover_url }}" alt="{{ page.title }}"></div>{% endif %}
-<article class="wrap read">
-  <header class="post-head">
-    <div class="eyebrow">وبلاگ{% if words > 0 %} · {{ words | divided_by: 180 | plus: 1 }} دقیقه مطالعه{% endif %}</div>
-    <h1>{{ page.title }}</h1>
-    {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+{% if body_check == '' and page.body %}{% assign body_html = page.body | markdownify %}{% else %}{% assign body_html = content %}{% endif %}
+{% assign others = site.posts | where_exp: "p", "p.url != page.url" %}
+
+<div class="progress" id="progress"></div>
+
+<div class="wrap wide hero-wrap">
+  <header class="post-hero">
+    {% if cover_url != '' %}<img class="bg" src="{{ cover_url }}" alt="">{% else %}<div class="bg ph-bg"></div>{% endif %}
+    <div class="shade"></div>
+    <div class="inner">
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+    </div>
   </header>
+</div>
 
+<article class="wrap read read-body">
   <div class="prose">
-    {% if body_check == '' and page.body %}{{ page.body | markdownify }}{% else %}{{ content }}{% endif %}
+    {{ body_html | replace: '<table', '<div class="table-wrap"><table' | replace: '</table>', '</table></div>' }}
   </div>
-
-  <nav class="post-nav">
-    {% if page.next %}<a class="next" href="{{ page.next.url }}"><small>مطلب جدیدتر</small>{{ page.next.title }}</a>{% endif %}
-    {% if page.previous %}<a class="prev" href="{{ page.previous.url }}"><small>مطلب قبلی</small>{{ page.previous.title }}</a>{% endif %}
-  </nav>
 </article>
+
+{% if others.size > 0 %}
+<section class="wrap wide more">
+  <div class="more-head">
+    <h2>مطالب دیگر</h2>
+    <a href="/blog/">همهٔ مطالب <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="post-grid">
+    {% for post in others limit: 3 %}
+    {% include cover.html src=post.image %}
+    <a class="post-card" href="{{ post.url }}" style="--i: {{ forloop.index0 }}">
+      <div class="thumb">
+        {% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}<div class="ph">{{ post.title | slice: 0 }}</div>{% endif %}
+      </div>
+      <div class="body">
+        <h2>{{ post.title }}</h2>
+        {% if post.description %}<p class="desc">{{ post.description }}</p>{% endif %}
+        <div class="foot"><span>ادامه مطلب</span><span class="go"><i class="fa-solid fa-arrow-right"></i></span></div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<div class="list-end"></div>
+
+<script>
+  (function () {
+    var bar = document.getElementById('progress');
+    function update() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, h.scrollTop / max) : 0) + ')';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
