@@ -3,12 +3,13 @@ layout: default
 ---
 {% include cover.html src=page.image %}
 {% assign body_check = content | strip %}
+{% assign words = content | number_of_words %}
 {% if cover_url != '' %}<div class="wrap wide hero-wrap"><img class="hero-cover" src="{{ cover_url }}" alt="{{ page.title }}"></div>{% endif %}
-<article class="wrap">
-  <header class="page-head">
-    <div class="eyebrow">{{ page.date | date: "%Y/%m/%d" }}{% assign words = content | number_of_words %}{% if words > 0 %} · {{ words | divided_by: 180 | plus: 1 }} دقیقه مطالعه{% endif %}</div>
+<article class="wrap read">
+  <header class="post-head">
+    <div class="eyebrow">وبلاگ{% if words > 0 %} · {{ words | divided_by: 180 | plus: 1 }} دقیقه مطالعه{% endif %}</div>
     <h1>{{ page.title }}</h1>
-    {% if page.description %}<p>{{ page.description }}</p>{% endif %}
+    {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
   </header>
 
   <div class="prose">
