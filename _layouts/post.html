@@ -8,8 +8,7 @@ layout: default
 
 {% assign related = '' | split: '' %}
 {% for p in others %}{% assign shared = false %}{% for t in p.tags %}{% if page.tags contains t %}{% assign shared = true %}{% endif %}{% endfor %}{% if shared %}{% assign related = related | push: p %}{% endif %}{% endfor %}
-{% assign rel_title = 'مطالب مرتبط' %}
-{% if related.size == 0 %}{% assign related = others %}{% assign rel_title = 'آخرین مطالب' %}{% endif %}
+{% if related.size == 0 %}{% assign related = others %}{% endif %}
 
 <div class="progress" id="progress"></div>
 
@@ -43,12 +42,17 @@ layout: default
         <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
       </div>
       <a class="btn-block" href="/brief/"><i class="fa-solid fa-pen-nib"></i> سفارش طراحی</a>
-      <button type="button" class="btn-block btn-line" id="copyLink" style="margin-top:10px"><i class="fa-regular fa-copy"></i> <span>کپی لینک مطلب</span></button>
+      <a class="btn-block btn-line" href="/" style="margin-top:10px"><i class="fa-solid fa-briefcase"></i> پرتفولیو</a>
     </div>
 
+    <div class="side-sticky">
+    <div class="side-card toc" id="toc" hidden>
+      <h3 class="side-title">در این مطلب</h3>
+      <nav id="tocList"></nav>
+    </div>
     {% if related.size > 0 %}
     <div class="side-card toc-like">
-      <h3 class="side-title">{{ rel_title }}</h3>
+      <h3 class="side-title">مطالب مرتبط</h3>
       <div class="rel-list">
         {% for post in related limit: 4 %}
         {% include cover.html src=post.image %}
@@ -64,36 +68,9 @@ layout: default
     </div>
     {% endif %}
 
-    <div class="side-card toc" id="toc" hidden>
-      <h3 class="side-title">در این مطلب</h3>
-      <nav id="tocList"></nav>
     </div>
   </aside>
 </div>
-
-{% if others.size > 0 %}
-<section class="wrap wide more">
-  <div class="more-head">
-    <h2>مطالب دیگر</h2>
-    <a href="/blog/">همهٔ مطالب <i class="fa-solid fa-arrow-right"></i></a>
-  </div>
-  <div class="post-grid">
-    {% for post in others limit: 3 %}
-    {% include cover.html src=post.image %}
-    <a class="post-card" href="{{ post.url }}" style="--i: {{ forloop.index0 }}">
-      <div class="thumb">
-        {% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}<div class="ph">{{ post.title | slice: 0 }}</div>{% endif %}
-      </div>
-      <div class="body">
-        <h2>{{ post.title }}</h2>
-        {% if post.description %}<p class="desc">{{ post.description }}</p>{% endif %}
-        <div class="foot"><span>ادامه مطلب</span><span class="go"><i class="fa-solid fa-arrow-right"></i></span></div>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
 
 <div class="list-end"></div>
 
@@ -138,21 +115,5 @@ layout: default
       heads.forEach(function (h) { io.observe(h); });
     }
 
-    var btn = document.getElementById('copyLink');
-    var label = btn.querySelector('span');
-    btn.addEventListener('click', function () {
-      function done() {
-        label.textContent = 'کپی شد';
-        setTimeout(function () { label.textContent = 'کپی لینک مطلب'; }, 2000);
-      }
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(location.href).then(done, done);
-      } else {
-        var t = document.createElement('textarea');
-        t.value = location.href; document.body.appendChild(t); t.select();
-        try { document.execCommand('copy'); } catch (e) {}
-        t.remove(); done();
-      }
-    });
   })();
 </script>
