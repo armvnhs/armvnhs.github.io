@@ -19,11 +19,36 @@ layout: default
   </header>
 </div>
 
-<article class="wrap read read-body">
-  <div class="prose">
-    {{ body_html | replace: '<table', '<div class="table-wrap"><table' | replace: '</table>', '</table></div>' }}
-  </div>
-</article>
+<div class="wrap wide post-layout">
+  <article>
+    <div class="prose" id="prose">
+      {{ body_html | replace: '<table', '<div class="table-wrap"><table' | replace: '</table>', '</table></div>' }}
+    </div>
+  </article>
+
+  <aside class="side">
+    <div class="side-card author">
+      <img class="avatar" src="/assets/img/Profile.jpg" alt="آرمان حق‌شناس">
+      <div class="name">آرمان حق‌شناس</div>
+      <div class="role">طراح گرافیک و هویت بصری</div>
+      <div class="side-socials">
+        <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+        <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
+        <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      </div>
+      <a class="btn-block" href="/getlogo/"><i class="fa-solid fa-pen-nib"></i> سفارش طراحی</a>
+    </div>
+
+    <div class="side-card toc" id="toc" hidden>
+      <h3>در این مطلب</h3>
+      <nav id="tocList"></nav>
+    </div>
+
+    <button type="button" class="btn-block btn-line" id="copyLink"><i class="fa-regular fa-copy"></i> <span>کپی لینک مطلب</span></button>
+  </aside>
+</div>
 
 {% if others.size > 0 %}
 <section class="wrap wide more">
@@ -53,6 +78,7 @@ layout: default
 
 <script>
   (function () {
+    // Reading progress
     var bar = document.getElementById('progress');
     function update() {
       var h = document.documentElement;
@@ -62,5 +88,53 @@ layout: default
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
+
+    // Table of contents from headings
+    var heads = Array.prototype.slice.call(document.querySelectorAll('#prose h2, #prose h3'));
+    if (heads.length >= 2) {
+      var list = document.getElementById('tocList');
+      var links = heads.map(function (h, i) {
+        h.id = h.id || 'section-' + (i + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent;
+        if (h.tagName === 'H3') a.className = 'sub';
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          h.scrollIntoView({ behavior: 'smooth' });
+        });
+        list.appendChild(a);
+        return a;
+      });
+      document.getElementById('toc').hidden = false;
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('on'); });
+            links[heads.indexOf(en.target)].classList.add('on');
+          }
+        });
+      }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+      heads.forEach(function (h) { io.observe(h); });
+    }
+
+    // Copy link
+    var btn = document.getElementById('copyLink');
+    var label = btn.querySelector('span');
+    btn.addEventListener('click', function () {
+      function done() {
+        label.textContent = 'کپی شد';
+        setTimeout(function () { label.textContent = 'کپی لینک مطلب'; }, 2000);
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(location.href).then(done, done);
+      } else {
+        var t = document.createElement('textarea');
+        t.value = location.href; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        t.remove(); done();
+      }
+    });
   })();
 </script>
