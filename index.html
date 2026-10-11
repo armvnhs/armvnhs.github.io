@@ -55,6 +55,258 @@
   .sec-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 26px; }
   .sec-head h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(40px, 7vw, 60px); letter-spacing: -.02em; line-height: 1; }
   .sec-head span { font-size: 12.5px; font-weight: 700; letter-spacing: 1.4px; color: var(--ink-faint); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 16px; }
+  .card { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: #151515; color: #fff; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .45s var(--ease), box-shadow .45s var(--ease); will-change: transform; }
+  .card:nth-child(even) { margin-top: 30px; }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.05); transition: filter .7s, transform 1s var(--ease); }
+  .card.ph { background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px); background-size: 14px 14px; }
+  .card.ph b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 96px; font-weight: 800; color: rgba(255,255,255,.12); }
+  .card::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .4s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.3), transparent 60%); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.84) 0%, rgba(0,0,0,.2) 50%, transparent 72%); }
+  .cap { position: absolute; inset: auto 0 0 0; z-index: 3; padding: 18px; transition: transform .5s var(--ease); }
+  .cap h3 { font-size: 16px; font-weight: 700; line-height: 1.55; letter-spacing: -.01em; text-align: start; }
+  .cap p { font-size: 12.5px; color: rgba(255,255,255,.72); line-height: 1.7; margin-top: 2px; text-align: start; }
+  .go { position: absolute; top: 14px; right: 14px; z-index: 3; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.38); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; transition: all .5s var(--ease); }
+  .go i { font-size: 13px; transform: rotate(-45deg); transition: transform .5s var(--ease); }
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover { box-shadow: 0 30px 60px rgba(10,10,10,.3); }
+    .card:hover img { filter: none; transform: scale(1.08); }
+    .card:hover::before { opacity: 1; }
+    .card:hover .go { background: #fff; color: #0A0A0A; }
+    .card:hover .go i { transform: rotate(0); }
+    .card:hover .cap { transform: translateY(-5px); }
+    .pill .icons a:hover { background: var(--ink); color: #fff; }
+  }
+  @media (hover: none) { .card img { filter: none; } }
+  .more { display: flex; justify-content: center; margin-top: 34px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; font-weight: 700; padding: 15px 26px; border-radius: 100px; border: 1px solid var(--ink); font-family: inherit; cursor: pointer; transition: all .25s var(--ease); touch-action: manipulation; }
+  .btn:active { transform: scale(.97); }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-line { background: transparent; color: var(--ink); border-color: var(--line); }
+  @media (hover: hover) and (pointer: fine) { .btn:hover { transform: translateY(-3px); } .btn-line:hover { border-color: var(--ink); } }
+
+  .contact { text-align: center; padding: 56px 24px; background: var(--ink); color: #fff; border-radius: 28px; }
+  .contact h2 { color: #fff; margin-bottom: 14px; font-size: clamp(42px, 8vw, 72px); }
+  .contact p { color: rgba(255,255,255,.65); max-width: 380px; margin: 0 auto; font-weight: 500; }
+  .contact .actions { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  .contact .btn-dark { background: #fff; color: var(--ink); border-color: #fff; }
+  .contact .btn-line { color: #fff; border-color: rgba(255,255,255,.3); }
+  .contact .info { display: flex; justify-content: center; gap: 26px; margin-top: 34px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,.55); font-weight: 600; }
+  .contact .info span { display: inline-flex; align-items: center; gap: 8px; }
+  .foot { text-align: center; margin-top: 34px; font-size: 12.5px; color: var(--ink-faint); font-weight: 600; }
+
+  .dock { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 100; display: flex; gap: 4px; padding: 7px; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid var(--line); border-radius: 100px; box-shadow: 0 14px 40px rgba(10,10,10,.12); }
+  .dock a { position: relative; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--ink-soft); transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease); }
+  .dock a i { font-size: 17px; }
+  .dock a.on { background: var(--ink); color: #fff; }
+  .dock a::after { content: attr(data-label); position: absolute; bottom: 62px; left: 50%; transform: translate(-50%, 6px); background: var(--ink); color: #fff; font-size: 11.5px; font-weight: 700; padding: 4px 11px; border-radius: 8px; opacity: 0; pointer-events: none; white-space: nowrap; transition: all .25s var(--ease); }
+  @media (hover: hover) and (pointer: fine) { .dock a:hover::after { opacity: 1; transform: translate(-50%, 0); } .dock a:hover:not(.on) { background: rgba(10,10,10,.07); color: var(--ink); } }
+
+  @media (max-width: 700px) {
+    .page { padding: 56px 18px 150px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .card:nth-child(even) { margin-top: 0; }
+    .cap { padding: 14px; }
+    .cap h3 { font-size: 14px; }
+    .avatar { width: 46px; height: 46px; right: -24px; top: -14px; }
+    .pill { flex-direction: column; gap: 10px; }
+    .status { margin-bottom: 40px; }
+    .contact { padding: 44px 20px; }
+    .contact .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top" id="top">
+    <div class="status"><span>Isfahan, Iran</span><span class="avail"><i class="dot"></i>Available for projects</span></div>
+    <div class="name">Arman<br>Haghshenas<img class="avatar" src="assets/img/Profile.jpg" alt="Arman Haghshenas"></div>
+    <p class="tagline">Graphic designer crafting logos, brands and visual identities with 4+ years of experience.</p>
+    <div class="cta">
+      <a href="#works" class="btn btn-dark">View works <i class="fa-solid fa-arrow-down"></i></a>
+      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" class="btn btn-line"><i class="fa-brands fa-telegram"></i> Telegram</a>
+    </div>
+    <div class="pill">
+      <span>Contact me:</span>
+      <div class="icons">
+        <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+        <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
+        <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://twitter.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="marquee"><div class="marquee-track">
+    <span>Logo Design</span><span>Brand Identity</span><span>Visual Identity</span><span>Poster &amp; Flyer</span><span>Social Media Design</span>
+    <span>Logo Design</span><span>Brand Identity</span><span>Visual Identity</span><span>Poster &amp; Flyer</span><span>Social Media Design</span>
+  </div></div>
+
+  <section class="section reveal" id="works"><div class="sec-head"><h2>Works</h2><span>01</span></div><div class="grid" id="worksGrid"></div></section>
+  <section class="section reveal" id="projects"><div class="sec-head"><h2>Projects</h2><span>02</span></div><div class="grid" id="projectsGrid"></div></section>
+
+  <section class="section reveal" id="blog">
+    <div class="sec-head"><h2>Blog</h2><span>03</span></div>
+    <div class="grid">
+      {% for post in site.posts limit: 4 %}
+      {% include cover.html src=post.image %}
+      <a class="card{% if cover_url == '' %} ph{% endif %}" href="{{ post.url }}">
+        {% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}<b>{{ post.title | slice: 0 }}</b>{% endif %}
+        <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+        <div class="cap">
+          <h3 dir="auto">{{ post.title }}</h3>
+          {% if post.description %}<p dir="auto">{{ post.description | truncate: 60 }}</p>{% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="more"><a href="/blog/" class="btn btn-line">View all posts <i class="fa-solid fa-arrow-right"></i></a></div>
+  </section>
+
+  <section class="section reveal" id="contact">
+    <div class="contact">
+      <h2>Let's <em class="serif">talk</em></h2>
+      <p>Have a logo or brand in mind? Send me a message.</p>
+      <div class="actions">
+        <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" class="btn btn-dark"><i class="fa-brands fa-telegram"></i> Telegram</a>
+        <a href="https://wa.me/989135957196" target="_blank" rel="noopener noreferrer" class="btn btn-line"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+      <div class="info">
+        <span><i class="fa-solid fa-location-dot"></i> Isfahan, Iran</span>
+        <span><i class="fa-solid fa-phone"></i> +98 913 595 7196</span>
+        <span><i class="fa-solid fa-globe"></i> armvnhs.ir</span>
+      </div>
+    </div>
+    <div class="foot">© 2026 Arman Haghshenas</div>
+  </section>
+</div>
+
+<nav class="dock" id="dock">
+  <a href="#top" class="on" data-label="Home" data-sec="top"><i class="fa-solid fa-house"></i></a>
+  <a href="#works" data-label="Works" data-sec="works"><i class="fa-solid fa-layer-group"></i></a>
+  <a href="#projects" data-label="Projects" data-sec="projects"><i class="fa-solid fa-folder-open"></i></a>
+  <a href="#blog" data-label="Blog" data-sec="blog"><i class="fa-solid fa-pen-nib"></i></a>
+  <a href="#contact" data-label="Contact" data-sec="contact"><i class="fa-solid fa-paper-plane"></i></a>
+</nav>
+
+<script>
+  const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .08 });
+  const observeReveal = () => document.querySelectorAll('.reveal:not(.seen)').forEach((el) => { el.classList.add('seen'); io.observe(el); });
+
+  function fill(id, items) {
+    const grid = document.getElementById(id + 'Grid');
+    if (!items.length) {
+      document.getElementById(id).remove();
+      document.querySelector('.dock a[data-sec="' + id + '"]').remove();
+      return;
+    }
+    grid.innerHTML = items.map((p) => '<a class="card" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy"><span class="go"><i class="fa-solid fa-arrow-right"></i></span><div class="cap"><h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</div></a>').join('');
+  }
+
+  fetch('projects.json', { cache: 'no-cache' })
+    .then((r) => r.json())
+    .catch(() => [])
+    .then((data) => {
+      const list = Array.isArray(data) ? data : [];
+      fill('works', list.filter((p) => (p.group || 'Works') === 'Works'));
+      fill('projects', list.filter((p) => p.group === 'Projects'));
+      observeReveal();
+      spy();
+    });
+
+  observeReveal();
+
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      const c = e.target.closest('.card');
+      if (!c) return;
+      const r = c.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      c.style.setProperty('--ry', ((x - .5) * 10) + 'deg');
+      c.style.setProperty('--rx', ((.5 - y) * 10) + 'deg');
+      c.style.setProperty('--mx', (x * 100) + '%');
+      c.style.setProperty('--my', (y * 100) + '%');
+    });
+    document.addEventListener('mouseout', (e) => {
+      const c = e.target.closest('.card');
+      if (c && !c.contains(e.relatedTarget)) {
+        c.style.setProperty('--rx', '0deg');
+        c.style.setProperty('--ry', '0deg');
+      }
+    });
+  }
+
+  function spy() {
+    const links = [...document.querySelectorAll('.dock a')];
+    const spyIO = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((a) => a.classList.toggle('on', a.dataset.sec === e.target.id));
+    }), { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    links.forEach((a) => { const t = document.getElementById(a.dataset.sec); if (t) spyIO.observe(t); });
+  }
+</script>
+</body>
+</html>---
+---
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arman Haghshenas — Graphic Designer</title>
+<meta name="description" content="Arman Haghshenas, graphic designer focused on logo design, branding and visual identity.">
+<meta name="theme-color" content="#F4F4F4">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Arman Haghshenas — Graphic Designer">
+<meta property="og:description" content="Logo design, branding and visual identity.">
+<meta property="og:image" content="https://armvnhs.github.io/assets/img/Profile.jpg">
+<link rel="icon" type="image/png" href="assets/img/Icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Estedad:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #F4F4F4; --ink: #0A0A0A; --ink-soft: #6B6B6B; --ink-faint: #A3A3A3; --line: rgba(10,10,10,.14); --ease: cubic-bezier(.22, 1, .36, 1); --serif: 'Instrument Serif', 'Estedad', serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  ::selection { background: var(--ink); color: #fff; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: 9990; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .8 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
+  ::-webkit-scrollbar { display: none; }
+  body { font-family: 'SN Pro', 'Estedad', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  i { font-size: 16px; line-height: 1; }
+  .page { max-width: 840px; margin: 0 auto; padding: 72px 24px 160px; }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+
+  .top { text-align: center; }
+  .status { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 56px; }
+  .avail { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(10,10,10,.45); } 70%, 100% { box-shadow: 0 0 0 9px rgba(10,10,10,0); } }
+  .cta { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  .name { position: relative; display: inline-block; font-size: clamp(56px, 12vw, 112px); font-weight: 800; letter-spacing: -.055em; line-height: .86; text-transform: uppercase; }
+  .avatar { position: absolute; top: -8px; right: -52px; width: 62px; height: 62px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 8px 22px rgba(0,0,0,.14); outline: 1px solid var(--line); outline-offset: 5px; object-fit: cover; background: #fff; }
+  .tagline { max-width: 480px; margin: 26px auto 0; font-size: 16px; color: var(--ink-soft); font-weight: 500; }
+  .pill { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 13.5px; color: var(--ink-soft); font-weight: 600; }
+  .pill .icons { display: flex; gap: 2px; padding: 5px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+  .pill .icons a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: var(--ink-soft); transition: all .25s var(--ease); }
+  .marquee { width: 100vw; margin: 64px 0 0 calc(50% - 50vw); background: var(--ink); color: #fff; overflow: hidden; padding: 18px 0; }
+  .marquee-track { display: flex; width: max-content; animation: scroll 36s linear infinite; }
+  .marquee-track span { font-size: clamp(20px, 3vw, 32px); font-weight: 700; letter-spacing: -.02em; padding: 0 30px; white-space: nowrap; display: flex; align-items: center; gap: 60px; }
+  .marquee-track span::after { content: "✦"; font-size: .6em; opacity: .45; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+  .section { margin-top: 72px; }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 26px; }
+  .sec-head h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(40px, 7vw, 60px); letter-spacing: -.02em; line-height: 1; }
+  .sec-head span { font-size: 12.5px; font-weight: 700; letter-spacing: 1.4px; color: var(--ink-faint); }
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 16px; }
   .card { display: block; }
   .tile { aspect-ratio: 1; border-radius: 22px; background: #fff; border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .3s; }
