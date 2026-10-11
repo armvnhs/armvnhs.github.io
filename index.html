@@ -16,13 +16,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Estedad:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
+  :root { --bg: #F4F4F4; --ink: #0A0A0A; --ink-soft: #6B6B6B; --ink-faint: #A3A3A3; --line: rgba(10,10,10,.14); --ease: cubic-bezier(.22, 1, .36, 1); --serif: 'Instrument Serif', 'Estedad', serif; }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  ::selection { background: var(--ink); color: #fff; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: 9990; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .8 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   html { scroll-behavior: smooth; scrollbar-width: none; }
   ::-webkit-scrollbar { display: none; }
-  body { font-family: 'SN Pro', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'SN Pro', 'Estedad', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   i { font-size: 16px; line-height: 1; }
   .page { max-width: 840px; margin: 0 auto; padding: 72px 24px 160px; }
@@ -30,25 +32,36 @@
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
 
-  .top { text-align: center; padding-top: 10px; }
+  .top { text-align: center; }
+  .status { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 56px; }
+  .avail { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(10,10,10,.45); } 70%, 100% { box-shadow: 0 0 0 9px rgba(10,10,10,0); } }
+  .cta { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
   .name { position: relative; display: inline-block; font-size: clamp(56px, 12vw, 112px); font-weight: 800; letter-spacing: -.055em; line-height: .86; text-transform: uppercase; }
   .avatar { position: absolute; top: -8px; right: -52px; width: 62px; height: 62px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 8px 22px rgba(0,0,0,.14); outline: 1px solid var(--line); outline-offset: 5px; object-fit: cover; background: #fff; }
   .tagline { max-width: 480px; margin: 26px auto 0; font-size: 16px; color: var(--ink-soft); font-weight: 500; }
   .pill { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 13.5px; color: var(--ink-soft); font-weight: 600; }
   .pill .icons { display: flex; gap: 2px; padding: 5px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
   .pill .icons a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: var(--ink-soft); transition: all .25s var(--ease); }
-  .rule { height: 1px; margin: 48px 0 0; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+  .marquee { width: 100vw; margin: 64px 0 0 calc(50% - 50vw); background: var(--ink); color: #fff; overflow: hidden; padding: 18px 0; }
+  .marquee-track { display: flex; width: max-content; animation: scroll 36s linear infinite; }
+  .marquee-track span { font-size: clamp(20px, 3vw, 32px); font-weight: 700; letter-spacing: -.02em; padding: 0 30px; white-space: nowrap; display: flex; align-items: center; gap: 60px; }
+  .marquee-track span::after { content: "✦"; font-size: .6em; opacity: .45; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
-  .section { margin-top: 64px; }
-  .section h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 38px; letter-spacing: -.01em; line-height: 1; margin-bottom: 24px; }
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 16px; }
+  .section { margin-top: 72px; }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 26px; }
+  .sec-head h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(40px, 7vw, 60px); letter-spacing: -.02em; line-height: 1; }
+  .sec-head span { font-size: 12.5px; font-weight: 700; letter-spacing: 1.4px; color: var(--ink-faint); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 16px; }
   .card { display: block; }
   .tile { aspect-ratio: 1; border-radius: 22px; background: #fff; border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .3s; }
   .tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
-  #works .tile img { object-fit: contain; padding: 15%; }
   .tile.ph { background-color: #151515; background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px); background-size: 14px 14px; color: rgba(255,255,255,.28); font-size: 46px; font-weight: 800; }
-  .card h3 { font-size: 15px; font-weight: 700; margin-top: 12px; letter-spacing: -.01em; line-height: 1.4; }
-  .card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; margin-top: 2px; }
+  .card h3 { font-size: 15px; font-weight: 700; margin-top: 14px; letter-spacing: -.01em; line-height: 1.6; text-align: start; }
+  .card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; margin-top: 2px; text-align: start; }
   @media (hover: hover) and (pointer: fine) {
     .card:hover .tile { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(10,10,10,.1); border-color: var(--ink); }
     .card:hover .tile img { transform: scale(1.06); }
@@ -83,6 +96,7 @@
     .grid { grid-template-columns: repeat(2, 1fr); }
     .avatar { width: 46px; height: 46px; right: -24px; top: -14px; }
     .pill { flex-direction: column; gap: 10px; }
+    .status { margin-bottom: 40px; }
     .contact { padding: 44px 20px; }
     .contact .btn { width: 100%; }
   }
@@ -90,9 +104,14 @@
 </head>
 <body>
 <div class="page">
-  <header class="top reveal" id="top">
+  <header class="top" id="top">
+    <div class="status"><span>Isfahan, Iran</span><span class="avail"><i class="dot"></i>Available for projects</span></div>
     <div class="name">Arman<br>Haghshenas<img class="avatar" src="assets/img/Profile.jpg" alt="Arman Haghshenas"></div>
     <p class="tagline">Graphic designer crafting logos, brands and visual identities with 4+ years of experience.</p>
+    <div class="cta">
+      <a href="#works" class="btn btn-dark">View works <i class="fa-solid fa-arrow-down"></i></a>
+      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" class="btn btn-line"><i class="fa-brands fa-telegram"></i> Telegram</a>
+    </div>
     <div class="pill">
       <span>Contact me:</span>
       <div class="icons">
@@ -104,21 +123,25 @@
         <a href="https://twitter.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
       </div>
     </div>
-    <div class="rule"></div>
   </header>
 
-  <section class="section reveal" id="works"><h2>Works</h2><div class="grid" id="worksGrid"></div></section>
-  <section class="section reveal" id="projects"><h2>Projects</h2><div class="grid" id="projectsGrid"></div></section>
+  <div class="marquee"><div class="marquee-track">
+    <span>Logo Design</span><span>Brand Identity</span><span>Visual Identity</span><span>Poster &amp; Flyer</span><span>Social Media Design</span>
+    <span>Logo Design</span><span>Brand Identity</span><span>Visual Identity</span><span>Poster &amp; Flyer</span><span>Social Media Design</span>
+  </div></div>
+
+  <section class="section reveal" id="works"><div class="sec-head"><h2>Works</h2><span>01</span></div><div class="grid" id="worksGrid"></div></section>
+  <section class="section reveal" id="projects"><div class="sec-head"><h2>Projects</h2><span>02</span></div><div class="grid" id="projectsGrid"></div></section>
 
   <section class="section reveal" id="blog">
-    <h2>Blog</h2>
+    <div class="sec-head"><h2>Blog</h2><span>03</span></div>
     <div class="grid">
       {% for post in site.posts limit: 4 %}
       {% include cover.html src=post.image %}
       <a class="card" href="{{ post.url }}">
         <div class="tile{% if cover_url == '' %} ph{% endif %}">{% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}{{ post.title | slice: 0 }}{% endif %}</div>
-        <h3>{{ post.title }}</h3>
-        {% if post.description %}<p>{{ post.description | truncate: 60 }}</p>{% endif %}
+        <h3 dir="auto">{{ post.title }}</h3>
+        {% if post.description %}<p dir="auto">{{ post.description | truncate: 60 }}</p>{% endif %}
       </a>
       {% endfor %}
     </div>
@@ -163,7 +186,7 @@
       document.querySelector('.dock a[data-sec="' + id + '"]').remove();
       return;
     }
-    grid.innerHTML = items.map((p) => '<a class="card" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer"><div class="tile"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy"></div><h3>' + esc(p.title) + '</h3>' + (p.subtitle ? '<p>' + esc(p.subtitle) + '</p>' : '') + '</a>').join('');
+    grid.innerHTML = items.map((p) => '<a class="card" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer"><div class="tile"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy"></div><h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</a>').join('');
   }
 
   fetch('projects.json', { cache: 'no-cache' })
