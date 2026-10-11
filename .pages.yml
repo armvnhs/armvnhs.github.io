@@ -20,11 +20,16 @@ content:
     format: json
     list: true
     fields:
+      - name: group
+        label: Group
+        type: select
+        options:
+          values: [Works, Projects]
       - name: title
         label: Title
         type: string
-      - name: tag
-        label: Category
+      - name: subtitle
+        label: Subtitle
         type: string
       - name: img
         label: Cover Image
@@ -32,7 +37,7 @@ content:
         options:
           media: projects
       - name: link
-        label: Project Link
+        label: Link
         type: string
 
   - name: posts
