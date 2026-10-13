@@ -24,7 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Estedad:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <style>
-  :root { --bg: #FFFFFF; --ink: #0A0A0A; --ink-soft: #5E5E63; --ink-faint: #9A9AA0; --line: rgba(10,10,10,.1); --ease: cubic-bezier(.22, 1, .36, 1); --serif: 'Instrument Serif', 'Estedad', serif; --glass: rgba(255,255,255,.62); --glass-brd: rgba(255,255,255,.9); --glass-sh: 0 1px 0 rgba(255,255,255,.95) inset, 0 28px 60px rgba(20,20,30,.08), 0 2px 8px rgba(20,20,30,.05); --plate: rgba(255,255,255,.84); --plate-ink: #0A0A0A; --plate-soft: #55555A; --chip: #fff; --b1: #fff; --b2: #EFEFF0; --blob1: #fff; --blob2: #fff; }
+  :root { --bg: #FFFFFF; --ink: #0A0A0A; --ink-soft: #5E5E63; --ink-faint: #9A9AA0; --line: rgba(10,10,10,.1); --ease: cubic-bezier(.22, 1, .36, 1); --serif: 'Instrument Serif', 'Estedad', serif; --glass: rgba(255,255,255,.62); --glass-brd: rgba(10,10,10,.14); --glass-sh: 0 1px 0 #fff inset, 0 14px 34px rgba(20,20,30,.12), 0 2px 6px rgba(20,20,30,.08); --plate: rgba(255,255,255,.84); --plate-ink: #0A0A0A; --plate-soft: #55555A; --chip: #fff; --b1: #fff; --b2: #E8E8EC; --blob1: #fff; --blob2: #fff; }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   ::selection { background: var(--ink); color: #fff; }
   html { scroll-behavior: smooth; scrollbar-width: none; background: var(--bg); }
@@ -38,7 +38,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } * { animation: none !important; } }
 
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 700 14.5px/1 'SN Pro', 'Estedad', sans-serif; height: 56px; padding: 0 28px; border-radius: 28px; border: 1px solid var(--glass-brd); color: var(--ink); background: linear-gradient(var(--b1), var(--b2)); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 8px 20px rgba(20,20,30,.1); cursor: pointer; transition: transform .25s var(--ease); touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 700 14.5px/1 'SN Pro', 'Estedad', sans-serif; height: 56px; padding: 0 28px; border-radius: 28px; border: 1px solid var(--glass-brd); color: var(--ink); background: linear-gradient(var(--b1), var(--b2)); box-shadow: 0 1px 0 #fff inset, 0 6px 16px rgba(20,20,30,.14); cursor: pointer; transition: transform .25s var(--ease); touch-action: manipulation; -webkit-user-select: none; user-select: none; }
   .btn:active { transform: scale(.96); }
   .btn.round { width: 56px; padding: 0; }
   .btn.round i.ph { font-size: 22px; }
@@ -55,7 +55,7 @@
   .tagline { max-width: 480px; margin: 26px auto 0; font-size: 16px; color: var(--ink-soft); font-weight: 500; }
   .cta { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
   .icons { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-  .icons a { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--ink); background: rgba(255,255,255,.85); border: 1px solid var(--glass-brd); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 6px 14px rgba(20,20,30,.08); transition: transform .25s var(--ease); touch-action: manipulation; }
+  .icons a { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--ink); background: linear-gradient(#fff, #E8E8EC); border: 1px solid var(--glass-brd); box-shadow: 0 1px 0 #fff inset, 0 6px 14px rgba(20,20,30,.14); transition: transform .25s var(--ease); touch-action: manipulation; }
   .icons a:active { transform: scale(.92); }
   @media (hover: hover) and (pointer: fine) { .icons a:hover { transform: translateY(-3px); } }
 
@@ -63,28 +63,24 @@
   .sec-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 24px; min-height: 66px; }
   .sec-head h2 { font-weight: 800; font-size: clamp(28px, 5vw, 38px); letter-spacing: -.04em; line-height: 1.1; }
 
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 22px; }
-  .card { display: block; transition: transform .35s var(--ease); touch-action: manipulation; }
-  .frame { position: relative; }
-  .frame::before, .frame::after { content: ""; position: absolute; inset: 0; border-radius: 24px; transition: transform .55s var(--ease); }
-  .frame::before { background: #F0F0F2; transform: rotate(-2.5deg); }
-  .frame::after { background: #E3E3E6; transform: rotate(2deg); }
-  .card .pic { position: relative; z-index: 1; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: #d9d9dd; box-shadow: 0 6px 16px rgba(20,20,30,.1); transition: transform .5s var(--ease); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .card { display: block; padding: 10px; border-radius: 28px; color: #fff; background: radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,.14), transparent 55%), linear-gradient(165deg, #3b3b3f 0%, #161617 55%, #0a0a0a 100%); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 1px 0 rgba(255,255,255,.16) inset, 0 14px 28px rgba(10,10,10,.18); transition: transform .4s var(--ease), box-shadow .4s var(--ease); touch-action: manipulation; }
+  .card .pic { position: relative; aspect-ratio: 1; border-radius: 20px; overflow: hidden; background: #2a2a2d; }
   .card .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
-  .card .pic.nopic { display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #fbfbfc, #dcdce0); }
-  .card .big { font-size: 46px; color: rgba(10,10,10,.22); }
-  .meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-top: 18px; }
-  .meta .tx { min-width: 0; flex: 1; }
-  .card h3 { font-size: 15px; font-weight: 700; letter-spacing: -.01em; line-height: 1.5; text-align: start; }
-  .card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; text-align: start; }
-  .ar { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--ink); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateX(-6px); transition: opacity .35s, transform .45s var(--ease), background .3s, color .3s; }
-  .ar i.ph { font-size: 14px; }
+  .card .pic.nopic { display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #2e2e32, #19191b); }
+  .card .big { font-size: 44px; color: rgba(255,255,255,.28); }
+  .card .body { padding: 14px 8px 6px; }
+  .cat { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 4px; }
+  .row { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+  .row .tx { min-width: 0; flex: 1; }
+  .card h3 { font-size: 15.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.5; text-align: start; }
+  .card p { font-size: 12.5px; color: rgba(255,255,255,.65); line-height: 1.6; text-align: start; }
+  .ar { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #0A0A0A; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateX(-6px); transition: opacity .35s, transform .45s var(--ease); }
+  .ar i.ph { font-size: 15px; }
   @media (hover: hover) and (pointer: fine) {
-    .card:hover .frame::before { transform: rotate(-6deg) translateX(-5px); }
-    .card:hover .frame::after { transform: rotate(5deg) translateX(5px); }
-    .card:hover .pic { transform: translateY(-4px); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 22px 40px rgba(10,10,10,.26); }
     .card:hover .pic img { transform: scale(1.05); }
-    .card:hover .ar { opacity: 1; transform: none; background: var(--ink); color: #fff; }
+    .card:hover .ar { opacity: 1; transform: none; }
   }
 
   .contact { text-align: center; padding: 56px 24px; background: radial-gradient(70% 90% at 50% -10%, rgba(255,255,255,.16), transparent 70%), #0A0A0A; color: #fff; border-radius: 34px; border: 1px solid var(--line); box-shadow: var(--glass-sh); }
@@ -120,9 +116,11 @@
     .avatar { width: 72px; height: 72px; }
     .section { margin-top: 56px; }
     .sec-head { min-height: 0; }
-    .grid { gap: 28px 18px; }
-    .card .pic { border-radius: 18px; }
-    .card h3 { font-size: 13.5px; margin-top: 10px; }
+    .grid { gap: 12px; }
+    .card { padding: 8px; border-radius: 24px; }
+    .card .pic { border-radius: 17px; }
+    .card .body { padding: 11px 6px 4px; }
+    .card h3 { font-size: 13.5px; }
     .contact { padding: 44px 18px; }
     .contact .btn { width: 100%; }
     .dock { left: 50%; right: auto; bottom: calc(12px + env(safe-area-inset-bottom)); transform: translateX(-50%); width: calc(100% - 24px); max-width: 460px; justify-content: space-around; padding: 8px 6px; border-radius: 28px; }
@@ -165,8 +163,8 @@
       {% for post in site.posts limit: 4 %}
       {% include cover.html src=post.image %}
       <a class="card" href="{{ post.url }}">
-        <div class="frame"><div class="pic{% if cover_url == '' %} nopic{% endif %}">{% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy" decoding="async">{% else %}<i class="ph ph-pen-nib big"></i>{% endif %}</div></div>
-        <div class="meta"><div class="tx"><h3 dir="auto">{{ post.title }}</h3>{% if post.description %}<p dir="auto">{{ post.description | truncate: 60 }}</p>{% endif %}</div><span class="ar"><i class="ph ph-arrow-up-right"></i></span></div>
+        <div class="pic{% if cover_url == '' %} nopic{% endif %}">{% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy" decoding="async">{% else %}<i class="ph ph-pen-nib big"></i>{% endif %}</div>
+        <div class="body"><span class="cat">Blog</span><div class="row"><div class="tx"><h3 dir="auto">{{ post.title }}</h3>{% if post.description %}<p dir="auto">{{ post.description | truncate: 60 }}</p>{% endif %}</div><span class="ar"><i class="ph ph-arrow-up-right"></i></span></div></div>
       </a>
       {% endfor %}
     </div>
@@ -206,11 +204,13 @@
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .06 });
   const observeReveal = () => document.querySelectorAll('.reveal:not(.seen)').forEach((el) => { el.classList.add('seen'); io.observe(el); });
 
-  function cardHTML(p, kind) {
+  const labels = { works: 'Works', projects: 'Projects', vibe: 'Vibe Coding', sheets: 'Cheatsheet' };
+
+  function cardHTML(p, kind, label) {
     const icon = kind === 'sheet' ? 'file-text' : kind === 'vibe' ? 'terminal-window' : 'image';
     const pic = p.img ? '<div class="pic"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy" decoding="async"></div>' : '<div class="pic nopic"><i class="ph ph-' + icon + ' big"></i></div>';
     const href = p.file || p.link || '#';
-    return '<a class="card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer"><div class="frame">' + pic + '</div><div class="meta"><div class="tx"><h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</div><span class="ar"><i class="ph ph-arrow-up-right"></i></span></div></a>';
+    return '<a class="card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + pic + '<div class="body"><span class="cat">' + esc(label) + '</span><div class="row"><div class="tx"><h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</div><span class="ar"><i class="ph ph-arrow-up-right"></i></span></div></div></a>';
   }
 
   function fill(id, items, kind) {
@@ -219,7 +219,7 @@
       document.querySelectorAll('[data-sec="' + id + '"]').forEach((el) => el.remove());
       return;
     }
-    document.getElementById(id + 'Grid').innerHTML = items.map((p) => cardHTML(p, kind)).join('');
+    document.getElementById(id + 'Grid').innerHTML = items.map((p) => cardHTML(p, kind, labels[id])).join('');
   }
 
   fetch('projects.json', { cache: 'no-cache' })
