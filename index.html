@@ -53,13 +53,6 @@
   .avatar.spin { animation: spin .9s var(--ease); }
   @keyframes spin { to { transform: rotate(720deg) scale(1.2); } }
   .tagline { max-width: 480px; margin: 26px auto 0; font-size: 16px; color: var(--ink-soft); font-weight: 500; }
-  .cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 540px; margin: 28px auto 0; }
-  .tg { padding: 10px 18px; border-radius: 16px; font-size: 15px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; white-space: nowrap; transition: transform .3s var(--ease); -webkit-user-select: none; user-select: none; }
-  .tg.t1 { color: #0B2670; background: linear-gradient(#7FA3FF, #2F6BFF); box-shadow: 0 1px 0 rgba(255,255,255,.55) inset, 0 8px 18px rgba(47,107,255,.28); }
-  .tg.t2, .tg.t5 { color: var(--ink); background: linear-gradient(#fff, #ECECEE); box-shadow: 0 1px 0 #fff inset, 0 6px 14px rgba(20,20,30,.08); }
-  .tg.t3 { color: #12307F; background: linear-gradient(#E6EEFF, #BCD0FF); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 6px 16px rgba(80,120,255,.2); }
-  .tg.t4 { color: #fff; background: linear-gradient(#3a3a3d, #0c0c0d); box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 8px 16px rgba(10,10,10,.22); }
-  @media (hover: hover) and (pointer: fine) { .tg:hover { transform: translateY(-3px); } }
   .cta { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
   .icons { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
   .icons a { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--ink); background: rgba(255,255,255,.85); border: 1px solid var(--glass-brd); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 6px 14px rgba(20,20,30,.08); transition: transform .25s var(--ease); touch-action: manipulation; }
@@ -68,24 +61,19 @@
 
   .section { margin-top: 72px; }
   .sec-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 24px; min-height: 66px; }
-  .sec-head h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(40px, 7vw, 60px); letter-spacing: -.02em; line-height: 1; }
+  .sec-head h2 { font-weight: 800; font-size: clamp(28px, 5vw, 38px); letter-spacing: -.04em; line-height: 1.1; }
 
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .card { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 26px; overflow: hidden; background: #d4d4d8; box-shadow: 0 8px 22px rgba(20,20,30,.1); transition: transform .45s var(--ease), box-shadow .45s var(--ease); touch-action: manipulation; }
-  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1s var(--ease); }
-  .card.nopic { display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #fbfbfc, #d6d6da); }
-  .card .big { font-size: 60px; color: rgba(10,10,10,.2); margin-bottom: 34px; }
-  .plate { position: absolute; left: 9px; right: 9px; bottom: 9px; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 11px 11px 11px 16px; border-radius: 20px; background: var(--plate); color: var(--plate-ink); border: 1px solid rgba(255,255,255,.35); box-shadow: 0 1px 0 rgba(255,255,255,.5) inset; }
-  .plate .tx { flex: 1; min-width: 0; }
-  .plate h3 { font-size: 14.5px; font-weight: 700; line-height: 1.45; letter-spacing: -.01em; text-align: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .plate p { font-size: 12px; color: var(--plate-soft); line-height: 1.5; text-align: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .go { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fff; color: #0A0A0A; box-shadow: 0 4px 12px rgba(0,0,0,.16); transition: transform .5s var(--ease); }
-  .badge { position: absolute; top: 12px; left: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 14px; font-size: 11px; font-weight: 700; color: var(--plate-ink); background: var(--plate); border: 1px solid rgba(255,255,255,.35); }
-  .badge i.ph { font-size: 14px; }
+  .card { display: block; transition: transform .35s var(--ease); touch-action: manipulation; }
+  .card .pic { position: relative; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: #d9d9dd; box-shadow: 0 6px 16px rgba(20,20,30,.08); }
+  .card .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+  .card .pic.nopic { display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #fbfbfc, #dcdce0); }
+  .card .big { font-size: 46px; color: rgba(10,10,10,.22); }
+  .card h3 { margin-top: 12px; font-size: 15px; font-weight: 700; letter-spacing: -.01em; line-height: 1.5; text-align: start; }
+  .card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; text-align: start; }
   @media (hover: hover) and (pointer: fine) {
-    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(20,20,30,.16); }
-    .card:hover img { transform: scale(1.07); }
-    .card:hover .go { transform: rotate(45deg); background: var(--blue); color: #fff; }
+    .card:hover { transform: translateY(-3px); }
+    .card:hover .pic img { transform: scale(1.05); }
   }
 
   .contact { text-align: center; padding: 56px 24px; background: radial-gradient(70% 90% at 50% -10%, rgba(47,107,255,.45), transparent 70%), #0A0A0A; color: #fff; border-radius: 34px; border: 1px solid var(--line); box-shadow: var(--glass-sh); }
@@ -121,14 +109,12 @@
     .avatar { width: 72px; height: 72px; }
     .section { margin-top: 56px; }
     .sec-head { min-height: 0; }
-    .grid { gap: 10px; }
-    .card { border-radius: 22px; }
-    .plate { left: 7px; right: 7px; bottom: 7px; padding: 9px 9px 9px 12px; border-radius: 17px; }
-    .plate h3 { font-size: 13px; }
-    .go { width: 32px; height: 32px; }
+    .grid { gap: 18px 12px; }
+    .card .pic { border-radius: 18px; }
+    .card h3 { font-size: 13.5px; margin-top: 10px; }
     .contact { padding: 44px 18px; }
     .contact .btn { width: 100%; }
-    .dock { left: 0; right: 0; bottom: 0; transform: none; justify-content: space-around; padding: 8px 4px calc(8px + env(safe-area-inset-bottom)); border-radius: 28px 28px 0 0; border-width: 1px 0 0; }
+    .dock { left: 50%; right: auto; bottom: calc(12px + env(safe-area-inset-bottom)); transform: translateX(-50%); width: calc(100% - 24px); max-width: 460px; justify-content: space-around; padding: 8px 6px; border-radius: 28px; }
     .dock a { flex: 1; min-width: 0; font-size: 10px; }
     .dock a i.ph { width: 42px; height: 42px; font-size: 21px; border-radius: 14px; }
     .toast { bottom: calc(100px + env(safe-area-inset-bottom)); }
@@ -144,9 +130,6 @@
   <header class="top" id="top">
     <img class="avatar" id="avatar" src="assets/img/Profile.jpg" alt="Arman Haghshenas" decoding="async"><div class="name">Arman<br>Haghshenas</div>
     <p class="tagline">Graphic designer crafting logos, brands and visual identities with 4+ years of experience.</p>
-    <div class="cloud" aria-hidden="true">
-      <span class="tg t1">Logo Design</span><span class="tg t2">Branding</span><span class="tg t3">Visual Identity</span><span class="tg t4">Posters</span><span class="tg t5">Social Media</span>
-    </div>
     <div class="cta">
       <a href="#works" class="btn btn-dark">View works <i class="ph ph-arrow-down"></i></a>
       <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" class="btn"><i class="ph ph-telegram-logo"></i> Telegram</a>
@@ -170,15 +153,10 @@
     <div class="grid">
       {% for post in site.posts limit: 4 %}
       {% include cover.html src=post.image %}
-      <a class="card{% if cover_url == '' %} nopic{% endif %}" href="{{ post.url }}">
-        {% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}<i class="ph ph-pen-nib big"></i>{% endif %}
-        <div class="plate">
-          <div class="tx">
-            <h3 dir="auto">{{ post.title }}</h3>
-            {% if post.description %}<p dir="auto">{{ post.description }}</p>{% endif %}
-          </div>
-          <span class="go"><i class="ph ph-arrow-up-right"></i></span>
-        </div>
+      <a class="card" href="{{ post.url }}">
+        <div class="pic{% if cover_url == '' %} nopic{% endif %}">{% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy" decoding="async">{% else %}<i class="ph ph-pen-nib big"></i>{% endif %}</div>
+        <h3 dir="auto">{{ post.title }}</h3>
+        {% if post.description %}<p dir="auto">{{ post.description | truncate: 60 }}</p>{% endif %}
       </a>
       {% endfor %}
     </div>
@@ -220,11 +198,9 @@
 
   function cardHTML(p, kind) {
     const icon = kind === 'sheet' ? 'file-text' : kind === 'vibe' ? 'terminal-window' : 'image';
-    const pic = p.img ? '<img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy" decoding="async">' : '<i class="ph ph-' + icon + ' big"></i>';
-    const badge = kind === 'vibe' ? '<span class="badge"><i class="ph ph-terminal-window"></i>Vibe coded</span>' : kind === 'sheet' ? '<span class="badge"><i class="ph ph-file-text"></i>Cheatsheet</span>' : '';
-    const go = kind === 'sheet' ? 'download-simple' : 'arrow-up-right';
+    const pic = p.img ? '<div class="pic"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy" decoding="async"></div>' : '<div class="pic nopic"><i class="ph ph-' + icon + ' big"></i></div>';
     const href = p.file || p.link || '#';
-    return '<a class="card' + (p.img ? '' : ' nopic') + '" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + pic + badge + '<div class="plate"><div class="tx"><h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</div><span class="go"><i class="ph ph-' + go + '"></i></span></div></a>';
+    return '<a class="card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + pic + '<h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</a>';
   }
 
   function fill(id, items, kind) {
