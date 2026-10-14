@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note — Arman Haghshenas</title>
+  <meta name="description" content="Notes by Arman Haghshenas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Estedad:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: #0A0A0A; font-family: 'Nunito', 'Estedad', sans-serif; -webkit-font-smoothing: antialiased; }
+    main { max-width: 760px; margin: auto; padding: 48px 24px 80px; }
+    .back { display: inline-flex; align-items: center; gap: 8px; color: #2A6B5C; text-decoration: none; font-weight: 600; margin-bottom: 40px; }
+    a:focus-visible { outline: 3px solid #2A6B5C; outline-offset: 5px; }
+    h1 { font-size: clamp(30px, 6vw, 48px); line-height: 1.4; margin: 0; letter-spacing: -.025em; overflow-wrap: anywhere; }
+    .summary { color: #6F6F73; font-size: 18px; line-height: 1.9; margin: 14px 0 28px; }
+    .cover { display: block; width: 100%; max-height: 520px; object-fit: cover; border-radius: 20px; margin: 28px 0 36px; }
+    .body { margin-top: 32px; font-size: 18px; line-height: 2; overflow-wrap: anywhere; }
+    .body p { margin: 0 0 24px; white-space: pre-wrap; }
+    .status { color: #6F6F73; line-height: 1.8; }
+    [hidden] { display: none !important; }
+    @media (max-width: 600px) { main { padding: 28px 20px 48px; } .back { margin-bottom: 28px; } .body { font-size: 17px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="index.html#notes"><span aria-hidden="true">←</span> Back to notes</a>
+    <p id="status" class="status" role="status">Loading article…</p>
+    <article id="article" hidden aria-labelledby="title">
+      <h1 id="title" dir="auto"></h1>
+      <p id="summary" class="summary" dir="auto" hidden></p>
+      <img id="cover" class="cover" alt="" hidden>
+      <div id="body" class="body" dir="auto"></div>
+    </article>
+  </main>
+  <script>
+    function showArticle(note) {
+      document.title = note.title + ' — Notes';
+      document.querySelector('meta[name="description"]').content = note.subtitle || note.title;
+      document.getElementById('title').textContent = note.title;
+      const summary = document.getElementById('summary');
+      summary.textContent = note.subtitle || '';
+      summary.hidden = !note.subtitle;
+      const cover = document.getElementById('cover');
+      if (typeof note.image === 'string' && note.image.trim()) {
+        try {
+          const url = new URL(note.image, location.href);
+          if (['http:', 'https:'].includes(url.protocol)) {
+            cover.addEventListener('error', () => { cover.hidden = true; }, { once: true });
+            cover.src = note.image;
+            cover.alt = note.title;
+            cover.hidden = false;
+          }
+        } catch { /* Keep the article readable without its cover. */ }
+      }
+      const body = document.getElementById('body');
+      body.replaceChildren();
+      const text = typeof note.body === 'string' ? note.body.trim() : '';
+      const paragraphs = text ? text.split(/\r?\n\s*\r?\n/) : ['This article has no text yet.'];
+      paragraphs.forEach((text) => {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        paragraph.dir = 'auto';
+        body.appendChild(paragraph);
+      });
+      document.getElementById('status').hidden = true;
+      document.getElementById('article').hidden = false;
+    }
+
+    async function loadArticle() {
+      const status = document.getElementById('status');
+      const slug = new URLSearchParams(location.search).get('slug');
+      if (!slug) { status.textContent = 'Article not found.'; return; }
+      try {
+        const response = await fetch('data/notes.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error('Unable to load notes');
+        const notes = await response.json();
+        if (!Array.isArray(notes)) throw new Error('Invalid notes data');
+        const matches = notes.filter((note) => note && typeof note.slug === 'string' && note.slug.trim() === slug);
+        if (matches.length !== 1 || typeof matches[0].title !== 'string') {
+          status.textContent = 'Article not found.';
+          return;
+        }
+        showArticle(matches[0]);
+      } catch (error) {
+        status.textContent = 'The article could not be loaded. Please try again later.';
+        console.error(error);
+      }
+    }
+    loadArticle();
+  </script>
+</body>
+</html>
