@@ -148,6 +148,10 @@ content:
         label: URL slug (unique, e.g. first-note)
         type: string
         required: true
+      - name: category
+        label: Category
+        type: string
+        required: true
       - name: subtitle
         label: Short description
         type: text
