@@ -1,5 +1,21 @@
 @font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
-@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Bold.otf") format("opentype"); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Light.otf") format("opentype"); font-weight: 300; font-display: swap; }
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Medium.otf") format("opentype"); font-weight: 500 600; font-display: swap; }
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
 @font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
-body { font-family: Teshrin, sans-serif; }
+body { font-family: Teshrin, sans-serif; font-weight: 300; }
+
+/* Article elements created by the CMS. */
+.body strong, .body b { font-weight: 500; }
+.body .tagline, .body .lead { font-size: 1.1em; color: #6f6f73; font-weight: 300; }
+.body hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, #d7dfdc, transparent); margin: 32px 0; }
+.body pre code { background: transparent; padding: 0; font-size: inherit; border-radius: 0; white-space: pre; }
+.body figure { margin: 24px 0; }
+.body figcaption, .body caption { color: #6f6f73; font-size: .85em; }
+.body th { font-weight: 500; background: #f3f7f5; }
+.body td, .body th { min-width: 100px; }
+.body details { margin: 20px 0; padding: 12px 16px; border: 1px solid #e5e8e6; border-radius: 12px; }
+.body summary { cursor: pointer; font-weight: 500; }
+.body mark { background: #e8f2ef; color: inherit; }
+.body dt { font-weight: 500; }
+.body dd { margin-inline-start: 24px; }
