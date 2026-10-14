@@ -46,6 +46,11 @@ content:
         type: image
         options:
           media: site
+      - name: availability
+        label: Availability
+        type: select
+        options:
+          values: [available, busy, not-set]
       - name: pageTitle
         label: Browser title
         type: string
@@ -127,11 +132,13 @@ content:
         type: string
 
   - name: notes
-    label: Notes
-    type: file
-    path: data/notes.json
-    format: json
-    list: true
+    label: Blog posts
+    type: collection
+    path: _notes
+    format: yaml-frontmatter
+    filename: "{slug}.md"
+    view:
+      primary: title
     fields:
       - name: title
         label: Title
@@ -150,6 +157,9 @@ content:
         options:
           media: notes
       - name: body
-        label: Full article
-        type: text
+        label: Article
+        type: rich-text
         required: true
+        options:
+          format: html
+          media: notes
