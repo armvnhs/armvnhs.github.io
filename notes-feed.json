@@ -10,7 +10,7 @@ permalink: /data/blog.json
     "url": {{ note.url | jsonify }},
     "subtitle": {{ note.subtitle | default: "" | jsonify }},
     "image": {{ note.image | default: "" | jsonify }},
-    "body": {{ note.content | jsonify }},
+    "body": {{ note.content | markdownify | jsonify }},
     "bodyFormat": "html"
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
