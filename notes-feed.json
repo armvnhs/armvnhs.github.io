@@ -7,6 +7,7 @@ permalink: /data/blog.json
   {
     "title": {{ note.title | jsonify }},
     "slug": {{ note.slug | jsonify }},
+    "category": {{ note.category | default: "Uncategorized" | jsonify }},
     "url": {{ note.url | jsonify }},
     "subtitle": {{ note.subtitle | default: "" | jsonify }},
     "image": {{ note.image | default: "" | jsonify }},
