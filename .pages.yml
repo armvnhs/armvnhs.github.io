@@ -73,9 +73,9 @@ content:
         label: Title
         type: string
         required: true
-      - name: subtitle
-        label: Short description
-        type: text
+      - name: category
+        label: Category
+        type: string
       - name: image
         label: Cover image
         type: image
