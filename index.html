@@ -1,191 +1,143 @@
----
----
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Arman Haghshenas — Graphic Designer</title>
-<meta name="description" content="Arman Haghshenas, graphic designer focused on logo design, branding and visual identity.">
-<meta name="theme-color" content="#F4F4F4">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arman Haghshenas — Graphic Designer">
-<meta property="og:description" content="Logo design, branding and visual identity.">
-<meta property="og:image" content="https://armvnhs.github.io/assets/img/Profile.jpg">
-<link rel="icon" type="image/png" href="assets/img/Icon.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta name="description" content="Arman Haghshenas, graphic designer. Projects, products and notes.">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700;800&family=Estedad:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
 <style>
+  :root { --ink: #0A0A0A; --soft: #6F6F73; --fill: #F2F2F3; --navy: #22396F; --ratio: 4 / 5; --ease: cubic-bezier(.22, 1, .36, 1); }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  ::selection { background: var(--navy); color: #fff; }
   html { scroll-behavior: smooth; scrollbar-width: none; }
   ::-webkit-scrollbar { display: none; }
-  body { font-family: 'SN Pro', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'SN Pro', 'Estedad', sans-serif; background: #fff; color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
-  i { font-size: 16px; line-height: 1; }
-  .page { max-width: 840px; margin: 0 auto; padding: 72px 24px 160px; }
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
-  .reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+  .page { max-width: 720px; margin: 0 auto; padding: calc(64px + env(safe-area-inset-top)) 20px calc(160px + env(safe-area-inset-bottom)); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
-  .top { text-align: center; padding-top: 10px; }
-  .name { position: relative; display: inline-block; font-size: clamp(56px, 12vw, 112px); font-weight: 800; letter-spacing: -.055em; line-height: .86; text-transform: uppercase; }
-  .avatar { position: absolute; top: -8px; right: -52px; width: 62px; height: 62px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 8px 22px rgba(0,0,0,.14); outline: 1px solid var(--line); outline-offset: 5px; object-fit: cover; background: #fff; }
-  .tagline { max-width: 480px; margin: 26px auto 0; font-size: 16px; color: var(--ink-soft); font-weight: 500; }
-  .pill { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 13.5px; color: var(--ink-soft); font-weight: 600; }
-  .pill .icons { display: flex; gap: 2px; padding: 5px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
-  .pill .icons a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: var(--ink-soft); transition: all .25s var(--ease); }
-  .rule { height: 1px; margin: 48px 0 0; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+  header h1 { font-size: clamp(38px, 8vw, 60px); font-weight: 800; letter-spacing: -.045em; line-height: 1; }
+  header p { margin-top: 14px; max-width: 460px; font-size: 16.5px; color: var(--soft); font-weight: 500; }
+  .socials { display: flex; gap: 8px; margin-top: 22px; }
+  .socials a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill); transition: background .25s, color .25s, transform .2s; touch-action: manipulation; }
+  .socials a:active { transform: scale(.92); }
+  .socials .ti { font-size: 22px; }
+  @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--navy); color: #fff; } }
 
-  .section { margin-top: 64px; }
-  .section h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 38px; letter-spacing: -.01em; line-height: 1; margin-bottom: 24px; }
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 16px; }
-  .card { display: block; }
-  .tile { aspect-ratio: 1; border-radius: 22px; background: #fff; border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .3s; }
-  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
-  #works .tile img { object-fit: contain; padding: 15%; }
-  .tile.ph { background-color: #151515; background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px); background-size: 14px 14px; color: rgba(255,255,255,.28); font-size: 46px; font-weight: 800; }
-  .card h3 { font-size: 15px; font-weight: 700; margin-top: 12px; letter-spacing: -.01em; line-height: 1.4; }
-  .card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; margin-top: 2px; }
-  @media (hover: hover) and (pointer: fine) {
-    .card:hover .tile { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(10,10,10,.1); border-color: var(--ink); }
-    .card:hover .tile img { transform: scale(1.06); }
-    .pill .icons a:hover { background: var(--ink); color: #fff; }
-  }
-  .more { display: flex; justify-content: center; margin-top: 34px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; font-weight: 700; padding: 15px 26px; border-radius: 100px; border: 1px solid var(--ink); font-family: inherit; cursor: pointer; transition: all .25s var(--ease); touch-action: manipulation; }
-  .btn:active { transform: scale(.97); }
-  .btn-dark { background: var(--ink); color: #fff; }
-  .btn-line { background: transparent; color: var(--ink); border-color: var(--line); }
-  @media (hover: hover) and (pointer: fine) { .btn:hover { transform: translateY(-3px); } .btn-line:hover { border-color: var(--ink); } }
+  section { margin-top: 76px; scroll-margin-top: 28px; }
+  section h2 { margin-bottom: 22px; font-size: clamp(24px, 4vw, 30px); font-weight: 800; letter-spacing: -.035em; line-height: 1.1; }
 
-  .contact { text-align: center; padding: 56px 24px; background: var(--ink); color: #fff; border-radius: 28px; }
-  .contact h2 { color: #fff; margin-bottom: 14px; font-size: clamp(42px, 8vw, 72px); }
-  .contact p { color: rgba(255,255,255,.65); max-width: 380px; margin: 0 auto; font-weight: 500; }
-  .contact .actions { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
-  .contact .btn-dark { background: #fff; color: var(--ink); border-color: #fff; }
-  .contact .btn-line { color: #fff; border-color: rgba(255,255,255,.3); }
-  .contact .info { display: flex; justify-content: center; gap: 26px; margin-top: 34px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,.55); font-weight: 600; }
-  .contact .info span { display: inline-flex; align-items: center; gap: 8px; }
-  .foot { text-align: center; margin-top: 34px; font-size: 12.5px; color: var(--ink-faint); font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { position: relative; display: block; aspect-ratio: var(--ratio); border-radius: 32px; overflow: hidden; isolation: isolate; color: #fff; background: linear-gradient(160deg, #2e2e31, #0d0d0e); }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+  .card .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 70px; }
+  .card .ph .ti { font-size: 44px; color: rgba(255,255,255,.22); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.74) 0%, rgba(0,0,0,.36) 28%, transparent 56%); }
+  .cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px 24px; }
+  .cap h3 { font-size: clamp(17px, 3.4vw, 24px); font-weight: 700; letter-spacing: -.025em; line-height: 1.25; text-align: start; }
+  .cap p { margin-top: 3px; font-size: clamp(13px, 2.3vw, 16px); color: rgba(255,255,255,.72); line-height: 1.4; text-align: start; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (hover: hover) and (pointer: fine) { .card:hover img { transform: scale(1.05); } }
 
-  .dock { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 100; display: flex; gap: 4px; padding: 7px; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid var(--line); border-radius: 100px; box-shadow: 0 14px 40px rgba(10,10,10,.12); }
-  .dock a { position: relative; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--ink-soft); transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease); }
-  .dock a i { font-size: 17px; }
-  .dock a.on { background: var(--ink); color: #fff; }
-  .dock a::after { content: attr(data-label); position: absolute; bottom: 62px; left: 50%; transform: translate(-50%, 6px); background: var(--ink); color: #fff; font-size: 11.5px; font-weight: 700; padding: 4px 11px; border-radius: 8px; opacity: 0; pointer-events: none; white-space: nowrap; transition: all .25s var(--ease); }
-  @media (hover: hover) and (pointer: fine) { .dock a:hover::after { opacity: 1; transform: translate(-50%, 0); } .dock a:hover:not(.on) { background: rgba(10,10,10,.07); color: var(--ink); } }
+  .dock { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 50; max-width: calc(100vw - 20px); }
+  .pill { display: flex; align-items: center; gap: 4px; padding: 8px 14px; background: #fff; border: 1px solid rgba(10,10,10,.06); border-radius: 36px; box-shadow: 0 10px 34px rgba(10,10,10,.1), 0 2px 6px rgba(10,10,10,.05); }
+  .pill a { position: relative; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 18px; color: #55565A; transition: color .3s, transform .2s; touch-action: manipulation; }
+  .pill .ti { font-size: 27px; }
+  .pill a:active { transform: scale(.9); }
+  .pill a.on { color: var(--navy); }
+  .pill a.on::before { content: ""; position: absolute; left: 50%; bottom: 8px; width: 46px; height: 42px; transform: translateX(-50%); background: radial-gradient(ellipse at 50% 100%, rgba(34,57,111,.3), transparent 70%); pointer-events: none; }
+  .pill a.on::after { content: ""; position: absolute; left: 50%; bottom: 6px; width: 30px; height: 3px; border-radius: 3px; background: var(--navy); transform: translateX(-50%); }
 
-  @media (max-width: 700px) {
-    .page { padding: 56px 18px 150px; }
-    .grid { grid-template-columns: repeat(2, 1fr); }
-    .avatar { width: 46px; height: 46px; right: -24px; top: -14px; }
-    .pill { flex-direction: column; gap: 10px; }
-    .contact { padding: 44px 20px; }
-    .contact .btn { width: 100%; }
+  @media (max-width: 600px) {
+    .page { padding: calc(44px + env(safe-area-inset-top)) 16px calc(130px + env(safe-area-inset-bottom)); }
+    section { margin-top: 60px; }
+    .grid { gap: 12px; }
+    .card { border-radius: 26px; }
+    .cap { padding: 16px 16px 18px; }
+    .pill { padding: 6px 10px; }
+    .pill a { width: 50px; height: 52px; }
   }
 </style>
 </head>
 <body>
-<div class="page">
-  <header class="top reveal" id="top">
-    <div class="name">Arman<br>Haghshenas<img class="avatar" src="assets/img/Profile.jpg" alt="Arman Haghshenas"></div>
-    <p class="tagline">Graphic designer crafting logos, brands and visual identities with 4+ years of experience.</p>
-    <div class="pill">
-      <span>Contact me:</span>
-      <div class="icons">
-        <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
-        <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
-        <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        <a href="https://twitter.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-      </div>
+<main class="page">
+  <header id="home">
+    <h1>Arman<br>Haghshenas</h1>
+    <p>Graphic designer crafting logos, brands and visual identities.</p>
+    <div class="socials">
+      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
+      <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+      <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
+      <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
+      <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
     </div>
-    <div class="rule"></div>
   </header>
 
-  <section class="section reveal" id="works"><h2>Works</h2><div class="grid" id="worksGrid"></div></section>
-  <section class="section reveal" id="projects"><h2>Projects</h2><div class="grid" id="projectsGrid"></div></section>
+  <section id="projects"><h2>Projects</h2><div class="grid" id="projectsGrid"></div></section>
+  <section id="products"><h2>Products</h2><div class="grid" id="productsGrid"></div></section>
+  <section id="notes"><h2>Notes</h2><div class="grid" id="notesGrid"></div></section>
+</main>
 
-  <section class="section reveal" id="blog">
-    <h2>Blog</h2>
-    <div class="grid">
-      {% for post in site.posts limit: 4 %}
-      {% include cover.html src=post.image %}
-      <a class="card" href="{{ post.url }}">
-        <div class="tile{% if cover_url == '' %} ph{% endif %}">{% if cover_url != '' %}<img src="{{ cover_url }}" alt="{{ post.title }}" loading="lazy">{% else %}{{ post.title | slice: 0 }}{% endif %}</div>
-        <h3>{{ post.title }}</h3>
-        {% if post.description %}<p>{{ post.description | truncate: 60 }}</p>{% endif %}
-      </a>
-      {% endfor %}
-    </div>
-    <div class="more"><a href="/blog/" class="btn btn-line">View all posts <i class="fa-solid fa-arrow-right"></i></a></div>
-  </section>
-
-  <section class="section reveal" id="contact">
-    <div class="contact">
-      <h2>Let's <em class="serif">talk</em></h2>
-      <p>Have a logo or brand in mind? Send me a message.</p>
-      <div class="actions">
-        <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" class="btn btn-dark"><i class="fa-brands fa-telegram"></i> Telegram</a>
-        <a href="https://wa.me/989135957196" target="_blank" rel="noopener noreferrer" class="btn btn-line"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-      </div>
-      <div class="info">
-        <span><i class="fa-solid fa-location-dot"></i> Isfahan, Iran</span>
-        <span><i class="fa-solid fa-phone"></i> +98 913 595 7196</span>
-        <span><i class="fa-solid fa-globe"></i> armvnhs.ir</span>
-      </div>
-    </div>
-    <div class="foot">© 2026 Arman Haghshenas</div>
-  </section>
-</div>
-
-<nav class="dock" id="dock">
-  <a href="#top" class="on" data-label="Home" data-sec="top"><i class="fa-solid fa-house"></i></a>
-  <a href="#works" data-label="Works" data-sec="works"><i class="fa-solid fa-layer-group"></i></a>
-  <a href="#projects" data-label="Projects" data-sec="projects"><i class="fa-solid fa-folder-open"></i></a>
-  <a href="#blog" data-label="Blog" data-sec="blog"><i class="fa-solid fa-pen-nib"></i></a>
-  <a href="#contact" data-label="Contact" data-sec="contact"><i class="fa-solid fa-paper-plane"></i></a>
+<nav class="dock">
+  <div class="pill" id="nav">
+    <a href="#home" class="on" data-s="home" title="Home" aria-label="Home"><i class="ti ti-home"></i></a>
+    <a href="#projects" data-s="projects" title="Projects" aria-label="Projects"><i class="ti ti-layout-grid"></i></a>
+    <a href="#products" data-s="products" title="Products" aria-label="Products"><i class="ti ti-box"></i></a>
+    <a href="#notes" data-s="notes" title="Notes" aria-label="Notes"><i class="ti ti-notebook"></i></a>
+  </div>
 </nav>
 
 <script>
-  const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .08 });
-  const observeReveal = () => document.querySelectorAll('.reveal:not(.seen)').forEach((el) => { el.classList.add('seen'); io.observe(el); });
+  const SECTIONS = ['projects', 'products', 'notes'];
+  const ICONS = { projects: 'layout-grid', products: 'box', notes: 'notebook' };
+  const FALLBACK = {
+    projects: [{ title: 'Isfahan Core', subtitle: 'Sticker design', image: '', link: 'https://www.instagram.com/p/DZxdnAiDc7x/' }],
+    products: [{ title: 'LogoSVG', subtitle: 'Open-source Iranian logo library', image: '', link: 'https://logosvg.ir' }],
+    notes: [{ title: 'First note', subtitle: 'Short thoughts on design', image: '', link: '#' }]
+  };
 
-  function fill(id, items) {
-    const grid = document.getElementById(id + 'Grid');
-    if (!items.length) {
-      document.getElementById(id).remove();
-      document.querySelector('.dock a[data-sec="' + id + '"]').remove();
-      return;
-    }
-    grid.innerHTML = items.map((p) => '<a class="card" href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer"><div class="tile"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" loading="lazy"></div><h3>' + esc(p.title) + '</h3>' + (p.subtitle ? '<p>' + esc(p.subtitle) + '</p>' : '') + '</a>').join('');
+  const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function cardHTML(p, icon) {
+    const pic = p.image
+      ? '<img src="' + esc(p.image) + '" alt="' + esc(p.title) + '" loading="lazy" decoding="async">'
+      : '<div class="ph"><i class="ti ti-' + icon + '"></i></div>';
+    const link = p.link || '#';
+    const ext = /^https?:/i.test(link) ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return '<a class="card" href="' + esc(link) + '"' + ext + '>' + pic + '<div class="cap"><h3 dir="auto">' + esc(p.title) + '</h3>' + (p.subtitle ? '<p dir="auto">' + esc(p.subtitle) + '</p>' : '') + '</div></a>';
   }
 
-  fetch('projects.json', { cache: 'no-cache' })
-    .then((r) => r.json())
-    .catch(() => [])
-    .then((data) => {
-      const list = Array.isArray(data) ? data : [];
-      fill('works', list.filter((p) => (p.group || 'Works') === 'Works'));
-      fill('projects', list.filter((p) => p.group === 'Projects'));
-      observeReveal();
-      spy();
-    });
+  function load(key) {
+    return fetch('data/' + key + '.json', { cache: 'no-cache' })
+      .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
+      .catch(() => FALLBACK[key]);
+  }
 
-  observeReveal();
+  Promise.all(SECTIONS.map(load)).then((all) => {
+    SECTIONS.forEach((key, i) => {
+      const items = Array.isArray(all[i]) ? all[i] : [];
+      if (!items.length) {
+        document.getElementById(key).remove();
+        document.querySelector('#nav a[data-s="' + key + '"]').remove();
+        return;
+      }
+      document.getElementById(key + 'Grid').innerHTML = items.map((p) => cardHTML(p, ICONS[key])).join('');
+    });
+    spy();
+  });
 
   function spy() {
-    const links = [...document.querySelectorAll('.dock a')];
-    const spyIO = new IntersectionObserver((es) => es.forEach((e) => {
-      if (!e.isIntersecting) return;
-      links.forEach((a) => a.classList.toggle('on', a.dataset.sec === e.target.id));
-    }), { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    links.forEach((a) => { const t = document.getElementById(a.dataset.sec); if (t) spyIO.observe(t); });
+    const links = [...document.querySelectorAll('#nav a')];
+    const set = (id) => links.forEach((a) => a.classList.toggle('on', a.dataset.s === id));
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(e.target.id); }), { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    links.forEach((a) => { const t = document.getElementById(a.dataset.s); if (t) io.observe(t); });
+    addEventListener('scroll', () => {
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) set(links[links.length - 1].dataset.s);
+    }, { passive: true });
   }
 </script>
 </body>
