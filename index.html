@@ -39,14 +39,14 @@
   @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--accent); color: #fff; transform: scale(1.12); } }
 
   section { margin-top: 76px; scroll-margin-top: 28px; }
-  section h2 { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; font-size: clamp(24px, 4vw, 30px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+  section h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; font-size: clamp(24px, 4vw, 30px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
   section h2 .ti { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 13px; background: #E8F2EF; color: var(--accent); font-size: 24px; }
   .load-error { color: var(--soft); font-size: 14px; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
   [hidden] { display: none !important; }
 
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .category-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 20px; }
+  .category-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 0 8px; }
   .filter-pill { border: 1px solid #dfe7e3; border-radius: 999px; padding: 8px 14px; background: #fff; color: var(--soft); cursor: pointer; font: inherit; font-size: 13px; }
   .filter-pill[aria-pressed="true"] { background: #e8f2ef; border-color: #c5ded4; color: var(--accent); }
   .card { position: relative; display: block; aspect-ratio: var(--ratio); border-radius: 24px; overflow: hidden; isolation: isolate; color: #fff; background: linear-gradient(160deg, #2e2e31, #0d0d0e); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
@@ -79,7 +79,7 @@
     section { margin-top: 60px; }
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; overflow: visible; padding: 0; }
     .grid .card { min-width: 0; }
-    .category-filters { flex-wrap: wrap; overflow: visible; padding: 3px 0 6px; }
+    .category-filters { flex-wrap: wrap; overflow: visible; padding: 3px 0 6px; margin-left: 0; }
     .filter-pill { flex-shrink: 0; }
     .card { border-radius: 22px; }
     .cap { padding: 12px 12px 14px; }
@@ -103,7 +103,7 @@
     </div>
   </header>
 
-  <section id="projects"><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div><h2><i class="ti ti-layout-grid" aria-hidden="true"></i><span>Projects</span></h2><div class="grid" id="projectsGrid"></div></section>
+  <section id="projects"><h2><i class="ti ti-layout-grid" aria-hidden="true"></i><span>Projects</span><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div></h2><div class="grid" id="projectsGrid"></div></section>
   <section id="products"><h2><i class="ti ti-box" aria-hidden="true"></i><span>Products</span></h2><div class="grid" id="productsGrid"></div></section>
   <section id="notes"><h2><i class="ti ti-notebook" aria-hidden="true"></i><span>Notes</span></h2><div class="grid" id="notesGrid"></div></section>
 </main>
