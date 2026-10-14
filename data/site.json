@@ -34,6 +34,11 @@
       "label": "LinkedIn",
       "icon": "brand-linkedin",
       "link": "https://linkedin.com/in/armvnhs"
+    },
+    {
+      "label": "Portfolio",
+      "icon": "link",
+      "link": "http://instagram.com/armvnhs"
     }
   ]
 }
