@@ -76,10 +76,8 @@ content:
             type: string
             required: true
           - name: icon
-            label: Icon
-            type: select
-            options:
-              values: [brand-telegram, brand-instagram, brand-behance, brand-dribbble, brand-linkedin, brand-github, brand-x, mail, link]
+            label: Tabler icon name (e.g. brand-youtube, brand-pinterest, mail)
+            type: string
           - name: link
             label: URL
             type: string
@@ -151,7 +149,6 @@ content:
       - name: category
         label: Category
         type: string
-        required: true
       - name: subtitle
         label: Short description
         type: text
