@@ -11,6 +11,11 @@ media:
     output: /assets/img/Projects
     rename: safe
     categories: [image]
+  - name: files
+    label: Files
+    input: assets/files
+    output: /assets/files
+    rename: safe
 
 content:
   - name: projects
@@ -24,18 +29,23 @@ content:
         label: Group
         type: select
         options:
-          values: [Works, Projects]
+          values: [Works, Projects, Vibe Coding, Cheatsheets]
       - name: title
         label: Title
         type: string
-      - name: subtitle
-        label: Subtitle
+      - name: type
+        label: Type
         type: string
       - name: img
         label: Cover Image
         type: image
         options:
           media: projects
+      - name: file
+        label: File
+        type: file
+        options:
+          media: files
       - name: link
         label: Link
         type: string
