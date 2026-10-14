@@ -3,6 +3,7 @@
   "initials": "AH",
   "bio": "Crafting logos, brands and visual identities.",
   "avatar": "/assets/img/site/Profile.jpg",
+  "availability": "busy",
   "pageTitle": "Arman Haghshenas — Graphic Designer",
   "description": "Arman Haghshenas, graphic designer. Projects, products and notes.",
   "projectsTitle": "Projects",
@@ -34,6 +35,5 @@
       "icon": "brand-linkedin",
       "link": "https://linkedin.com/in/armvnhs"
     }
-  ],
-  "availability": "not-set"
+  ]
 }
