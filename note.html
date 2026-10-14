@@ -9,19 +9,20 @@
     * { box-sizing: border-box; }
     body { margin: 0; background: #fff; color: #0A0A0A; font-family: Teshrin, sans-serif; -webkit-font-smoothing: antialiased; }
     main { max-width: 760px; margin: auto; padding: 48px 24px 80px; }
-    .back { display: inline-flex; align-items: center; gap: 8px; color: #2A6B5C; text-decoration: none; font-weight: 600; margin-bottom: 40px; }
+    .back { display: inline-flex; align-items: center; gap: 8px; color: #2A6B5C; text-decoration: none; font-weight: 400; margin-bottom: 40px; }
     a:focus-visible { outline: 3px solid #2A6B5C; outline-offset: 5px; }
     h1 { font-size: clamp(30px, 6vw, 48px); line-height: 1.4; margin: 0; letter-spacing: -.025em; overflow-wrap: anywhere; }
     .summary { color: #6F6F73; font-size: 18px; line-height: 1.9; margin: 14px 0 28px; }
     .cover { display: block; width: 100%; max-height: 520px; object-fit: cover; border-radius: 20px; margin: 28px 0 36px; }
-    .body { margin-top: 32px; font-size: 18px; line-height: 2; overflow-wrap: anywhere; }
+    .body { margin-top: 32px; font-size: 18px; line-height: 2; overflow-wrap: anywhere; font-weight: 300; }
     .body p { margin: 0 0 24px; white-space: pre-wrap; }
-    .body h1, .body h2, .body h3, .body h4 { margin: 32px 0 16px; line-height: 1.6; }
+    .body h1, .body h2, .body h3, .body h4, .body h5, .body h6 { margin: 32px 0 16px; line-height: 1.6; font-weight: 500; }
     .body img { max-width: 100%; height: auto; border-radius: 16px; }
     .body a { color: #2A6B5C; text-underline-offset: 4px; }
     .body ul, .body ol { padding-inline-start: 28px; }
     .body blockquote { margin: 24px 0; padding: 12px 20px; border-inline-start: 3px solid #2A6B5C; background: #f3f7f5; }
-    .body pre { overflow-x: auto; padding: 16px; background: #f2f2f3; border-radius: 12px; direction: ltr; }
+    .body pre { overflow-x: auto; padding: 16px; background: #f2f2f3; border-radius: 12px; direction: ltr; text-align: left; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .body code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; background: #f2f2f3; padding: .12em .35em; border-radius: 5px; }
     .body table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
     .body th, .body td { border: 1px solid #ddd; padding: 8px 12px; }
     .status { color: #6F6F73; line-height: 1.8; }
