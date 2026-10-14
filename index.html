@@ -116,7 +116,9 @@
     const pic = image
       ? '<img src="' + esc(image) + '" alt="' + esc(item.title) + '" loading="lazy" decoding="async">'
       : '<div class="ph"><i class="ti ti-' + icon + '" aria-hidden="true"></i></div>';
-    const link = safeURL(item.link);
+    const link = key === 'notes'
+      ? (typeof item.slug === 'string' && item.slug.trim() ? 'note.html?slug=' + encodeURIComponent(item.slug.trim()) : '')
+      : safeURL(item.link);
     const external = /^https?:/i.test(link) || link.startsWith('//');
     const tag = link ? 'a' : 'article';
     const attrs = link ? ' href="' + esc(link) + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : '') : '';
