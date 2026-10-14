@@ -1,8 +1,26 @@
 media:
-  - name: images
-    label: Images
-    input: assets/img
-    output: /assets/img
+  - name: projects
+    label: Projects images
+    input: assets/img/projects
+    output: /assets/img/projects
+    rename: safe
+    categories: [image]
+  - name: products
+    label: Products images
+    input: assets/img/products
+    output: /assets/img/products
+    rename: safe
+    categories: [image]
+  - name: notes
+    label: Notes images
+    input: assets/img/notes
+    output: /assets/img/notes
+    rename: safe
+    categories: [image]
+  - name: site
+    label: Site images
+    input: assets/img/site
+    output: /assets/img/site
     rename: safe
     categories: [image]
 
@@ -27,7 +45,7 @@ content:
         label: Profile photo
         type: image
         options:
-          media: images
+          media: site
       - name: pageTitle
         label: Browser title
         type: string
@@ -80,7 +98,7 @@ content:
         label: Cover image
         type: image
         options:
-          media: images
+          media: projects
       - name: link
         label: URL (optional)
         type: string
@@ -103,7 +121,7 @@ content:
         label: Cover image
         type: image
         options:
-          media: images
+          media: products
       - name: link
         label: URL (optional)
         type: string
@@ -126,7 +144,7 @@ content:
         label: Cover image
         type: image
         options:
-          media: images
+          media: notes
       - name: link
         label: URL (optional)
         type: string
