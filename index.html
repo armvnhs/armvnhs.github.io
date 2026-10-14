@@ -78,7 +78,7 @@
 <body>
 <main class="page">
   <header id="home">
-    <div class="avatar-wrap"><div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div><span class="availability" data-status="not-set" role="img" tabindex="0" data-label="وضعیت همکاری مشخص نشده" aria-label="وضعیت همکاری مشخص نشده" title="وضعیت همکاری مشخص نشده"></span></div>
+    <div class="avatar-wrap"><div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div><span class="availability" data-status="not-set" role="img" tabindex="0" data-label="وضعیت همکاری مشخص نشده" aria-label="وضعیت همکاری مشخص نشده"></span></div>
     <h1>Arman Haghshenas</h1>
     <p>Crafting logos, brands and visual identities.</p>
     <div class="socials">
@@ -183,7 +183,6 @@
       availability.dataset.status = state;
       availability.setAttribute('aria-label', label);
       availability.dataset.label = label;
-      availability.title = label;
       const avatar = header.querySelector('.avatar img');
       const image = safeURL(site.avatar, true);
       if (avatar && image) { avatar.src = image; avatar.alt = site.name || ''; }
