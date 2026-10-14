@@ -45,6 +45,10 @@
   a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .section-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -4px 0 18px; }
+  .category-filter { border: 1px solid #dfe7e3; border-radius: 12px; padding: 9px 12px; background: #fff; color: var(--ink); font: inherit; font-size: 13px; }
+  .more { border: 0; border-radius: 12px; padding: 10px 14px; background: #e8f2ef; color: var(--accent); cursor: pointer; font: inherit; font-size: 13px; }
+  .more[hidden] { display: none; }
   .card { position: relative; display: block; aspect-ratio: var(--ratio); border-radius: 24px; overflow: hidden; isolation: isolate; color: #fff; background: linear-gradient(160deg, #2e2e31, #0d0d0e); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
   .card.show { animation: rise .7s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 70ms); }
   @keyframes rise { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
@@ -71,6 +75,10 @@
     .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .card { border-radius: 22px; }
     .cap { padding: 12px 12px 14px; }
+    #notesGrid { display: flex; grid-template-columns: none; gap: 10px; overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; padding: 3px 2px 12px; scrollbar-width: thin; }
+    #notesGrid .card { flex: 0 0 min(78vw, 300px); scroll-snap-align: start; }
+    #notesGrid::-webkit-scrollbar { display: block; height: 5px; }
+    #notesGrid::-webkit-scrollbar-thumb { background: #c9d9d3; border-radius: 5px; }
   }
 </style>
 <link rel="stylesheet" href="assets/site.css">
@@ -93,7 +101,7 @@
 
   <section id="projects"><h2><i class="ti ti-layout-grid" aria-hidden="true"></i><span>Projects</span></h2><div class="grid" id="projectsGrid"></div></section>
   <section id="products"><h2><i class="ti ti-box" aria-hidden="true"></i><span>Products</span></h2><div class="grid" id="productsGrid"></div></section>
-  <section id="notes"><h2><i class="ti ti-notebook" aria-hidden="true"></i><span>Notes</span></h2><div class="grid" id="notesGrid"></div></section>
+  <section id="notes"><h2><i class="ti ti-notebook" aria-hidden="true"></i><span>Notes</span></h2><div class="section-tools" id="notesTools" hidden><select class="category-filter" id="notesFilter" aria-label="Filter notes by category"><option value="all">All categories</option></select><button class="more" id="notesMore" type="button" hidden>Show all notes</button></div><div class="grid" id="notesGrid"></div></section>
 </main>
 
 
@@ -148,7 +156,28 @@
       if (!Array.isArray(data)) throw new Error('Expected a list for ' + key);
       const items = data.filter((item) => item && typeof item.title === 'string' && item.title.trim());
       if (!items.length) { section.hidden = true; return; }
-      grid.innerHTML = items.map((item, i) => cardHTML(item, ICONS[key], i % 4, key)).join('');
+      if (key === 'notes') {
+        const tools = document.getElementById('notesTools');
+        const filter = document.getElementById('notesFilter');
+        const more = document.getElementById('notesMore');
+        const categories = [...new Set(items.map((item) => String(item.category || 'Uncategorized').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+        categories.forEach((category) => filter.insertAdjacentHTML('beforeend', '<option value="' + esc(category) + '">' + esc(category) + '</option>'));
+        tools.hidden = false;
+        let showAll = false;
+        const renderNotes = () => {
+          const selected = filter.value;
+          const filtered = selected === 'all' ? items : items.filter((item) => String(item.category || 'Uncategorized').trim() === selected);
+          const visible = showAll ? filtered : filtered.slice(0, 8);
+          grid.innerHTML = visible.map((item, i) => cardHTML(item, ICONS[key], i % 4, key)).join('');
+          more.hidden = filtered.length <= 8 || showAll;
+          grid.querySelectorAll('.card').forEach((card) => card.classList.add('show'));
+        };
+        filter.addEventListener('change', () => { showAll = false; renderNotes(); });
+        more.addEventListener('click', () => { showAll = true; renderNotes(); });
+        renderNotes();
+      } else {
+        grid.innerHTML = items.map((item, i) => cardHTML(item, ICONS[key], i % 4, key)).join('');
+      }
       grid.querySelectorAll('img').forEach((img) => img.addEventListener('error', () => {
         const placeholder = document.createElement('div');
         placeholder.className = 'ph';
