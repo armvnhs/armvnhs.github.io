@@ -6,7 +6,6 @@
 <title>Arman Haghshenas — Graphic Designer</title>
 <meta name="description" content="Arman Haghshenas, graphic designer. Projects, products and notes.">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
 <style>
   :root { --ink: #0A0A0A; --soft: #6F6F73; --fill: #F2F2F3; --accent: #2A6B5C; --ratio: 4 / 5; --ease: cubic-bezier(.22, 1, .36, 1); }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -36,6 +35,9 @@
   .socials a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill); transition: background .25s, color .25s, transform .2s; touch-action: manipulation; }
   .socials a:active { transform: scale(.92); }
   .socials .ti { font-size: 22px; }
+  .icon-svg { width: 1em; height: 1em; display: block; object-fit: contain; }
+  .socials .icon-svg { width: 22px; height: 22px; }
+  section h2 .icon-svg { width: 24px; height: 24px; }
   @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--accent); color: #fff; transform: scale(1.12); } }
 
   section { margin-top: 76px; scroll-margin-top: 28px; }
@@ -95,17 +97,17 @@
     <h1>Arman Haghshenas</h1>
     <p>Crafting logos, brands and visual identities.</p>
     <div class="socials">
-      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
-      <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
-      <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
-      <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
-      <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><img class="icon-svg" src="assets/icons/brand-telegram.svg" alt="Telegram"></a>
+      <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img class="icon-svg" src="assets/icons/brand-instagram.svg" alt="Instagram"></a>
+      <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><img class="icon-svg" src="assets/icons/brand-behance.svg" alt="Behance"></a>
+      <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><img class="icon-svg" src="assets/icons/brand-dribbble.svg" alt="Dribbble"></a>
+      <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="icon-svg" src="assets/icons/brand-linkedin.svg" alt="LinkedIn"></a>
     </div>
   </header>
 
-  <section id="projects"><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div><h2><i class="ti ti-layout-grid" aria-hidden="true"></i><span>Projects</span></h2><div class="grid" id="projectsGrid"></div></section>
-  <section id="products"><h2><i class="ti ti-box" aria-hidden="true"></i><span>Products</span></h2><div class="grid" id="productsGrid"></div></section>
-  <section id="notes"><h2><i class="ti ti-notebook" aria-hidden="true"></i><span>Notes</span></h2><div class="grid" id="notesGrid"></div></section>
+  <section id="projects"><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div><h2><img class="icon-svg" src="assets/icons/layout-grid.svg" alt=""><span>Projects</span></h2><div class="grid" id="projectsGrid"></div></section>
+  <section id="products"><h2><img class="icon-svg" src="assets/icons/box.svg" alt=""><span>Products</span></h2><div class="grid" id="productsGrid"></div></section>
+  <section id="notes"><h2><img class="icon-svg" src="assets/icons/notebook.svg" alt=""><span>Notes</span></h2><div class="grid" id="notesGrid"></div></section>
 </main>
 
 
@@ -113,6 +115,7 @@
   const SECTIONS = ['projects', 'products', 'notes'];
   const ICONS = { projects: 'layout-grid', products: 'box', notes: 'notebook' };
   const esc = (text) => String(text ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const iconHTML = (name, label = '') => { const safe = String(name || '').replace(/^ti ti-/, '').replace(/^ti-/, '').toLowerCase(); return /^[a-z0-9-]+$/.test(safe) ? '<img class="icon-svg" src="assets/icons/' + esc(safe) + '.svg" alt="' + esc(label) + '" loading="lazy">' : ''; };
 
   function safeURL(value, image = false) {
     if (typeof value !== 'string' || !value.trim()) return '';
@@ -139,7 +142,7 @@
     const image = safeURL(item.image, true);
     const pic = image
       ? '<img src="' + esc(image) + '" alt="' + esc(item.title) + '" loading="lazy" decoding="async">'
-      : '<div class="ph"><i class="ti ti-' + icon + '" aria-hidden="true"></i></div>';
+      : '<div class="ph">' + iconHTML(icon) + '</div>';
     const link = key === 'notes'
       ? (typeof item.slug === 'string' && item.slug.trim() ? (safeURL(item.url) || '/note/' + encodeURIComponent(item.slug.trim()) + '/') : '')
       : safeURL(item.link);
@@ -147,7 +150,7 @@
     const tag = link ? 'a' : 'article';
     const attrs = link ? ' href="' + esc(link) + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : '') : '';
     return '<' + tag + ' class="card" style="--i:' + i + '"' + attrs + '>' + pic
-      + (link ? '<span class="go"><i class="ti ti-arrow-up-right" aria-hidden="true"></i></span>' : '')
+      + (link ? '<span class="go">' + iconHTML("arrow-up-right") + '</span>' : '')
       + '<div class="cap"><h3 dir="auto">' + esc(item.title) + '</h3>'
       + (caption ? '<p dir="auto"' + (key === 'projects' ? ' class="category"' : '') + '>' + esc(caption) + '</p>' : '') + '</div></' + tag + '>';
   }
@@ -168,7 +171,7 @@
       const replaceImage = () => {
         const placeholder = document.createElement('div');
         placeholder.className = 'ph';
-        placeholder.innerHTML = '<i class="ti ti-' + ICONS[key] + '" aria-hidden="true"></i>';
+        placeholder.innerHTML = iconHTML(ICONS[key]);
         img.replaceWith(placeholder);
       };
       img.addEventListener('error', replaceImage, { once: true });
@@ -192,7 +195,7 @@
         more.type = 'button';
         more.className = 'card card-more';
         more.setAttribute('aria-label', 'Show all projects in this category');
-        more.innerHTML = '<i class="ti ti-arrow-right" aria-hidden="true"></i><span>More projects</span><small>' + view.remaining + ' more</small>';
+        more.innerHTML = iconHTML('arrow-up-right') + '<span>More projects</span><small>' + view.remaining + ' more</small>';
         more.addEventListener('click', () => { expanded = true; render(); });
         grid.appendChild(more);
       }
@@ -269,7 +272,7 @@
         if (!link) return '';
         const iconName = String(social.icon || '').trim().replace(/^ti ti-/, '').replace(/^ti-/, '').toLowerCase();
         const icon = /^[a-z0-9-]+$/.test(iconName) ? iconName : 'link';
-        return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '"><i class="ti ti-' + icon + '" aria-hidden="true"></i></a>';
+        return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '">' + iconHTML(icon, social.label) + '</a>';
       }).join('');
       SECTIONS.forEach((key) => {
         if (typeof site[key + 'Title'] === 'string' && site[key + 'Title'].trim()) {
