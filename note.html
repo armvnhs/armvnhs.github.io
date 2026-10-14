@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Note — Arman Haghshenas</title>
   <meta name="description" content="Notes by Arman Haghshenas.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Estedad:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; background: #fff; color: #0A0A0A; font-family: 'Nunito', 'Estedad', sans-serif; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; background: #fff; color: #0A0A0A; font-family: Teshrin, sans-serif; -webkit-font-smoothing: antialiased; }
     main { max-width: 760px; margin: auto; padding: 48px 24px 80px; }
     .back { display: inline-flex; align-items: center; gap: 8px; color: #2A6B5C; text-decoration: none; font-weight: 600; margin-bottom: 40px; }
     a:focus-visible { outline: 3px solid #2A6B5C; outline-offset: 5px; }
@@ -19,10 +16,20 @@
     .cover { display: block; width: 100%; max-height: 520px; object-fit: cover; border-radius: 20px; margin: 28px 0 36px; }
     .body { margin-top: 32px; font-size: 18px; line-height: 2; overflow-wrap: anywhere; }
     .body p { margin: 0 0 24px; white-space: pre-wrap; }
+    .body h1, .body h2, .body h3, .body h4 { margin: 32px 0 16px; line-height: 1.6; }
+    .body img { max-width: 100%; height: auto; border-radius: 16px; }
+    .body a { color: #2A6B5C; text-underline-offset: 4px; }
+    .body ul, .body ol { padding-inline-start: 28px; }
+    .body blockquote { margin: 24px 0; padding: 12px 20px; border-inline-start: 3px solid #2A6B5C; background: #f3f7f5; }
+    .body pre { overflow-x: auto; padding: 16px; background: #f2f2f3; border-radius: 12px; direction: ltr; }
+    .body table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+    .body th, .body td { border: 1px solid #ddd; padding: 8px 12px; }
     .status { color: #6F6F73; line-height: 1.8; }
     [hidden] { display: none !important; }
     @media (max-width: 600px) { main { padding: 28px 20px 48px; } .back { margin-bottom: 28px; } .body { font-size: 17px; } }
   </style>
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" type="image/png" href="assets/img/site/Icon.png">
 </head>
 <body>
   <main>
@@ -35,46 +42,16 @@
       <div id="body" class="body" dir="auto"></div>
     </article>
   </main>
-  <script>
-    function showArticle(note) {
-      document.title = note.title + ' — Notes';
-      document.querySelector('meta[name="description"]').content = note.subtitle || note.title;
-      document.getElementById('title').textContent = note.title;
-      const summary = document.getElementById('summary');
-      summary.textContent = note.subtitle || '';
-      summary.hidden = !note.subtitle;
-      const cover = document.getElementById('cover');
-      if (typeof note.image === 'string' && note.image.trim()) {
-        try {
-          const url = new URL(note.image, location.href);
-          if (['http:', 'https:'].includes(url.protocol)) {
-            cover.addEventListener('error', () => { cover.hidden = true; }, { once: true });
-            cover.src = note.image;
-            cover.alt = note.title;
-            cover.hidden = false;
-          }
-        } catch { /* Keep the article readable without its cover. */ }
-      }
-      const body = document.getElementById('body');
-      body.replaceChildren();
-      const text = typeof note.body === 'string' ? note.body.trim() : '';
-      const paragraphs = text ? text.split(/\r?\n\s*\r?\n/) : ['This article has no text yet.'];
-      paragraphs.forEach((text) => {
-        const paragraph = document.createElement('p');
-        paragraph.textContent = text;
-        paragraph.dir = 'auto';
-        body.appendChild(paragraph);
-      });
-      document.getElementById('status').hidden = true;
-      document.getElementById('article').hidden = false;
-    }
-
-    async function loadArticle() {
+  <script src="assets/blog.js"></script>
+  <script>    async function loadArticle() {
       const status = document.getElementById('status');
       const slug = new URLSearchParams(location.search).get('slug');
       if (!slug) { status.textContent = 'Article not found.'; return; }
       try {
-        const response = await fetch('data/notes.json', { cache: 'no-cache' });
+        let response = await fetch('data/blog.json', { cache: 'no-cache' });
+        if (!response.ok && ['localhost', '127.0.0.1'].includes(location.hostname)) {
+          response = await fetch('data/notes.json', { cache: 'no-cache' });
+        }
         if (!response.ok) throw new Error('Unable to load notes');
         const notes = await response.json();
         if (!Array.isArray(notes)) throw new Error('Invalid notes data');
@@ -83,7 +60,7 @@
           status.textContent = 'Article not found.';
           return;
         }
-        showArticle(matches[0]);
+        location.replace(matches[0].url || '/note/' + encodeURIComponent(slug) + '/');
       } catch (error) {
         status.textContent = 'The article could not be loaded. Please try again later.';
         console.error(error);

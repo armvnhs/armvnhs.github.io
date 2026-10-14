@@ -1,0 +1,13 @@
+collections:
+  notes:
+    output: true
+    permalink: /note/:name/
+exclude:
+  - README.md
+
+defaults:
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: note

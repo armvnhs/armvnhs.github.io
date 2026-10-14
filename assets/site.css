@@ -1,0 +1,5 @@
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Bold.otf") format("opentype"); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: Teshrin; src: url("./font/TeshrinAR+LT-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+body { font-family: Teshrin, sans-serif; }
