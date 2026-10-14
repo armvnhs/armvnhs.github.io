@@ -1,3 +1,8 @@
 [
-  { "title": "LogoSVG", "subtitle": "Open-source Iranian logo library", "image": "", "link": "https://logosvg.ir" }
+  {
+    "title": "LogoSVG",
+    "subtitle": "Iranian logo library",
+    "image": "/assets/img/products/logosvg.png",
+    "link": "https://logosvg.ir"
+  }
 ]
