@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Arman Haghshenas — Graphic Designer</title>
+<meta name="description" content="Arman Haghshenas, graphic designer. Projects, products and notes.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<style>
+  :root { --ink: #0A0A0A; --soft: #6F6F73; --fill: #F2F2F3; --accent: #2A6B5C; --ratio: 4 / 5; --ease: cubic-bezier(.22, 1, .36, 1); }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  ::selection { background: var(--accent); color: #fff; }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
+  ::-webkit-scrollbar { display: none; }
+  body { font-family: Teshrin, sans-serif; background: #fff; color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .page { max-width: 860px; margin: 0 auto; padding: calc(64px + env(safe-area-inset-top)) 20px calc(64px + env(safe-area-inset-bottom)); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } .card { opacity: 1 !important; } }
+
+  header { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: 48px; }
+  header::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(42,107,92,.18) 30%, rgba(42,107,92,.18) 70%, transparent); }
+  .avatar-wrap { position: relative; margin-bottom: 28px; }
+  header .avatar-wrap .avatar { margin-bottom: 0; }
+  .availability { position: absolute; right: -2px; bottom: 3px; width: 20px; height: 20px; border: 4px solid #fff; border-radius: 50%; background: #a3a3a3; box-shadow: 0 0 0 1px rgba(0,0,0,.06); cursor: help; }
+  .availability::after { content: attr(data-label); position: absolute; left: 50%; bottom: calc(100% + 10px); padding: 7px 10px; border-radius: 9px; background: var(--status-color, #a3a3a3); color: #fff; font-size: 12px; font-weight: 300; line-height: 1.2; white-space: nowrap; opacity: 0; pointer-events: none; transform: translate(-50%, 4px); transition: opacity .2s, transform .2s; }
+  .availability:hover::after, .availability:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+  .availability[data-status="available"] { --status-color: #38a875; background: var(--status-color); }
+  .availability[data-status="busy"] { --status-color: #e4a13b; background: var(--status-color); }
+  .availability[data-status="not-set"] { --status-color: #a3a3a3; }
+  header .avatar { position: relative; width: 104px; height: 104px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; background: var(--accent); color: #fff; font-size: 30px; font-weight: 800; outline: 1.5px solid rgba(42,107,92,.2); outline-offset: 6px; }
+  header .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  header h1 { font-size: clamp(32px, 6.4vw, 46px); font-weight: 600; letter-spacing: -.035em; line-height: 1.05; }
+  header p { margin-top: 14px; max-width: 460px; font-size: 16.5px; color: var(--soft); font-weight: 300; }
+  .socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+  .socials a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill); transition: background .25s, color .25s, transform .2s; touch-action: manipulation; }
+  .socials a:active { transform: scale(.92); }
+  .socials .ti { font-size: 22px; }
+  @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--accent); color: #fff; transform: scale(1.12); } }
+
+  section { margin-top: 76px; scroll-margin-top: 28px; }
+  section h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; font-size: clamp(24px, 4vw, 30px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+  section h2 .ti { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 13px; background: #E8F2EF; color: var(--accent); font-size: 24px; }
+  .load-error { color: var(--soft); font-size: 14px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+  [hidden] { display: none !important; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .category-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 0 8px; }
+  .filter-pill { border: 1px solid #dfe7e3; border-radius: 999px; padding: 8px 14px; background: #fff; color: var(--soft); cursor: pointer; font: inherit; font-size: 13px; }
+  .filter-pill[aria-pressed="true"] { background: #e8f2ef; border-color: #c5ded4; color: var(--accent); }
+  .card { position: relative; display: block; aspect-ratio: var(--ratio); border-radius: 24px; overflow: hidden; isolation: isolate; color: #fff; background: linear-gradient(160deg, #2e2e31, #0d0d0e); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .card.show { animation: rise .7s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 70ms); }
+  @keyframes rise { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+  .card .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 48px; }
+  .card .ph .ti { font-size: 32px; color: rgba(255,255,255,.22); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.74) 0%, rgba(0,0,0,.36) 28%, transparent 56%); }
+  .card-more { border: 1px dashed #bad3c9; background: #f1f7f4; color: var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 20px; cursor: pointer; font: inherit; text-align: center; }
+  .card-more::after { display: none; }
+  .card-more .ti { font-size: 30px; }
+  .card-more span { font-size: 15px; font-weight: 500; }
+  .card-more small { font-size: 12px; color: var(--soft); }
+  .cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 14px 16px; }
+  .cap h3 { font-size: clamp(14px, 1.7vw, 16px); font-weight: 500; letter-spacing: -.01em; line-height: 1.25; text-align: start; }
+  .cap p { margin-top: 2px; font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.4; text-align: start; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .go { position: absolute; top: 10px; right: 10px; z-index: 3; width: 34px; height: 34px; border-radius: 50%; background: #fff; color: var(--ink); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translate(-6px, 6px) scale(.8); transition: opacity .35s, transform .5s var(--ease); }
+  .go .ti { font-size: 17px; }
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover { transform: scale(1.06); z-index: 5; box-shadow: 0 18px 40px rgba(10,10,10,.22); }
+    .card:hover img { transform: scale(1.04); }
+    .card:hover .go { opacity: 1; transform: none; }
+  }
+  @media (hover: none) { .go { opacity: 1; transform: none; width: 30px; height: 30px; } .go .ti { font-size: 15px; } }
+
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) {
+    .page { padding: calc(44px + env(safe-area-inset-top)) 16px calc(44px + env(safe-area-inset-bottom)); }
+    section { margin-top: 60px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; overflow: visible; padding: 0; }
+    .grid .card { min-width: 0; }
+    .category-filters { flex-wrap: wrap; overflow: visible; padding: 3px 0 6px; margin-left: 0; }
+    .filter-pill { flex-shrink: 0; }
+    .card { border-radius: 22px; }
+    .cap { padding: 12px 12px 14px; }
+  }
+</style>
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" type="image/png" href="assets/img/site/Icon.png">
+</head>
+<body>
+<main class="page">
+  <header id="home">
+    <div class="avatar-wrap"><div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div><span class="availability" data-status="not-set" role="img" tabindex="0" data-label="Availability not set" aria-label="Availability not set"></span></div>
+    <h1>Arman Haghshenas</h1>
+    <p>Crafting logos, brands and visual identities.</p>
+    <div class="socials">
+      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
+      <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+      <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
+      <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
+      <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+    </div>
+  </header>
+
+  <section id="projects"><h2><i class="ti ti-layout-grid" aria-hidden="true"></i><span>Projects</span><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div></h2><div class="grid" id="projectsGrid"></div></section>
+  <section id="products"><h2><i class="ti ti-box" aria-hidden="true"></i><span>Products</span></h2><div class="grid" id="productsGrid"></div></section>
+  <section id="notes"><h2><i class="ti ti-notebook" aria-hidden="true"></i><span>Notes</span></h2><div class="grid" id="notesGrid"></div></section>
+</main>
+
+
+<script>
+  const SECTIONS = ['projects', 'products', 'notes'];
+  const ICONS = { projects: 'layout-grid', products: 'box', notes: 'notebook' };
+  const esc = (text) => String(text ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function safeURL(value, image = false) {
+    if (typeof value !== 'string' || !value.trim()) return '';
+    const raw = value.trim();
+    if (raw.startsWith('#')) return '';
+    try {
+      const url = new URL(raw, location.href);
+      return ['http:', 'https:'].includes(url.protocol) || (image && url.protocol === 'file:') ? raw : '';
+    } catch { return ''; }
+  }
+
+  async function load(key) {
+    const path = key === 'notes' ? 'data/blog.json' : 'data/' + key + '.json';
+    let response = await fetch(path, { cache: 'no-cache' });
+    if (key === 'notes' && !response.ok && ['localhost', '127.0.0.1'].includes(location.hostname)) {
+      response = await fetch('data/notes.json', { cache: 'no-cache' });
+    }
+    if (!response.ok) throw new Error('Unable to load ' + key);
+    return response.json();
+  }
+
+  function cardHTML(item, icon, i, key) {
+    const caption = key === 'projects' ? item.category : item.subtitle;
+    const image = safeURL(item.image, true);
+    const pic = image
+      ? '<img src="' + esc(image) + '" alt="' + esc(item.title) + '" loading="lazy" decoding="async">'
+      : '<div class="ph"><i class="ti ti-' + icon + '" aria-hidden="true"></i></div>';
+    const link = key === 'notes'
+      ? (typeof item.slug === 'string' && item.slug.trim() ? (safeURL(item.url) || '/note/' + encodeURIComponent(item.slug.trim()) + '/') : '')
+      : safeURL(item.link);
+    const external = /^https?:/i.test(link) || link.startsWith('//');
+    const tag = link ? 'a' : 'article';
+    const attrs = link ? ' href="' + esc(link) + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : '') : '';
+    return '<' + tag + ' class="card" style="--i:' + i + '"' + attrs + '>' + pic
+      + (link ? '<span class="go"><i class="ti ti-arrow-up-right" aria-hidden="true"></i></span>' : '')
+      + '<div class="cap"><h3 dir="auto">' + esc(item.title) + '</h3>'
+      + (caption ? '<p dir="auto"' + (key === 'projects' ? ' class="category"' : '') + '>' + esc(caption) + '</p>' : '') + '</div></' + tag + '>';
+  }
+
+
+  function projectCategory(item) {
+    return typeof item.category === 'string' && item.category.trim() ? item.category.trim() : 'Uncategorized';
+  }
+
+  function projectView(items, category, mobile, expanded) {
+    const filtered = category === null ? items : items.filter((item) => projectCategory(item) === category);
+    const more = !mobile && !expanded && filtered.length > 7;
+    return { visible: more ? filtered.slice(0, 7) : filtered, more, remaining: more ? filtered.length - 7 : 0 };
+  }
+
+  function prepareCards(grid, key) {
+    grid.querySelectorAll('img').forEach((img) => {
+      const replaceImage = () => {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'ph';
+        placeholder.innerHTML = '<i class="ti ti-' + ICONS[key] + '" aria-hidden="true"></i>';
+        img.replaceWith(placeholder);
+      };
+      img.addEventListener('error', replaceImage, { once: true });
+      if (img.complete && img.naturalWidth === 0) replaceImage();
+    });
+    grid.querySelectorAll('.card').forEach((card) => card.classList.add('show'));
+  }
+
+  function renderProjects(items, grid) {
+    const filters = document.getElementById('projectsFilters');
+    const mobile = window.matchMedia('(max-width: 700px)');
+    const categories = [...new Set(items.map(projectCategory))].sort((a, b) => a.localeCompare(b));
+    let selected = null;
+    let expanded = false;
+    const buttons = [];
+    const render = () => {
+      const view = projectView(items, selected, mobile.matches, expanded);
+      grid.innerHTML = view.visible.map((item, i) => cardHTML(item, ICONS.projects, i % 4, 'projects')).join('');
+      if (view.more) {
+        const more = document.createElement('button');
+        more.type = 'button';
+        more.className = 'card card-more';
+        more.setAttribute('aria-label', 'Show all projects in this category');
+        more.innerHTML = '<i class="ti ti-arrow-right" aria-hidden="true"></i><span>More projects</span><small>' + view.remaining + ' more</small>';
+        more.addEventListener('click', () => { expanded = true; render(); });
+        grid.appendChild(more);
+      }
+      buttons.forEach(({ button, category }) => button.setAttribute('aria-pressed', String(category === selected)));
+      prepareCards(grid, 'projects');
+    };
+    [null, ...categories].forEach((category) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'filter-pill';
+      button.textContent = category === null ? 'All' : category;
+      button.dir = 'auto';
+      button.addEventListener('click', () => {
+        selected = category;
+        expanded = false;
+        grid.scrollLeft = 0;
+        render();
+      });
+      filters.appendChild(button);
+      buttons.push({ button, category });
+    });
+    filters.hidden = categories.length <= 1;
+    mobile.addEventListener('change', render);
+    render();
+  }
+
+  async function renderSection(key) {
+    const section = document.getElementById(key);
+    const grid = document.getElementById(key + 'Grid');
+    try {
+      const data = await load(key);
+      if (!Array.isArray(data)) throw new Error('Expected a list for ' + key);
+      const items = data.filter((item) => item && typeof item.title === 'string' && item.title.trim());
+      if (!items.length) { section.hidden = true; return; }
+      if (key === 'projects') {
+        renderProjects(items, grid);
+      } else {
+        grid.innerHTML = items.map((item, i) => cardHTML(item, ICONS[key], i % 4, key)).join('');
+        prepareCards(grid, key);
+      }
+    } catch (error) {
+      grid.classList.remove('grid');
+      grid.innerHTML = '<p class="load-error" role="status">Content could not be loaded. Please try again later.</p>';
+      console.error(error);
+    }
+  }
+
+  async function renderProfile() {
+    try {
+      const site = await load('site');
+      if (!site || typeof site !== 'object' || Array.isArray(site)) throw new Error('Invalid site settings');
+      const header = document.getElementById('home');
+      header.querySelector('h1').textContent = site.name || '';
+      header.querySelector('h1').dir = 'auto';
+      header.querySelector('p').textContent = site.bio || '';
+      header.querySelector('p').dir = 'auto';
+      header.querySelector('.avatar span').textContent = site.initials || '';
+      const availability = header.querySelector('.availability');
+      const state = ['available', 'busy'].includes(site.availability) ? site.availability : 'not-set';
+      const label = { available: 'Available for work', busy: 'Currently busy', 'not-set': 'Availability not set' }[state];
+      availability.dataset.status = state;
+      availability.setAttribute('aria-label', label);
+      availability.dataset.label = label;
+      availability.removeAttribute('title');
+      const avatar = header.querySelector('.avatar img');
+      const image = safeURL(site.avatar, true);
+      if (avatar && image) { avatar.src = image; avatar.alt = site.name || ''; }
+      else if (avatar) avatar.remove();
+      document.title = site.pageTitle || site.name || '';
+      document.querySelector('meta[name="description"]').content = site.description || site.bio || '';
+      const socials = Array.isArray(site.socials) ? site.socials : [];
+      header.querySelector('.socials').innerHTML = socials.map((social) => {
+        const link = safeURL(social.link);
+        if (!link) return '';
+        const iconName = String(social.icon || '').trim().replace(/^ti ti-/, '').replace(/^ti-/, '').toLowerCase();
+        const icon = /^[a-z0-9-]+$/.test(iconName) ? iconName : 'link';
+        return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '"><i class="ti ti-' + icon + '" aria-hidden="true"></i></a>';
+      }).join('');
+      SECTIONS.forEach((key) => {
+        if (typeof site[key + 'Title'] === 'string' && site[key + 'Title'].trim()) {
+          const title = document.querySelector('#' + key + ' h2 span');
+          title.textContent = site[key + 'Title'];
+          title.dir = 'auto';
+        }
+      });
+    } catch (error) { console.error(error); }
+  }
+
+  renderProfile();
+  SECTIONS.forEach(renderSection);
+</script>
+</body>
+</html>
