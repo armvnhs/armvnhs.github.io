@@ -1,10 +1,10 @@
-# Portfolio
+﻿# Portfolio
 
 ## CMS content
-- Site settings: data/site.json — profile, social links, headings and availability.
-- Projects: data/projects.json — title, category, image and link.
-- Products: data/products.json — title, subtitle, image and link.
-- Blog posts: _notes/*.md — one article per file.
+- Site settings: data/site.json â€” profile, social links, headings and availability.
+- Projects: data/projects.json â€” title, category, image and link.
+- Products: data/products.json â€” title, subtitle, image and link.
+- Blog posts: _notes/*.md â€” one article per file.
 
 In Pages CMS, open Blog posts and create or edit a post. The article field is a rich-text editor supporting headings, emphasis, lists, links and inline images. Use a unique slug and keep it unchanged to preserve the article URL.
 
@@ -15,7 +15,7 @@ Availability in Site settings:
 
 Images are uploaded to assets/img/projects, products, notes or site according to their CMS editor.
 The favicon is assets/img/site/Icon.png.
-Fonts are loaded locally from assets/font using assets/site.css.
+The site uses Archivo for Latin text and Vazirmatn for Persian text via the shared typography styles.
 
 ## GitHub Pages deployment
 Upload index.html, note.html, .pages.yml, _config.yml, notes-feed.json, assets/site.css, assets/blog.js, assets/article.js and the _notes and _layouts folders. Include the fonts and assets/img/site/Icon.png.
@@ -38,3 +38,4 @@ A plain HTTP server can preview the layout using the old local notes.json sample
 Opening index.html through file:// cannot reliably load the content.
 
 JavaScript syntax, local assets, article link behavior and rich-content filtering were checked. The Jekyll build and final browser rendering still require verification in an environment where Jekyll and Chrome are available.
+
