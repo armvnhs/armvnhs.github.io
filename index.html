@@ -21,7 +21,9 @@
   a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
   [hidden] { display: none !important; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } .card { opacity: 1 !important; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } .card, .reveal { opacity: 1 !important; translate: none !important; } }
+  .reveal { opacity: 0; translate: 0 18px; transition: opacity .8s var(--ease), translate .8s var(--ease); }
+  .reveal.in { opacity: 1; translate: 0 0; }
 
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 26px; border-radius: 16px; border: 1px solid transparent; font: 600 15px/1 Archivo, Vazirmatn, sans-serif; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .25s var(--ease); touch-action: manipulation; -webkit-user-select: none; user-select: none; }
   .btn:active { transform: scale(.97); }
@@ -41,13 +43,21 @@
   @media (hover: hover) and (pointer: fine) { .links a:hover { color: var(--ink); background: var(--fill); } }
   .bar .btn { height: 42px; padding: 0 18px; font-size: 13.5px; border-radius: 13px; }
 
+  .hero-text > *, .portrait { animation: up .8s var(--ease) both; }
+  .hero-text > :nth-child(1) { animation-delay: .05s; }
+  .hero-text > :nth-child(2) { animation-delay: .12s; }
+  .hero-text > :nth-child(3) { animation-delay: .2s; }
+  .hero-text > :nth-child(4) { animation-delay: .28s; }
+  .hero-text > :nth-child(5) { animation-delay: .36s; }
+  .portrait { animation-delay: .18s; }
+  @keyframes up { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
   .hero { display: grid; grid-template-columns: 1fr 340px; gap: 72px; align-items: center; padding: 64px 0 60px; }
   .availability { display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 13px; font-weight: 500; color: var(--soft); }
   .availability .dot { width: 8px; height: 8px; border-radius: 50%; background: #a3a3a3; }
   .availability[data-status="available"] .dot { background: #38a875; box-shadow: 0 0 0 4px rgba(56,168,117,.2); }
   .availability[data-status="busy"] .dot { background: #e4a13b; box-shadow: 0 0 0 4px rgba(228,161,59,.22); }
-  h1 { margin-top: 26px; font-size: clamp(46px, 8vw, 92px); font-weight: 500; letter-spacing: -.05em; line-height: .96; }
-  .bio { margin-top: 26px; max-width: 480px; font-size: 20px; line-height: 1.55; color: var(--soft); }
+  h1 { text-wrap: balance; margin-top: 26px; font-size: clamp(46px, 8vw, 92px); font-weight: 500; letter-spacing: -.05em; line-height: .96; }
+  .bio { text-wrap: pretty; margin-top: 26px; max-width: 480px; font-size: 20px; line-height: 1.55; color: var(--soft); }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
   .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
   .socials a { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--fill); transition: background .25s, color .25s, transform .25s var(--ease); touch-action: manipulation; }
@@ -101,7 +111,15 @@
   }
   @media (hover: none) { .go { opacity: 1; transform: none; width: 30px; height: 30px; } .go .ti { font-size: 15px; } }
 
-  footer.foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 96px 0 0; padding: 24px 0 calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 13.5px; color: var(--soft); }
+  .contact { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; margin-top: 100px; padding: 68px 56px; border-radius: 36px; background: var(--ink); color: #fff; }
+  .contact h2 { text-wrap: balance; font-size: clamp(36px, 6vw, 68px); font-weight: 500; letter-spacing: -.045em; line-height: 1; }
+  .contact p { margin-top: 20px; max-width: 420px; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.62); }
+  .contact .side { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .contact .btn-accent { height: 58px; padding: 0 30px; }
+  .contact .socials { margin-top: 0; }
+  .contact .socials a { background: rgba(255,255,255,.1); color: #fff; }
+  @media (hover: hover) and (pointer: fine) { .contact .socials a:hover { background: var(--accent); } }
+  footer.foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 0; padding: 24px 0 calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 13.5px; color: var(--soft); }
   footer.foot a { display: inline-flex; align-items: center; gap: 6px; transition: color .25s; }
   footer.foot .ti { font-size: 16px; }
   @media (hover: hover) and (pointer: fine) { footer.foot a:hover { color: var(--accent); } }
@@ -128,7 +146,10 @@
     .grid .card { min-width: 0; }
     .card { border-radius: 22px; }
     .cap { padding: 12px 12px 14px; }
-    footer.foot { margin-top: 72px; }
+    .contact { grid-template-columns: 1fr; gap: 32px; margin-top: 72px; padding: 40px 24px; border-radius: 28px; }
+    .contact .btn-accent { width: 100%; }
+    .contact .side { align-items: stretch; }
+    footer.foot { margin-top: 28px; }
   }
 </style>
 <link rel="stylesheet" href="assets/site.css">
@@ -142,6 +163,7 @@
       <a href="#projects" data-s="projects">Projects</a>
       <a href="#products" data-s="products">Products</a>
       <a href="#notes" data-s="notes">Notes</a>
+      <a href="#contact" data-s="contact">Contact</a>
     </nav>
     <a class="btn btn-accent" href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" data-contact>Get in touch</a>
   </div>
@@ -168,16 +190,33 @@
       </div>
       <div class="portrait"><div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div></div>
     </div>
-    <dl class="facts">
+    <dl class="facts reveal">
       <div><dt>Experience</dt><dd id="fExp">4+ years</dd></div>
       <div><dt>Focus</dt><dd id="fFocus">Logo &amp; visual identity</dd></div>
       <div><dt>Based in</dt><dd id="fLoc">Isfahan, Iran</dd></div>
     </dl>
   </header>
 
-  <section id="projects"><div class="sec-head"><h2><span>Projects</span></h2><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div></div><div class="grid" id="projectsGrid"></div></section>
-  <section id="products"><div class="sec-head"><h2><span>Products</span></h2></div><div class="grid" id="productsGrid"></div></section>
-  <section id="notes"><div class="sec-head"><h2><span>Notes</span></h2></div><div class="grid" id="notesGrid"></div></section>
+  <section id="projects"><div class="sec-head reveal"><h2><span>Projects</span></h2><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div></div><div class="grid" id="projectsGrid"></div></section>
+  <section id="products"><div class="sec-head reveal"><h2><span>Products</span></h2></div><div class="grid" id="productsGrid"></div></section>
+  <section id="notes"><div class="sec-head reveal"><h2><span>Notes</span></h2></div><div class="grid" id="notesGrid"></div></section>
+
+  <section id="contact" class="contact reveal">
+    <div>
+      <h2>Have a project in mind? Let&rsquo;s talk.</h2>
+      <p>Logos, brands and visual identities. Send me a message and tell me what you need.</p>
+    </div>
+    <div class="side">
+      <a class="btn btn-accent" href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" data-contact>Get in touch <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
+      <div class="socials" id="contactSocials">
+        <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
+        <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+        <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
+        <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
+        <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
 
   <footer class="foot">
     <span>&copy; <span id="year"></span> <span id="siteName">Arman Haghshenas</span></span>
@@ -351,13 +390,17 @@
       if (text(site.focus)) document.getElementById('fFocus').textContent = text(site.focus);
       if (text(site.location)) document.getElementById('fLoc').textContent = text(site.location);
       const socials = Array.isArray(site.socials) ? site.socials : [];
-      header.querySelector('.socials').innerHTML = socials.map((social) => {
+      const socialsHTML = socials.map((social) => {
         const link = safeURL(social.link);
         if (!link) return '';
         const iconName = String(social.icon || '').trim().replace(/^ti ti-/, '').replace(/^ti-/, '').toLowerCase();
         const icon = /^[a-z0-9-]+$/.test(iconName) ? iconName : 'link';
         return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '"><i class="ti ti-' + icon + '" aria-hidden="true"></i></a>';
       }).join('');
+      if (socialsHTML) {
+        header.querySelector('.socials').innerHTML = socialsHTML;
+        document.getElementById('contactSocials').innerHTML = socialsHTML;
+      }
       const contact = socials.find((s) => /telegram/i.test(String(s.icon || '') + String(s.label || '')) && safeURL(s.link)) || socials.find((s) => safeURL(s.link));
       if (contact) document.querySelectorAll('[data-contact]').forEach((a) => { a.href = safeURL(contact.link); });
       SECTIONS.forEach((key) => {
@@ -379,7 +422,9 @@
     const links = [...document.querySelectorAll('#links a')];
     const set = (id) => links.forEach((a) => a.classList.toggle('on', a.dataset.s === id));
     const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) set(e.target.id); }), { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-    SECTIONS.forEach((key) => { const el = document.getElementById(key); if (el) io.observe(el); });
+    [...SECTIONS, 'contact'].forEach((key) => { const el = document.getElementById(key); if (el) io.observe(el); });
+    const rio = new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach((el) => rio.observe(el));
     addEventListener('scroll', () => { if (scrollY < 200) set(''); }, { passive: true });
   }
 
