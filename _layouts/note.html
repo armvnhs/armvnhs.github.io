@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>{{ page.title | escape }} &mdash; Notes</title>
   <meta name="description" content="{{ page.subtitle | default: page.title | escape }}">
-  <meta name="theme-color" content="#FBFCFB">
+  <meta name="theme-color" content="#246BFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap">
@@ -84,20 +84,42 @@
       .body blockquote { padding: 16px 18px; font-size: 17px; }
     }
   </style>
+  <style>
+    :root { --bg:#f5f8ff; --paper:#fff; --ink:#0b1736; --soft:#64708a; --line:rgba(11,23,54,.12); --accent:#246bff; --accent-dark:#124bd0; --tint:#dce8ff; --ease:cubic-bezier(.22,1,.36,1); }
+    body { background: radial-gradient(circle at 88% 8%, rgba(36,107,255,.10), transparent 28rem), var(--bg); }
+    .bar { display:none; }
+    .wrap { max-width: 960px; padding-inline: 30px; }
+    .read { max-width: 860px; }
+    .progress { height:4px; background:var(--accent); box-shadow:0 0 16px rgba(36,107,255,.45); }
+    .a-head { padding:72px 0 26px; }
+    .a-head::before { content:'Notes / Journal'; display:block; margin-bottom:28px; color:var(--accent); font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+    .back-link { display:inline-flex; align-items:center; gap:8px; margin-bottom:24px; padding:9px 15px; border:1px solid var(--line); border-radius:999px; color:var(--soft); font-size:13px; transition:all .25s; }
+    .back-link:hover { background:var(--accent); color:#fff; border-color:var(--accent); transform:translateX(-3px); }
+    .chip { background:var(--tint); color:var(--accent); padding:8px 14px; }
+    h1 { max-width:760px; margin-top:24px; font-size:clamp(42px,7vw,78px); line-height:.98; font-weight:600; letter-spacing:-.065em; }
+    .summary { max-width:650px; margin-top:24px; font-size:clamp(18px,2.2vw,23px); line-height:1.55; color:var(--soft); }
+    .meta { margin-top:30px; padding-bottom:24px; color:var(--soft); }
+    .meta .ti { color:var(--accent); }
+    .cover { max-height:560px; margin:24px 0 0; border-radius:28px; box-shadow:0 22px 65px rgba(36,107,255,.15); }
+    .body { max-width:730px; margin:48px auto 0; font-size:19px; line-height:1.95; }
+    .body h2,.body h3 { color:var(--ink); font-weight:650; }
+    .body a { color:var(--accent); }
+    .body blockquote { background:var(--tint); border-inline-start-color:var(--accent); }
+    .body code { background:var(--tint); color:var(--ink); }
+    .body th { background:var(--tint); }
+    .body pre { background:#0b1736; box-shadow:0 14px 32px rgba(11,23,54,.14); }
+    .foot { margin-top:100px; }
+    .foot a:hover { color:var(--accent); }
+    @media (max-width:700px) { .wrap { padding-inline:18px; } .a-head { padding-top:48px; } h1 { font-size:clamp(42px,13vw,68px); } .body { font-size:17px; margin-top:34px; } .cover { border-radius:20px; } }
+  </style>
 </head>
 <body>
   <div class="progress" id="progress"></div>
-  <div class="bar" id="bar">
-    <div class="wrap bar-in">
-      <a class="brand" href="/"><span class="mark" id="mark">AH</span><span id="brandName">Arman Haghshenas</span></a>
-      <a class="btn" href="/#notes"><i class="ti ti-arrow-left" aria-hidden="true"></i> All notes</a>
-    </div>
-  </div>
-
   <main class="wrap read">
     <p id="status" class="status" role="status">Loading article&hellip;</p>
     <article id="article" hidden aria-labelledby="title">
       <header class="a-head">
+        <a class="back-link" href="/#notes"><i class="ti ti-arrow-left" aria-hidden="true"></i> All notes</a>
         {% if page.category %}<span class="chip" dir="auto">{{ page.category | escape }}</span>{% endif %}
         <h1 id="title" dir="auto"></h1>
         <p id="summary" class="summary" dir="auto" hidden></p>
@@ -138,7 +160,7 @@
     const bar = document.getElementById('bar');
     const progress = document.getElementById('progress');
     function onScroll() {
-      bar.classList.toggle('stuck', scrollY > 8);
+      if (bar) bar.classList.toggle('stuck', scrollY > 8);
       const max = document.documentElement.scrollHeight - innerHeight;
       progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0) + ')';
     }
@@ -150,10 +172,8 @@
       .then((site) => {
         if (!site) return;
         if (typeof site.name === 'string' && site.name.trim()) {
-          document.getElementById('brandName').textContent = site.name;
           document.getElementById('footName').textContent = site.name;
         }
-        if (typeof site.initials === 'string' && site.initials.trim()) document.getElementById('mark').textContent = site.initials;
       })
       .catch(() => {});
   </script>

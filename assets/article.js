@@ -1,4 +1,4 @@
-function showArticle(note) {
+﻿function showArticle(note) {
       document.title = note.title + ' — Notes';
       document.querySelector('meta[name="description"]').content = note.subtitle || note.title;
       document.getElementById('title').textContent = note.title;
@@ -34,3 +34,4 @@ function showArticle(note) {
       document.getElementById('status').hidden = true;
       document.getElementById('article').hidden = false;
     }
+
