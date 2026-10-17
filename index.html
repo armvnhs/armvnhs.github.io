@@ -1,47 +1,74 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Arman Haghshenas â€” Graphic Designer</title>
+<title>Arman Haghshenas &mdash; Graphic Designer</title>
 <meta name="description" content="Arman Haghshenas, graphic designer. Projects, products and notes.">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FBFCFB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
 <style>
-  :root { --ink: #0A0A0A; --soft: #6F6F73; --fill: #F2F2F3; --accent: #2A6B5C; --tint: #E8F2EF; --line: rgba(10,10,10,.1); --ratio: 4 / 5; --ease: cubic-bezier(.22, 1, .36, 1); }
+  :root { --ink: #0A0A0A; --soft: #6F6F73; --fill: #F1F3F2; --accent: #2A6B5C; --accent-dark: #235A4D; --tint: #E6F0ED; --bg: #FBFCFB; --line: rgba(10,10,10,.1); --ratio: 4 / 5; --ease: cubic-bezier(.22, 1, .36, 1); }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   ::selection { background: var(--accent); color: #fff; }
   html { scroll-behavior: smooth; scrollbar-width: none; }
   ::-webkit-scrollbar { display: none; }
-  body { font-family: Archivo, Vazirmatn, sans-serif; background: #fbfcfb; color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { font-family: Archivo, Vazirmatn, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
   [hidden] { display: none !important; }
-  .page { max-width: 1080px; margin: 0 auto; padding: calc(72px + env(safe-area-inset-top)) 24px calc(48px + env(safe-area-inset-bottom)); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } .card { opacity: 1 !important; } }
 
-  header { padding-bottom: 60px; border-bottom: 1px solid var(--line); }
-  .hero { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px; }
-  .availability { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 26px; padding: 7px 15px 7px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 400; color: var(--soft); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 26px; border-radius: 16px; border: 1px solid transparent; font: 600 15px/1 Archivo, Vazirmatn, sans-serif; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .25s var(--ease); touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+  .btn:active { transform: scale(.97); }
+  .btn .ti { font-size: 18px; }
+  .btn-accent { background: var(--accent); color: #fff; }
+  .btn-ghost { background: #fff; border-color: var(--line); color: var(--ink); }
+  @media (hover: hover) and (pointer: fine) { .btn-accent:hover { background: var(--accent-dark); } .btn-ghost:hover { border-color: var(--ink); } }
+
+  .bar { position: sticky; top: 0; z-index: 30; background: var(--bg); border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .bar.stuck { border-color: var(--line); }
+  .bar-in { display: flex; align-items: center; gap: 20px; padding-top: calc(14px + env(safe-area-inset-top)); padding-bottom: 14px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+  .mark { width: 40px; height: 40px; border-radius: 13px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; letter-spacing: 0; }
+  .links { display: flex; gap: 4px; margin-left: auto; }
+  .links a { padding: 9px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--soft); transition: color .25s, background .25s; }
+  .links a.on { color: var(--ink); background: var(--fill); }
+  @media (hover: hover) and (pointer: fine) { .links a:hover { color: var(--ink); background: var(--fill); } }
+  .bar .btn { height: 42px; padding: 0 18px; font-size: 13.5px; border-radius: 13px; }
+
+  .hero { display: grid; grid-template-columns: 1fr 340px; gap: 72px; align-items: center; padding: 64px 0 60px; }
+  .availability { display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 13px; font-weight: 500; color: var(--soft); }
   .availability .dot { width: 8px; height: 8px; border-radius: 50%; background: #a3a3a3; }
-  .availability[data-status="available"] .dot { background: #38a875; box-shadow: 0 0 0 4px rgba(56,168,117,.18); }
-  .availability[data-status="busy"] .dot { background: #e4a13b; box-shadow: 0 0 0 4px rgba(228,161,59,.2); }
-  header h1 { font-size: clamp(44px, 8.6vw, 86px); font-weight: 500; letter-spacing: -.05em; line-height: .96; }
-  header p { margin-top: 22px; max-width: 470px; font-size: 19px; line-height: 1.55; color: var(--soft); font-weight: 300; }
-  .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
-  .socials a { width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: var(--fill); transition: background .25s, color .25s, transform .25s var(--ease); touch-action: manipulation; }
+  .availability[data-status="available"] .dot { background: #38a875; box-shadow: 0 0 0 4px rgba(56,168,117,.2); }
+  .availability[data-status="busy"] .dot { background: #e4a13b; box-shadow: 0 0 0 4px rgba(228,161,59,.22); }
+  h1 { margin-top: 26px; font-size: clamp(46px, 8vw, 92px); font-weight: 500; letter-spacing: -.05em; line-height: .96; }
+  .bio { margin-top: 26px; max-width: 480px; font-size: 20px; line-height: 1.55; color: var(--soft); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .socials a { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--fill); transition: background .25s, color .25s, transform .25s var(--ease); touch-action: manipulation; }
   .socials a:active { transform: scale(.92); }
-  .socials .ti { font-size: 22px; }
+  .socials .ti { font-size: 21px; }
   @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--accent); color: #fff; transform: translateY(-3px); } }
-  .avatar { position: relative; width: 168px; height: 168px; border-radius: 52px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; font-size: 46px; font-weight: 600; }
+
+  .portrait { position: relative; isolation: isolate; }
+  .portrait::before { content: ""; position: absolute; inset: 20px -20px -20px 20px; border-radius: 40px; background: var(--tint); z-index: -1; }
+  .avatar { position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; font-size: 76px; font-weight: 600; }
   .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  section { margin-top: 84px; scroll-margin-top: 28px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--line); }
+  .facts div { padding: 24px 26px; }
+  .facts div + div { border-inline-start: 1px solid var(--line); }
+  .facts dt { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--soft); }
+  .facts dd { margin-top: 6px; font-size: 18px; font-weight: 500; letter-spacing: -.015em; line-height: 1.3; }
+
+  section { margin-top: 88px; scroll-margin-top: 84px; }
   .sec-head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
-   .sec-head h2 { font-size: clamp(28px, 4.6vw, 40px); font-weight: 500; letter-spacing: -.04em; line-height: 1; }
+  .sec-head h2 { font-size: clamp(28px, 4.6vw, 40px); font-weight: 500; letter-spacing: -.04em; line-height: 1; }
   .load-error { color: var(--soft); font-size: 14px; }
 
   .category-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
@@ -74,19 +101,27 @@
   }
   @media (hover: none) { .go { opacity: 1; transform: none; width: 30px; height: 30px; } .go .ti { font-size: 15px; } }
 
-  footer.foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--soft); }
+  footer.foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 96px 0 0; padding: 24px 0 calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 13.5px; color: var(--soft); }
   footer.foot a { display: inline-flex; align-items: center; gap: 6px; transition: color .25s; }
   footer.foot .ti { font-size: 16px; }
   @media (hover: hover) and (pointer: fine) { footer.foot a:hover { color: var(--accent); } }
 
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } .hero { grid-template-columns: 1fr 260px; gap: 48px; } }
   @media (max-width: 700px) {
-    .page { padding: calc(40px + env(safe-area-inset-top)) 16px calc(36px + env(safe-area-inset-bottom)); }
-    header { padding-bottom: 44px; }
-    .hero { grid-template-columns: 1fr; gap: 28px; }
-    .avatar { order: -1; width: 104px; height: 104px; border-radius: 34px; font-size: 32px; }
-    header p { font-size: 17px; margin-top: 18px; }
+    .wrap { padding: 0 16px; }
+    .links { display: none; }
+    .bar .btn { margin-left: auto; }
+    .hero { grid-template-columns: 1fr; gap: 36px; padding: 36px 0 44px; }
+    .portrait { order: -1; width: 128px; }
+    .portrait::before { inset: 10px -10px -10px 10px; border-radius: 28px; }
+    .avatar { aspect-ratio: 1; border-radius: 28px; font-size: 40px; }
+    h1 { margin-top: 20px; }
+    .bio { font-size: 17px; margin-top: 20px; }
+    .actions { margin-top: 28px; }
+    .actions .btn { flex: 1 1 100%; }
     .socials { margin-top: 26px; }
+    .facts div { padding: 18px 14px; }
+    .facts dd { font-size: 15px; }
     section { margin-top: 64px; }
     .sec-head { align-items: flex-start; flex-direction: column; gap: 14px; }
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -100,13 +135,29 @@
 <link rel="icon" type="image/png" href="assets/img/site/Icon.png">
 </head>
 <body>
-<main class="page">
+<div class="bar" id="bar">
+  <div class="wrap bar-in">
+    <a class="brand" href="#home"><span class="mark" id="mark">AH</span><span id="brandName">Arman Haghshenas</span></a>
+    <nav class="links" id="links">
+      <a href="#projects" data-s="projects">Projects</a>
+      <a href="#products" data-s="products">Products</a>
+      <a href="#notes" data-s="notes">Notes</a>
+    </nav>
+    <a class="btn btn-accent" href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" data-contact>Get in touch</a>
+  </div>
+</div>
+
+<main class="wrap">
   <header id="home">
     <div class="hero">
       <div class="hero-text">
         <span class="availability" data-status="not-set" role="status" hidden><i class="dot"></i><span class="al">Availability not set</span></span>
         <h1>Arman Haghshenas</h1>
-        <p>Crafting logos, brands and visual identities.</p>
+        <p class="bio">Crafting logos, brands and visual identities.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="#projects">View projects <i class="ti ti-arrow-down-right" aria-hidden="true"></i></a>
+          <a class="btn btn-ghost" href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" data-contact>Get in touch</a>
+        </div>
         <div class="socials">
           <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
           <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
@@ -115,8 +166,13 @@
           <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
         </div>
       </div>
-      <div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div>
+      <div class="portrait"><div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div></div>
     </div>
+    <dl class="facts">
+      <div><dt>Experience</dt><dd id="fExp">4+ years</dd></div>
+      <div><dt>Focus</dt><dd id="fFocus">Logo &amp; visual identity</dd></div>
+      <div><dt>Based in</dt><dd id="fLoc">Isfahan, Iran</dd></div>
+    </dl>
   </header>
 
   <section id="projects"><div class="sec-head"><h2><span>Projects</span></h2><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div></div><div class="grid" id="projectsGrid"></div></section>
@@ -124,7 +180,7 @@
   <section id="notes"><div class="sec-head"><h2><span>Notes</span></h2></div><div class="grid" id="notesGrid"></div></section>
 
   <footer class="foot">
-    <span>Â© <span id="year"></span> <span id="siteName">Arman Haghshenas</span></span>
+    <span>&copy; <span id="year"></span> <span id="siteName">Arman Haghshenas</span></span>
     <a href="#home">Back to top <i class="ti ti-arrow-up" aria-hidden="true"></i></a>
   </footer>
 </main>
@@ -133,6 +189,7 @@
   const SECTIONS = ['projects', 'products', 'notes'];
   const ICONS = { projects: 'layout-grid', products: 'box', notes: 'notebook' };
   const esc = (text) => String(text ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const text = (value) => typeof value === 'string' && value.trim() ? value.trim() : '';
 
   function safeURL(value, image = false) {
     if (typeof value !== 'string' || !value.trim()) return '';
@@ -237,14 +294,19 @@
     render();
   }
 
+  function hideSection(key) {
+    document.getElementById(key).hidden = true;
+    const link = document.querySelector('#links a[data-s="' + key + '"]');
+    if (link) link.remove();
+  }
+
   async function renderSection(key) {
-    const section = document.getElementById(key);
     const grid = document.getElementById(key + 'Grid');
     try {
       const data = await load(key);
       if (!Array.isArray(data)) throw new Error('Expected a list for ' + key);
       const items = data.filter((item) => item && typeof item.title === 'string' && item.title.trim());
-      if (!items.length) { section.hidden = true; return; }
+      if (!items.length) { hideSection(key); return; }
       if (key === 'projects') {
         renderProjects(items, grid);
       } else {
@@ -263,11 +325,15 @@
       const site = await load('site');
       if (!site || typeof site !== 'object' || Array.isArray(site)) throw new Error('Invalid site settings');
       const header = document.getElementById('home');
-      header.querySelector('h1').textContent = site.name || '';
+      const name = text(site.name);
+      header.querySelector('h1').textContent = name;
       header.querySelector('h1').dir = 'auto';
-      header.querySelector('.hero-text > p').textContent = site.bio || '';
-      header.querySelector('.hero-text > p').dir = 'auto';
-      header.querySelector('.avatar span').textContent = site.initials || '';
+      header.querySelector('.bio').textContent = site.bio || '';
+      header.querySelector('.bio').dir = 'auto';
+      const initials = site.initials || '';
+      header.querySelector('.avatar span').textContent = initials;
+      document.getElementById('mark').textContent = initials;
+      document.getElementById('brandName').textContent = name;
       const availability = header.querySelector('.availability');
       const state = ['available', 'busy'].includes(site.availability) ? site.availability : 'not-set';
       const label = { available: 'Available for work', busy: 'Currently busy', 'not-set': 'Availability not set' }[state];
@@ -276,11 +342,14 @@
       availability.hidden = state === 'not-set';
       const avatar = header.querySelector('.avatar img');
       const image = safeURL(site.avatar, true);
-      if (avatar && image) { avatar.src = image; avatar.alt = site.name || ''; }
+      if (avatar && image) { avatar.src = image; avatar.alt = name; }
       else if (avatar) avatar.remove();
-      document.title = site.pageTitle || site.name || '';
+      document.title = site.pageTitle || name || '';
       document.querySelector('meta[name="description"]').content = site.description || site.bio || '';
-      document.getElementById('siteName').textContent = site.name || '';
+      document.getElementById('siteName').textContent = name;
+      if (text(site.experience)) document.getElementById('fExp').textContent = text(site.experience);
+      if (text(site.focus)) document.getElementById('fFocus').textContent = text(site.focus);
+      if (text(site.location)) document.getElementById('fLoc').textContent = text(site.location);
       const socials = Array.isArray(site.socials) ? site.socials : [];
       header.querySelector('.socials').innerHTML = socials.map((social) => {
         const link = safeURL(social.link);
@@ -289,21 +358,35 @@
         const icon = /^[a-z0-9-]+$/.test(iconName) ? iconName : 'link';
         return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '"><i class="ti ti-' + icon + '" aria-hidden="true"></i></a>';
       }).join('');
+      const contact = socials.find((s) => /telegram/i.test(String(s.icon || '') + String(s.label || '')) && safeURL(s.link)) || socials.find((s) => safeURL(s.link));
+      if (contact) document.querySelectorAll('[data-contact]').forEach((a) => { a.href = safeURL(contact.link); });
       SECTIONS.forEach((key) => {
-        if (typeof site[key + 'Title'] === 'string' && site[key + 'Title'].trim()) {
-          const title = document.querySelector('#' + key + ' h2 span');
-          title.textContent = site[key + 'Title'];
-          title.dir = 'auto';
+        const title = text(site[key + 'Title']);
+        if (title) {
+          const heading = document.querySelector('#' + key + ' h2 span');
+          heading.textContent = title;
+          heading.dir = 'auto';
+          const link = document.querySelector('#links a[data-s="' + key + '"]');
+          if (link) link.textContent = title;
         }
       });
     } catch (error) { console.error(error); }
   }
 
+  function watch() {
+    const bar = document.getElementById('bar');
+    addEventListener('scroll', () => bar.classList.toggle('stuck', scrollY > 8), { passive: true });
+    const links = [...document.querySelectorAll('#links a')];
+    const set = (id) => links.forEach((a) => a.classList.toggle('on', a.dataset.s === id));
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) set(e.target.id); }), { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    SECTIONS.forEach((key) => { const el = document.getElementById(key); if (el) io.observe(el); });
+    addEventListener('scroll', () => { if (scrollY < 200) set(''); }, { passive: true });
+  }
+
   document.getElementById('year').textContent = new Date().getFullYear();
   renderProfile();
   SECTIONS.forEach(renderSection);
+  watch();
 </script>
 </body>
 </html>
-
-
