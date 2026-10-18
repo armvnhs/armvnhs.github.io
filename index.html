@@ -14,14 +14,14 @@
 <style>
   :root {
     --bg: #ffffff;
-    --card: #f6f6f6;
-    --sand: #ebebeb;
-    --stone: #d2d2d2;
-    --ink: #161616;
+    --card: #ffffff;
+    --sand: #ffffff;
+    --stone: #000000;
+    --ink: #000000;
     --mid: #555555;
     --soft: #8c8c8c;
-    --line: rgba(22,22,22,.09);
-    --line-2: rgba(22,22,22,.18);
+    --line: rgba(0,0,0,.1);
+    --line-2: rgba(0,0,0,.18);
     --ease: cubic-bezier(.22, 1, .36, 1);
     --sans: Archivo, Vazirmatn, system-ui, sans-serif;
   }
@@ -30,6 +30,7 @@
   html { scroll-behavior: smooth; scrollbar-width: none; }
   ::-webkit-scrollbar { display: none; }
   body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; padding-bottom: 130px; overflow-x: hidden; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(rgba(0,0,0,.1) 1px, transparent 1px); background-size: 22px 22px; mask-image: linear-gradient(to bottom, #000, transparent 70%); -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%); }
   a { color: inherit; text-decoration: none; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
   [hidden] { display: none !important; }
@@ -45,16 +46,15 @@
   header#home > :nth-child(4) { animation-delay: .21s; }
   header#home > :nth-child(5) { animation-delay: .28s; }
   @keyframes up { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
-  .avatar { position: relative; width: 92px; height: 92px; margin: 0 auto; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--sand); color: var(--ink); font-size: 30px; font-weight: 700; letter-spacing: -.05em; }
+  .avatar { position: relative; width: 92px; height: 92px; margin: 0 auto; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-2); background: #fff; color: #000; font-size: 30px; font-weight: 700; letter-spacing: -.05em; }
   .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .availability { display: inline-flex; align-items: center; gap: 9px; margin-top: 22px; padding: 7px 15px 7px 12px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--card); font-size: 12.5px; font-weight: 700; }
   .availability .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: pulse 2s infinite; }
   .availability[data-status="busy"] .dot { background: transparent; border: 1.5px solid var(--ink); animation: none; }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(22,22,22,.4); } 70%, 100% { box-shadow: 0 0 0 8px rgba(22,22,22,0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,0,0,.4); } 70%, 100% { box-shadow: 0 0 0 8px rgba(0,0,0,0); } }
   h1 { text-wrap: balance; margin-top: 22px; font-size: clamp(34px, 5.4vw, 48px); font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
   .bio { text-wrap: balance; margin: 22px auto 0; max-width: 520px; font-weight: 400; font-size: clamp(19px, 2.4vw, 24px); line-height: 1.4; letter-spacing: -.02em; color: var(--mid); }
-  .contact-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 30px; padding: 6px 6px 6px 20px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--card); }
-  .contact-pill > span { font-size: 13px; font-weight: 400; color: var(--soft); margin-right: 6px; }
+  .contact-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 30px; }
   .contact-pill a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background .3s, color .3s, transform .4s var(--ease); touch-action: manipulation; }
   .contact-pill .ti { font-size: 19px; }
   @media (hover: hover) and (pointer: fine) { .contact-pill a:hover { background: var(--ink); color: #fff; transform: translateY(-3px); } }
@@ -85,7 +85,7 @@
   .bitem h3 { margin-top: 12px; font-size: 14.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
   .bitem p { margin-top: 2px; font-size: 12px; color: var(--soft); line-height: 1.4; }
   @media (hover: hover) and (pointer: fine) {
-    .bitem:hover .bcard { transform: translateY(-6px); background: var(--sand); }
+    .bitem:hover .bcard { transform: translateY(-6px); }
     .bitem:hover .bcard img { transform: scale(1.06); }
     .bitem:hover .bcard .num { color: var(--mid); }
   }
@@ -94,10 +94,10 @@
   .pcard { display: block; opacity: 0; }
   .pcard.show { animation: rise .8s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 70ms); }
   @keyframes rise { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
-  .thumb { position: relative; aspect-ratio: 1 / 1.05; border-radius: 24px; overflow: hidden; background: var(--sand); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+  .thumb { position: relative; aspect-ratio: 1 / 1.05; border-radius: 24px; overflow: hidden; background: #000; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
   .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), filter .5s; }
   .thumb .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .thumb .ph .ti { font-size: 34px; color: rgba(22,22,22,.25); }
+  .thumb .ph .ti { font-size: 34px; color: #fff; }
   .go { position: absolute; top: 10px; right: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: var(--ink); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translate(-6px, 6px) scale(.85); transition: opacity .3s, transform .5s var(--ease); }
   .go .ti { font-size: 17px; }
   .pcard h3 { margin-top: 12px; font-size: 15px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
@@ -110,7 +110,8 @@
   @media (hover: none) { .go { opacity: 1; transform: none; width: 30px; height: 30px; } .go .ti { font-size: 15px; } }
 
 
-  .contact { position: relative; isolation: isolate; overflow: hidden; margin-top: 110px; padding: clamp(36px, 7vw, 64px) clamp(24px, 6vw, 56px); border-radius: 36px; background: var(--sand); color: var(--ink); text-align: center; }
+  .contact { position: relative; isolation: isolate; overflow: hidden; margin-top: 110px; padding: clamp(36px, 7vw, 64px) clamp(24px, 6vw, 56px); border-radius: 36px; border: 1px solid var(--line-2); background: #fff; color: #000; text-align: center; }
+  .contact::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: radial-gradient(rgba(0,0,0,.18) 1px, transparent 1px); background-size: 18px 18px; mask-image: radial-gradient(circle at 50% 120%, #000, transparent 70%); -webkit-mask-image: radial-gradient(circle at 50% 120%, #000, transparent 70%); }
   .contact h2 { text-wrap: balance; font-weight: 700; font-size: clamp(28px, 4.4vw, 40px); letter-spacing: -.03em; line-height: 1.1; }
   .contact p { margin: 18px auto 0; max-width: 380px; font-size: 16px; color: var(--mid); }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; margin-top: 30px; padding: 0 30px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--bg); font: 700 15px var(--sans); cursor: pointer; transition: background .3s, color .3s, transform .3s var(--ease); touch-action: manipulation; }
@@ -118,19 +119,19 @@
   .btn .ti { font-size: 19px; transition: transform .4s var(--ease); }
   @media (hover: hover) and (pointer: fine) { .btn:hover { background: transparent; color: var(--ink); } .btn:hover .ti { transform: translate(3px, -3px); } }
   .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-  .socials a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(22,22,22,.3); transition: background .3s, color .3s, transform .4s var(--ease); }
+  .socials a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-2); transition: background .3s, color .3s, transform .4s var(--ease); }
   .socials .ti { font-size: 20px; }
   @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--ink); color: var(--bg); transform: translateY(-4px); } }
 
   footer.foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 30px 0 0; font-size: 13.5px; color: var(--soft); }
 
-  .dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 50; display: flex; align-items: center; gap: 4px; padding: 7px; border-radius: 999px; background: rgba(255,255,255,.82); border: 1px solid rgba(22,22,22,.12); backdrop-filter: blur(22px) saturate(1.2); -webkit-backdrop-filter: blur(22px) saturate(1.2); box-shadow: 0 18px 44px rgba(22,22,22,.16), inset 0 1px 0 rgba(255,255,255,.8); transform: translateX(-50%); animation: dockin 1s .5s var(--ease) both; }
+  .dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 50; display: flex; align-items: center; gap: 4px; padding: 7px; border-radius: 999px; background: rgba(255,255,255,.82); border: 1px solid var(--line-2); backdrop-filter: blur(22px) saturate(1.2); -webkit-backdrop-filter: blur(22px) saturate(1.2); box-shadow: none; transform: translateX(-50%); animation: dockin 1s .5s var(--ease) both; }
   @keyframes dockin { from { opacity: 0; transform: translate(-50%, 30px); } to { opacity: 1; transform: translate(-50%, 0); } }
   .dock a { position: relative; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--soft); transition: color .3s, background .3s, transform .4s var(--ease); touch-action: manipulation; }
   .dock a .ti { font-size: 22px; }
-  .dock a.on { background: var(--sand); color: var(--ink); }
+  .dock a.on { background: #000; color: #fff; }
   .dock a::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 12px); left: 50%; padding: 6px 12px; border-radius: 10px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap; opacity: 0; pointer-events: none; transform: translate(-50%, 6px); transition: opacity .25s, transform .35s var(--ease); }
-  @media (hover: hover) and (pointer: fine) { .dock a:hover { color: var(--ink); transform: translateY(-3px); } .dock a.on:hover { color: var(--ink); } .dock a:hover::after { opacity: 1; transform: translate(-50%, 0); } }
+  @media (hover: hover) and (pointer: fine) { .dock a:hover { color: var(--ink); transform: translateY(-3px); } .dock a.on:hover { color: #fff; } .dock a:hover::after { opacity: 1; transform: translate(-50%, 0); } }
 
   @media (max-width: 700px) {
     .col { padding: 0 16px; }
@@ -138,8 +139,6 @@
     .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
     .thumb, .bcard { border-radius: 20px; }
     .facts dd { font-size: 14.5px; }
-    .contact-pill > span { display: none; }
-    .contact-pill { padding-left: 6px; }
     .dock a { width: 44px; height: 44px; }
     .dock a .ti { font-size: 20px; }
     .dock a::after { display: none; }
@@ -154,7 +153,6 @@
     <div><h1>Arman Haghshenas</h1></div>
     <p class="bio">Crafting logos, brands and visual identities.</p>
     <div class="contact-pill" id="heroSocials">
-      <span>Contact me:</span>
       <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
       <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
       <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
@@ -415,7 +413,7 @@
         return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '"><i class="ti ti-' + icon + '" aria-hidden="true"></i></a>';
       }).join('');
       if (socialsHTML) {
-        document.getElementById('heroSocials').innerHTML = '<span>Contact me:</span>' + socialsHTML;
+        document.getElementById('heroSocials').innerHTML = socialsHTML;
         document.getElementById('contactSocials').innerHTML = socialsHTML;
       }
       const contact = socials.find((s) => /telegram/i.test(String(s.icon || '') + String(s.label || '')) && safeURL(s.link)) || socials.find((s) => safeURL(s.link));
