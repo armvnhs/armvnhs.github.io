@@ -12,23 +12,14 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="wrap">
-  <header class="hero">
-    <img class="avatar" id="avatar" src="assets/img/Profile.jpg" alt="Arman Haghshenas" width="104" height="104">
-    <h1 id="name">Arman Haghshenas</h1>
-    <p class="tagline" id="tagline">Crafting logos, brands and visual identities.</p>
-  </header>
-  <hr class="rule">
-  <section aria-labelledby="projects-title">
-    <h2 class="section-title" id="projects-title">Projects</h2>
-    <div class="projects" id="projects"></div>
-  </section>
-  <section id="brands-section" aria-labelledby="brands-title" hidden>
-    <h2 class="section-title small" id="brands-title">Brands I’ve worked with</h2>
-    <div class="brands" id="brands"></div>
-  </section>
-</main>
+<nav class="nav" aria-label="Main">
+  <a href="#/" data-route="work">Work</a>
+  <a href="#/resume" data-route="resume">Resume</a>
+  <a href="#/contact" data-route="contact">Contact</a>
+</nav>
+<main class="wrap" id="app"></main>
 <footer class="wrap social" id="social"></footer>
+<noscript><p style="text-align:center;padding:40px">Please enable JavaScript to view this site.</p></noscript>
 <script src="app.js" defer></script>
 </body>
 </html>

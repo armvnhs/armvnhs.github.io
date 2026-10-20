@@ -1,0 +1,15 @@
+{
+  "summary": "Graphic designer based in Isfahan, Iran, with around four years of experience in logo design and visual identity.",
+  "pdf": "",
+  "experience": [
+    { "company": "Entekhab Group", "role": "Graphic Designer", "period": "Present", "details": "" },
+    { "company": "Vira Holding", "role": "Graphic Designer", "period": "", "details": "" },
+    { "company": "Davin Pack", "role": "Graphic Designer", "period": "", "details": "" },
+    { "company": "Chap Aseman Farda", "role": "Graphic Designer", "period": "", "details": "" }
+  ],
+  "education": [
+    { "school": "Sepehr University", "degree": "BA in Graphics", "period": "" },
+    { "school": "Mohajer University", "degree": "Additional credentials", "period": "" }
+  ],
+  "skills": ["Logo Design", "Visual Identity", "Brand Design"]
+}
