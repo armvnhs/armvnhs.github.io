@@ -1,6 +1,12 @@
 media:
-  input: assets/img
-  output: /assets/img
+  - name: images
+    label: Images
+    input: assets/img
+    output: /assets/img
+  - name: files
+    label: Files
+    input: assets/files
+    output: /assets/files
 content:
   - name: profile
     label: Profile
@@ -16,6 +22,12 @@ content:
       - name: avatar
         label: Photo
         type: image
+      - name: email
+        label: Email
+        type: string
+      - name: contactText
+        label: Contact text
+        type: string
       - name: social
         label: Social links
         type: object
@@ -49,19 +61,84 @@ content:
           - name: link
             label: Link
             type: string
-  - name: brands
-    label: Brands
+  - name: companies
+    label: Companies
     type: file
-    path: data/brands.json
+    path: data/companies.json
     fields:
       - name: items
-        label: Brands
+        label: Companies
         type: object
         list: true
         fields:
           - name: name
             label: Name
             type: string
-          - name: logo
-            label: Logo
+          - name: slug
+            label: Slug
+            type: string
+          - name: role
+            label: Role
+            type: string
+          - name: period
+            label: Period
+            type: string
+          - name: cover
+            label: Cover
             type: image
+          - name: summary
+            label: Summary
+            type: string
+          - name: body
+            label: Post
+            type: rich-text
+            options:
+              format: html
+  - name: resume
+    label: Resume
+    type: file
+    path: data/resume.json
+    fields:
+      - name: summary
+        label: Summary
+        type: text
+      - name: pdf
+        label: PDF
+        type: file
+        options:
+          media: files
+      - name: experience
+        label: Experience
+        type: object
+        list: true
+        fields:
+          - name: company
+            label: Company
+            type: string
+          - name: role
+            label: Role
+            type: string
+          - name: period
+            label: Period
+            type: string
+          - name: details
+            label: Details
+            type: text
+      - name: education
+        label: Education
+        type: object
+        list: true
+        fields:
+          - name: school
+            label: School
+            type: string
+          - name: degree
+            label: Degree
+            type: string
+          - name: period
+            label: Period
+            type: string
+      - name: skills
+        label: Skills
+        type: string
+        list: true
