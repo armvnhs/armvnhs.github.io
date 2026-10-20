@@ -34,6 +34,12 @@ content:
       - name: email
         label: Email
         type: string
+      - name: telegram
+        label: Telegram
+        type: string
+      - name: phone
+        label: Phone
+        type: string
       - name: contactText
         label: Contact text
         type: string
@@ -106,6 +112,39 @@ content:
             type: rich-text
             options:
               format: html
+  - name: products
+    label: Products
+    type: file
+    path: data/products.json
+    fields:
+      - name: items
+        label: Products
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: type
+            label: Type
+            type: select
+            options:
+              values:
+                - Website
+                - App
+                - Product
+          - name: description
+            label: Description
+            type: string
+          - name: logo
+            label: Logo
+            type: image
+          - name: cover
+            label: Cover
+            type: image
+          - name: link
+            label: Link
+            type: string
   - name: resume
     label: Resume
     type: file
