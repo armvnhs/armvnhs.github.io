@@ -1,0 +1,67 @@
+media:
+  input: assets/img
+  output: /assets/img
+content:
+  - name: profile
+    label: Profile
+    type: file
+    path: data/site.json
+    fields:
+      - name: name
+        label: Name
+        type: string
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: avatar
+        label: Photo
+        type: image
+      - name: social
+        label: Social links
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+          - name: url
+            label: URL
+            type: string
+  - name: projects
+    label: Projects
+    type: file
+    path: data/projects.json
+    fields:
+      - name: items
+        label: Projects
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: category
+            label: Category
+            type: string
+          - name: cover
+            label: Cover
+            type: image
+          - name: link
+            label: Link
+            type: string
+  - name: brands
+    label: Brands
+    type: file
+    path: data/brands.json
+    fields:
+      - name: items
+        label: Brands
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: logo
+            label: Logo
+            type: image
