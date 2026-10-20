@@ -1,7 +1,20 @@
 {
   "items": [
-    { "title": "Isfahan Core", "category": "Sticker", "cover": "assets/img/Projects/Isfahan-Core.png", "link": "" },
-    { "title": "Lady Tel", "category": "Logo Design", "cover": "assets/img/Projects/Lady-Tel.jpg", "link": "" },
-    { "title": "Hidway", "category": "Brand Identity", "cover": "assets/img/Projects/Hidway.jpg", "link": "" }
+    {
+      "title": "Isfahan Core",
+      "category": "Sticker",
+      "cover": "/assets/img/isfahan-core.png",
+      "link": "https://armvnhs.ir/"
+    },
+    {
+      "title": "Lady Tel",
+      "category": "Logo Design",
+      "cover": "/assets/img/Projects/Lady-Tel.jpg"
+    },
+    {
+      "title": "Hidway",
+      "category": "Brand Identity",
+      "cover": "/assets/img/Projects/Hidway.jpg"
+    }
   ]
 }
