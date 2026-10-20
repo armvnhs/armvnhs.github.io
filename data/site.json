@@ -1,0 +1,11 @@
+{
+  "name": "Arman Haghshenas",
+  "tagline": "Crafting logos, brands and visual identities.",
+  "avatar": "assets/img/Profile.jpg",
+  "social": [
+    { "label": "Behance", "url": "https://www.behance.net/armvnhs" },
+    { "label": "Instagram", "url": "https://instagram.com/armvnhs" },
+    { "label": "Dribbble", "url": "https://dribbble.com/armvnhs" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/armvnhs" }
+  ]
+}
