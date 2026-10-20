@@ -1,448 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Arman Haghshenas &mdash; Graphic Designer</title>
-<meta name="description" content="Arman Haghshenas, graphic designer. Logos, brands and visual identities.">
-<meta name="theme-color" content="#ffffff">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&family=Vazirmatn:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
-<link rel="icon" type="image/png" href="assets/img/site/Icon.png">
-<style>
-  :root {
-    --bg: #ffffff;
-    --card: #ffffff;
-    --sand: #ffffff;
-    --stone: #000000;
-    --ink: #000000;
-    --mid: #555555;
-    --soft: #8c8c8c;
-    --line: rgba(0,0,0,.1);
-    --line-2: rgba(0,0,0,.18);
-    --ease: cubic-bezier(.22, 1, .36, 1);
-    --sans: Archivo, Vazirmatn, system-ui, sans-serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  ::selection { background: var(--ink); color: #fff; }
-  html { scroll-behavior: smooth; scrollbar-width: none; }
-  ::-webkit-scrollbar { display: none; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; padding-bottom: 130px; overflow-x: hidden; }
-  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(rgba(0,0,0,.1) 1px, transparent 1px); background-size: 22px 22px; mask-image: linear-gradient(to bottom, #000, transparent 70%); -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%); }
-  a { color: inherit; text-decoration: none; }
-  a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-  [hidden] { display: none !important; }
-  .col { max-width: 760px; margin: 0 auto; padding: 0 22px; }
-  .reveal { opacity: 0; translate: 0 24px; transition: opacity .9s var(--ease), translate .9s var(--ease); }
-  .reveal.in { opacity: 1; translate: 0 0; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } .reveal, .pcard { opacity: 1 !important; translate: none !important; } }
-
-  header#home { text-align: center; padding: calc(56px + env(safe-area-inset-top)) 0 44px; }
-  header#home > * { animation: up .9s var(--ease) both; }
-  header#home > :nth-child(2) { animation-delay: .07s; }
-  header#home > :nth-child(3) { animation-delay: .14s; }
-  header#home > :nth-child(4) { animation-delay: .21s; }
-  header#home > :nth-child(5) { animation-delay: .28s; }
-  @keyframes up { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
-  .avatar { position: relative; width: 92px; height: 92px; margin: 0 auto; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-2); background: #fff; color: #000; font-size: 30px; font-weight: 700; letter-spacing: -.05em; }
-  .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .availability { display: inline-flex; align-items: center; gap: 9px; margin-top: 22px; padding: 7px 15px 7px 12px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--card); font-size: 12.5px; font-weight: 700; }
-  .availability .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: pulse 2s infinite; }
-  .availability[data-status="busy"] .dot { background: transparent; border: 1.5px solid var(--ink); animation: none; }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,0,0,.4); } 70%, 100% { box-shadow: 0 0 0 8px rgba(0,0,0,0); } }
-  h1 { text-wrap: balance; margin-top: 22px; font-size: clamp(34px, 5.4vw, 48px); font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
-  .bio { text-wrap: balance; margin: 22px auto 0; max-width: 520px; font-weight: 400; font-size: clamp(19px, 2.4vw, 24px); line-height: 1.4; letter-spacing: -.02em; color: var(--mid); }
-  .contact-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 30px; }
-  .contact-pill a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background .3s, color .3s, transform .4s var(--ease); touch-action: manipulation; }
-  .contact-pill .ti { font-size: 19px; }
-  @media (hover: hover) and (pointer: fine) { .contact-pill a:hover { background: var(--ink); color: #fff; transform: translateY(-3px); } }
-
-  .facts { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 8px; border-block: 1px solid var(--line-2); }
-  .facts div { padding: 20px 8px; text-align: center; }
-  .facts div + div { border-inline-start: 1px solid var(--line); }
-  .facts dt { font-size: 10.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); }
-  .facts dd { margin-top: 6px; font-size: 17px; font-weight: 400; letter-spacing: -.02em; line-height: 1.2; }
-
-  section { margin-top: 84px; scroll-margin-top: 28px; }
-  .sec-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 26px; }
-  .sec-head h2 { font-weight: 700; font-size: clamp(24px, 3.4vw, 30px); letter-spacing: -.025em; line-height: 1.1; }
-  .sec-head h2 sup { margin-inline-start: 8px; font-family: var(--sans); font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--soft); vertical-align: top; position: relative; top: 8px; }
-  .load-error { color: var(--soft); font-size: 14px; }
-
-  .category-filters { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--card); }
-  .filter-pill { border: 0; border-radius: 999px; padding: 8px 16px; background: transparent; color: var(--soft); cursor: pointer; font: 700 13px var(--sans); transition: background .3s, color .3s; }
-  .filter-pill[aria-pressed="true"] { background: var(--ink); color: #fff; }
-  @media (hover: hover) and (pointer: fine) { .filter-pill[aria-pressed="false"]:hover { color: var(--ink); } }
-
-  .brand-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  .bitem { display: block; }
-  .bcard { position: relative; aspect-ratio: 1; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 18px; overflow: hidden; transition: transform .5s var(--ease), box-shadow .5s var(--ease), background .4s, color .4s; }
-  .bcard img { max-width: 68%; max-height: 62%; object-fit: contain; transition: transform .6s var(--ease); }
-  .bcard .wm { font-size: clamp(17px, 2.6vw, 24px); font-weight: 700; letter-spacing: -.05em; line-height: .98; text-align: center; text-wrap: balance; }
-  .bcard .num { position: absolute; top: 12px; left: 14px; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; color: var(--soft); transition: color .4s; }
-  .bitem h3 { margin-top: 12px; font-size: 14.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
-  .bitem p { margin-top: 2px; font-size: 12px; color: var(--soft); line-height: 1.4; }
-  @media (hover: hover) and (pointer: fine) {
-    .bitem:hover .bcard { transform: translateY(-6px); }
-    .bitem:hover .bcard img { transform: scale(1.06); }
-    .bitem:hover .bcard .num { color: var(--mid); }
-  }
-
-  .pgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 16px; }
-  .pcard { display: block; opacity: 0; }
-  .pcard.show { animation: rise .8s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 70ms); }
-  @keyframes rise { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
-  .thumb { position: relative; aspect-ratio: 1 / 1.05; border-radius: 24px; overflow: hidden; background: #000; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
-  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), filter .5s; }
-  .thumb .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .thumb .ph .ti { font-size: 34px; color: #fff; }
-  .go { position: absolute; top: 10px; right: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: var(--ink); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translate(-6px, 6px) scale(.85); transition: opacity .3s, transform .5s var(--ease); }
-  .go .ti { font-size: 17px; }
-  .pcard h3 { margin-top: 12px; font-size: 15px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
-  .pcard p { margin-top: 2px; font-size: 12.5px; color: var(--soft); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  @media (hover: hover) and (pointer: fine) {
-    .pcard:hover .thumb { transform: translateY(-6px); }
-    .pcard:hover .thumb img { transform: scale(1.05); }
-    .pcard:hover .go { opacity: 1; transform: none; }
-  }
-  @media (hover: none) { .go { opacity: 1; transform: none; width: 30px; height: 30px; } .go .ti { font-size: 15px; } }
-
-
-  .contact { position: relative; isolation: isolate; overflow: hidden; margin-top: 110px; padding: clamp(36px, 7vw, 64px) clamp(24px, 6vw, 56px); border-radius: 36px; border: 1px solid var(--line-2); background: #fff; color: #000; text-align: center; }
-  .contact::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: radial-gradient(rgba(0,0,0,.18) 1px, transparent 1px); background-size: 18px 18px; mask-image: radial-gradient(circle at 50% 120%, #000, transparent 70%); -webkit-mask-image: radial-gradient(circle at 50% 120%, #000, transparent 70%); }
-  .contact h2 { text-wrap: balance; font-weight: 700; font-size: clamp(28px, 4.4vw, 40px); letter-spacing: -.03em; line-height: 1.1; }
-  .contact p { margin: 18px auto 0; max-width: 380px; font-size: 16px; color: var(--mid); }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; margin-top: 30px; padding: 0 30px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--bg); font: 700 15px var(--sans); cursor: pointer; transition: background .3s, color .3s, transform .3s var(--ease); touch-action: manipulation; }
-  .btn:active { transform: scale(.97); }
-  .btn .ti { font-size: 19px; transition: transform .4s var(--ease); }
-  @media (hover: hover) and (pointer: fine) { .btn:hover { background: transparent; color: var(--ink); } .btn:hover .ti { transform: translate(3px, -3px); } }
-  .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-  .socials a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-2); transition: background .3s, color .3s, transform .4s var(--ease); }
-  .socials .ti { font-size: 20px; }
-  @media (hover: hover) and (pointer: fine) { .socials a:hover { background: var(--ink); color: var(--bg); transform: translateY(-4px); } }
-
-  footer.foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 30px 0 0; font-size: 13.5px; color: var(--soft); }
-
-  .dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 50; display: flex; align-items: center; gap: 4px; padding: 7px; border-radius: 999px; background: rgba(255,255,255,.82); border: 1px solid var(--line-2); backdrop-filter: blur(22px) saturate(1.2); -webkit-backdrop-filter: blur(22px) saturate(1.2); box-shadow: none; transform: translateX(-50%); animation: dockin 1s .5s var(--ease) both; }
-  @keyframes dockin { from { opacity: 0; transform: translate(-50%, 30px); } to { opacity: 1; transform: translate(-50%, 0); } }
-  .dock a { position: relative; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--soft); transition: color .3s, background .3s, transform .4s var(--ease); touch-action: manipulation; }
-  .dock a .ti { font-size: 22px; }
-  .dock a.on { background: #000; color: #fff; }
-  .dock a::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 12px); left: 50%; padding: 6px 12px; border-radius: 10px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap; opacity: 0; pointer-events: none; transform: translate(-50%, 6px); transition: opacity .25s, transform .35s var(--ease); }
-  @media (hover: hover) and (pointer: fine) { .dock a:hover { color: var(--ink); transform: translateY(-3px); } .dock a.on:hover { color: #fff; } .dock a:hover::after { opacity: 1; transform: translate(-50%, 0); } }
-
-  @media (max-width: 700px) {
-    .col { padding: 0 16px; }
-    .brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
-    .thumb, .bcard { border-radius: 20px; }
-    .facts dd { font-size: 14.5px; }
-    .dock a { width: 44px; height: 44px; }
-    .dock a .ti { font-size: 20px; }
-    .dock a::after { display: none; }
-  }
-</style>
-</head>
-<body>
-<main class="col">
-  <header id="home">
-    <div class="avatar"><span>AH</span><img src="assets/img/site/Profile.jpg" alt="Arman Haghshenas" onerror="this.remove()"></div>
-    <span class="availability" data-status="not-set" role="status" hidden><i class="dot"></i><span class="al">Availability not set</span></span>
-    <div><h1>Arman Haghshenas</h1></div>
-    <p class="bio">Crafting logos, brands and visual identities.</p>
-    <div class="contact-pill" id="heroSocials">
-      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
-      <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
-      <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
-      <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
-      <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
-    </div>
-  </header>
-
-  <dl class="facts reveal">
-    <div><dt>Experience</dt><dd id="fExp">4+ years</dd></div>
-    <div><dt>Focus</dt><dd id="fFocus">Logo &amp; visual identity</dd></div>
-    <div><dt>Based in</dt><dd id="fLoc">Isfahan, Iran</dd></div>
-  </dl>
-
-  <section id="brands">
-    <div class="sec-head reveal"><h2>Brands I&rsquo;ve worked with<sup id="brandsCount"></sup></h2></div>
-    <div class="brand-grid reveal" id="brandGrid"></div>
-  </section>
-
-  <section id="projects">
-    <div class="sec-head reveal"><h2><span>Projects</span><sup id="projectsCount"></sup></h2><div class="category-filters" id="projectsFilters" role="group" aria-label="Filter projects by category" hidden></div></div>
-    <div class="pgrid" id="projectsGrid"></div>
-  </section>
-
-  <section id="products"><div class="sec-head reveal"><h2><span>Products</span></h2></div><div class="pgrid" id="productsGrid"></div></section>
-  <section id="notes"><div class="sec-head reveal"><h2><span>Notes</span></h2></div><div class="pgrid" id="notesGrid"></div></section>
-
-
-  <section id="contact" class="contact reveal">
-    <h2>Have a project in mind?</h2>
-    <p>Logos, brands and visual identities. Send me a message and tell me what you need.</p>
-    <a class="btn" href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" data-contact>Get in touch <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
-    <div class="socials" id="contactSocials">
-      <a href="https://t.me/armvnpv" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
-      <a href="https://instagram.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
-      <a href="https://www.behance.net/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ti ti-brand-behance"></i></a>
-      <a href="https://dribbble.com/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
-      <a href="https://linkedin.com/in/armvnhs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
-    </div>
-  </section>
-
-  <footer class="foot">
-    <span>&copy; <span id="year"></span> <span id="siteName">Arman Haghshenas</span></span>
-    <span>Isfahan, Iran</span>
-  </footer>
-</main>
-
-<nav class="dock" id="dock" aria-label="Sections">
-  <a href="#home" data-s="home" data-tip="Home" aria-label="Home"><i class="ti ti-home-2"></i></a>
-  <a href="#brands" data-s="brands" data-tip="Brands" aria-label="Brands"><i class="ti ti-building-store"></i></a>
-  <a href="#projects" data-s="projects" data-tip="Projects" aria-label="Projects"><i class="ti ti-layout-grid"></i></a>
-  <a href="#notes" data-s="notes" data-tip="Notes" aria-label="Notes"><i class="ti ti-notebook"></i></a>
-  <a href="#contact" data-s="contact" data-tip="Contact" aria-label="Contact"><i class="ti ti-send"></i></a>
-</nav>
-
-<script>
-  const SECTIONS = ['projects', 'products', 'notes'];
-  const ICONS = { projects: 'layout-grid', products: 'box', notes: 'notebook' };
-  const DEFAULT_BRANDS = [
-    { name: 'Entekhab Group', role: '', logo: 'assets/img/Experience/Entekhab-Group.jpg' },
-    { name: 'Vira Holding', role: '', logo: 'assets/img/Experience/Vira-Holding.jpg' },
-    { name: 'Davin Pack', role: '', logo: 'assets/img/Experience/Davin-Pack.jpg' },
-    { name: 'Chap Aseman Farda', role: '', logo: 'assets/img/Experience/Aseman-Farda.jpg' },
-    { name: 'Beryooni Azam', role: '', logo: '' }
-  ];
-  const esc = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const text = (v) => typeof v === 'string' && v.trim() ? v.trim() : '';
-  const initials = (n) => String(n).split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
-
-  function safeURL(value, image = false) {
-    if (typeof value !== 'string' || !value.trim()) return '';
-    const raw = value.trim();
-    if (raw.startsWith('#')) return '';
-    try {
-      const url = new URL(raw, location.href);
-      return ['http:', 'https:'].includes(url.protocol) || (image && url.protocol === 'file:') ? raw : '';
-    } catch { return ''; }
-  }
-
-  async function load(key) {
-    const path = key === 'notes' ? 'data/blog.json' : 'data/' + key + '.json';
-    let response = await fetch(path, { cache: 'no-cache' });
-    if (key === 'notes' && !response.ok && ['localhost', '127.0.0.1'].includes(location.hostname)) {
-      response = await fetch('data/notes.json', { cache: 'no-cache' });
-    }
-    if (!response.ok) throw new Error('Unable to load ' + key);
-    return response.json();
-  }
-
-  function cardHTML(item, icon, i, key) {
-    const caption = key === 'projects' ? item.category : item.subtitle;
-    const image = safeURL(item.image, true);
-    const pic = image
-      ? '<img src="' + esc(image) + '" alt="' + esc(item.title) + '" loading="lazy" decoding="async">'
-      : '<div class="ph"><i class="ti ti-' + icon + '" aria-hidden="true"></i></div>';
-    const link = key === 'notes'
-      ? (typeof item.slug === 'string' && item.slug.trim() ? (safeURL(item.url) || '/note/' + encodeURIComponent(item.slug.trim()) + '/') : '')
-      : safeURL(item.link);
-    const external = /^https?:/i.test(link) || link.startsWith('//');
-    const tag = link ? 'a' : 'article';
-    const attrs = link ? ' href="' + esc(link) + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : '') : '';
-    return '<' + tag + ' class="pcard" style="--i:' + i + '"' + attrs + '><div class="thumb">' + pic
-      + (link ? '<span class="go"><i class="ti ti-arrow-up-right" aria-hidden="true"></i></span>' : '')
-      + '</div><h3 dir="auto">' + esc(item.title) + '</h3>'
-      + (caption ? '<p dir="auto">' + esc(caption) + '</p>' : '') + '</' + tag + '>';
-  }
-
-  function projectCategory(item) {
-    return typeof item.category === 'string' && item.category.trim() ? item.category.trim() : 'Uncategorized';
-  }
-
-  function prepareCards(grid, key) {
-    grid.querySelectorAll('img').forEach((img) => {
-      const replaceImage = () => {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'ph';
-        placeholder.innerHTML = '<i class="ti ti-' + ICONS[key] + '" aria-hidden="true"></i>';
-        img.replaceWith(placeholder);
-      };
-      img.addEventListener('error', replaceImage, { once: true });
-      if (img.complete && img.naturalWidth === 0) replaceImage();
-    });
-    grid.querySelectorAll('.pcard').forEach((card) => card.classList.add('show'));
-  }
-
-  function renderProjects(items, grid) {
-    const filters = document.getElementById('projectsFilters');
-    const categories = [...new Set(items.map(projectCategory))].sort((a, b) => a.localeCompare(b));
-    let selected = null;
-    const buttons = [];
-    document.getElementById('projectsCount').textContent = String(items.length).padStart(2, '0');
-    const render = () => {
-      const list = selected === null ? items : items.filter((item) => projectCategory(item) === selected);
-      grid.innerHTML = list.map((item, i) => cardHTML(item, ICONS.projects, i % 6, 'projects')).join('');
-      buttons.forEach(({ button, category }) => button.setAttribute('aria-pressed', String(category === selected)));
-      prepareCards(grid, 'projects');
-    };
-    [null, ...categories].forEach((category) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'filter-pill';
-      button.textContent = category === null ? 'All' : category;
-      button.dir = 'auto';
-      button.addEventListener('click', () => { selected = category; render(); });
-      filters.appendChild(button);
-      buttons.push({ button, category });
-    });
-    filters.hidden = categories.length <= 1;
-    render();
-  }
-
-
-  function bindLogoFallback(root) {
-    root.querySelectorAll('img').forEach((img) => {
-      img.addEventListener('error', () => {
-        const parent = img.parentElement;
-        const label = img.alt || '';
-        if (parent.classList.contains('bcard')) {
-          const wm = document.createElement('span');
-          wm.className = 'wm';
-          wm.dir = 'auto';
-          wm.textContent = label;
-          img.replaceWith(wm);
-        } else {
-          parent.textContent = initials(label);
-        }
-      }, { once: true });
-    });
-  }
-
-  async function renderBrands() {
-    let list = DEFAULT_BRANDS;
-    try {
-      const response = await fetch('data/brands.json', { cache: 'no-cache' });
-      if (response.ok) {
-        const data = await response.json();
-        const clean = Array.isArray(data) ? data.filter((b) => b && text(b.name)) : [];
-        if (clean.length) list = clean.map((b) => {
-          const base = DEFAULT_BRANDS.find((d) => d.name.toLowerCase() === b.name.trim().toLowerCase());
-          return { ...b, logo: text(b.logo) || (base ? base.logo : '') };
-        });
-      }
-    } catch (error) { console.error(error); }
-    document.getElementById('brandsCount').textContent = String(list.length).padStart(2, '0');
-    const grid = document.getElementById('brandGrid');
-    grid.innerHTML = list.map((b, i) => {
-      const logo = safeURL(b.logo, true);
-      const link = safeURL(b.link);
-      const tag = link ? 'a' : 'div';
-      const attrs = link ? ' href="' + esc(link) + '" target="_blank" rel="noopener noreferrer"' : '';
-      return '<' + tag + ' class="bitem"' + attrs + '><div class="bcard"><span class="num">' + String(i + 1).padStart(2, '0') + '</span>'
-        + (logo ? '<img src="' + esc(logo) + '" alt="' + esc(b.name) + '" loading="lazy">' : '<span class="wm" dir="auto">' + esc(b.name) + '</span>')
-        + '</div><h3 dir="auto">' + esc(b.name) + '</h3>' + (text(b.role) ? '<p dir="auto">' + esc(b.role) + '</p>' : '') + '</' + tag + '>';
-    }).join('');
-    bindLogoFallback(grid);
-  }
-
-
-  function hideSection(key) {
-    document.getElementById(key).hidden = true;
-    const link = document.querySelector('#dock a[data-s="' + key + '"]');
-    if (link) link.remove();
-  }
-
-  async function renderSection(key) {
-    const grid = document.getElementById(key + 'Grid');
-    try {
-      const data = await load(key);
-      if (!Array.isArray(data)) throw new Error('Expected a list for ' + key);
-      const items = data.filter((item) => item && typeof item.title === 'string' && item.title.trim());
-      if (!items.length) { hideSection(key); return; }
-      if (key === 'projects') {
-        renderProjects(items, grid);
-      } else {
-        grid.innerHTML = items.map((item, i) => cardHTML(item, ICONS[key], i % 6, key)).join('');
-        prepareCards(grid, key);
-      }
-    } catch (error) {
-      grid.classList.remove('pgrid');
-      grid.innerHTML = '<p class="load-error" role="status">Content could not be loaded. Please try again later.</p>';
-      console.error(error);
-    }
-  }
-
-  async function renderProfile() {
-    try {
-      const site = await load('site');
-      if (!site || typeof site !== 'object' || Array.isArray(site)) throw new Error('Invalid site settings');
-      const header = document.getElementById('home');
-      const name = text(site.name);
-      header.querySelector('h1').textContent = name;
-      header.querySelector('h1').dir = 'auto';
-      header.querySelector('.bio').textContent = site.bio || '';
-      header.querySelector('.bio').dir = 'auto';
-      header.querySelector('.avatar span').textContent = site.initials || '';
-      const availability = header.querySelector('.availability');
-      const state = ['available', 'busy'].includes(site.availability) ? site.availability : 'not-set';
-      const label = { available: 'Available for work', busy: 'Currently busy', 'not-set': 'Availability not set' }[state];
-      availability.dataset.status = state;
-      availability.querySelector('.al').textContent = label;
-      availability.hidden = state === 'not-set';
-      const avatar = header.querySelector('.avatar img');
-      const image = safeURL(site.avatar, true);
-      if (avatar && image) { avatar.src = image; avatar.alt = name; }
-      else if (avatar) avatar.remove();
-      document.title = site.pageTitle || name || '';
-      document.querySelector('meta[name="description"]').content = site.description || site.bio || '';
-      document.getElementById('siteName').textContent = name;
-      if (text(site.experience)) document.getElementById('fExp').textContent = text(site.experience);
-      if (text(site.focus)) document.getElementById('fFocus').textContent = text(site.focus);
-      if (text(site.location)) document.getElementById('fLoc').textContent = text(site.location);
-      const socials = Array.isArray(site.socials) ? site.socials : [];
-      const socialsHTML = socials.map((social) => {
-        const link = safeURL(social.link);
-        if (!link) return '';
-        const iconName = String(social.icon || '').trim().replace(/^ti ti-/, '').replace(/^ti-/, '').toLowerCase();
-        const icon = /^[a-z0-9-]+$/.test(iconName) ? iconName : 'link';
-        return '<a href="' + esc(link) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(social.label) + '"><i class="ti ti-' + icon + '" aria-hidden="true"></i></a>';
-      }).join('');
-      if (socialsHTML) {
-        document.getElementById('heroSocials').innerHTML = socialsHTML;
-        document.getElementById('contactSocials').innerHTML = socialsHTML;
-      }
-      const contact = socials.find((s) => /telegram/i.test(String(s.icon || '') + String(s.label || '')) && safeURL(s.link)) || socials.find((s) => safeURL(s.link));
-      if (contact) document.querySelectorAll('[data-contact]').forEach((a) => { a.href = safeURL(contact.link); });
-      SECTIONS.forEach((key) => {
-        const title = text(site[key + 'Title']);
-        if (title) {
-          const heading = document.querySelector('#' + key + ' h2 span');
-          heading.textContent = title;
-          heading.dir = 'auto';
-        }
-      });
-    } catch (error) { console.error(error); }
-  }
-
-  function watch() {
-    const set = (id) => document.querySelectorAll('#dock a').forEach((a) => a.classList.toggle('on', a.dataset.s === id));
-    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) set(e.target.id); }), { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
-    ['home', 'brands', 'projects', 'notes', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
-    set('home');
-    const rio = new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .1 });
-    document.querySelectorAll('.reveal').forEach((el) => rio.observe(el));
-  }
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-  renderProfile();
-  renderBrands();
-  SECTIONS.forEach(renderSection);
-  watch();
-</script>
-</body>
-</html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>باشگاه طراحان گرافیک اصفهان | IGDC</title><meta name="description" content="شبکه توسعه و راهبری فرایند هنر و دیزاین"><meta property="og:type" content="website"><meta property="og:title" content="باشگاه طراحان گرافیک اصفهان"><meta property="og:description" content="شبکه توسعه و راهبری فرایند هنر و دیزاین"><meta name="theme-color" content="#ffffff"><meta name="color-scheme" content="light"><link rel="canonical" href="https://igdc.ir/"><meta property="og:url" content="https://igdc.ir/"><link rel="icon" type="image/png" href="/assets/img/Favicon.png"><link rel="apple-touch-icon" href="/assets/img/Favicon.png"><link rel="preload" href="/assets/fonts/Ravi-VF.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="/assets/site.css"></head><body><a class="skip" href="#main">پرش به محتوا</a><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="cal" viewBox="0 0 24 24">
+  <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" />
+  <path d="M16 3l0 4" />
+  <path d="M8 3l0 4" />
+  <path d="M4 11l16 0" />
+  <path d="M8 15h2v2h-2l0 -2" />
+</symbol>
+<symbol id="pin" viewBox="0 0 24 24">
+  <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+  <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0" />
+</symbol>
+<symbol id="mail" viewBox="0 0 24 24">
+  <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" />
+  <path d="M3 7l9 6l9 -6" />
+</symbol>
+<symbol id="phone" viewBox="0 0 24 24">
+  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+</symbol>
+<symbol id="moon" viewBox="0 0 24 24">
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008" />
+</symbol>
+<symbol id="sun" viewBox="0 0 24 24">
+  <path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+  <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+</symbol>
+<symbol id="ig" viewBox="0 0 24 24">
+  <path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" />
+  <path d="M8.5 12a3.5 3.5 0 1 0 7 0a3.5 3.5 0 0 0 -7 0" />
+  <path d="M17 7v.01" />
+</symbol>
+<symbol id="tg" viewBox="0 0 24 24">
+  <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+</symbol>
+<symbol id="clock" viewBox="0 0 24 24">
+  <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+  <path d="M12 7v5l3 3" />
+</symbol>
+<symbol id="users" viewBox="0 0 24 24">
+  <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+  <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+</symbol>
+<symbol id="pal" viewBox="0 0 24 24">
+  <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+  <path d="M7.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+  <path d="M11.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+  <path d="M15.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+</symbol>
+<symbol id="bulb" viewBox="0 0 24 24">
+  <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" />
+  <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" />
+  <path d="M9.7 17l4.6 0" />
+</symbol>
+<symbol id="chev" viewBox="0 0 24 24">
+  <path d="M15 6l-6 6l6 6" />
+</symbol>
+<symbol id="projects" viewBox="0 0 24 24">
+  <path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" />
+  <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
+  <path d="M12 12l0 .01" />
+  <path d="M3 13a20 20 0 0 0 18 0" />
+</symbol></defs></svg><header id="hdr"><div class="wrap bar"><a class="logo" href="#home" aria-label="باشگاه طراحان گرافیک اصفهان — خانه"><img class="brand-mark" src="/assets/img/Logo.png" alt="" width="26" height="40"><span class="brand-wordmark"><b>باشگاه طراحان گرافیک اصفهان</b><small>شبکه توسعه و راهبری فرایند هنر و دیزاین</small></span></a><nav id="menu" aria-label="ناوبری اصلی"><a href="#events">رویدادها</a><a href="/gallery">گالری</a><a href="/members">اعضا</a><a href="#about">درباره</a><a href="#club-footer">تماس</a></nav><div class="acts"><button class="cta membership-trigger" type="button" aria-haspopup="dialog" aria-controls="membership-dialog">عضویت</button><button class="burger" id="mb" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="menu"><span></span></button></div></div></header><main id="main"><section class="hero" id="home"><div class="wrap"><h1 class="sr-only">باشگاه طراحان گرافیک اصفهان</h1><div class="feature-stage" id="feature-stage"><div class="stage-art" aria-hidden="true"><span class="stage-word">IGDC</span><span class="orb"></span><span class="orb2"></span></div></div><div class="stats" aria-label="باشگاه در یک نگاه"><div class="stat"><svg class="i stat-icon" aria-hidden="true"><use href="#users"/></svg><strong dir="ltr">۱۲۰+</strong><span>عضو فعال</span></div><div class="stat"><svg class="i stat-icon" aria-hidden="true"><use href="#cal"/></svg><strong dir="ltr">۴۰+</strong><span>رویداد برگزارشده</span></div><div class="stat"><svg class="i stat-icon" aria-hidden="true"><use href="#projects"/></svg><strong dir="ltr">۱۵</strong><span>پروژهٔ مشترک</span></div></div></div></section><section class="section section-tint" id="events"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">رویدادها</span><h2>قرار بعدی ما</h2></div><p>کارگاه، نمایشگاه و ایونت</p></div><div class="events"><article class="ev registration-open"><div class="ev-visual"><span class="event-monogram" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#pal"/></svg></span><span class="event-category">ورکشاپ</span><span class="event-status">ثبت‌نام باز است</span></div><div class="ev-body"><div class="event-date"><svg class="i" aria-hidden="true"><use href="#cal"/></svg><span>۲۸ آبان ۱۴۰۵</span></div><h3>هویت بصری، از بریف تا ارائه</h3><p class="event-description">طراحی یک هویت کامل در یک روز، با نقد حضوری و بازخورد مستقیم</p><div class="event-meta"><span><svg class="i" aria-hidden="true"><use href="#clock"/></svg>۱۰ تا ۱۷</span><span><svg class="i" aria-hidden="true"><use href="#pin"/></svg>اصفهان</span></div><span class="event-pending">لینک ثبت‌نام به‌زودی</span></div></article><article class="ev"><div class="ev-visual"><span class="event-monogram" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#pal"/></svg></span><span class="event-category">نمایشگاه</span><span class="event-status">برنامهٔ باشگاه</span></div><div class="ev-body"><div class="event-date"><svg class="i" aria-hidden="true"><use href="#cal"/></svg><span>۱۲ آذر ۱۴۰۵</span></div><h3>نمایشگاه پوستر</h3><p class="event-description">آثار منتخب اعضا و گفت‌وگو با طراحان دربارهٔ روند خلق هر پوستر</p><div class="event-meta"><span><svg class="i" aria-hidden="true"><use href="#clock"/></svg>۱۶ تا ۲۱</span><span><svg class="i" aria-hidden="true"><use href="#pin"/></svg>اصفهان</span></div></div></article></div></div></section><section class="section" id="gallery"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">گالری</span><h2>از نزدیک، در کنار هم</h2></div><a class="text-link" href="/gallery">همهٔ تصاویر <svg class="i" aria-hidden="true"><use href="#chev"/></svg></a></div><div class="gal" data-gallery="preview"><p class="empty-state">تصاویر تازهٔ باشگاه به‌زودی اینجا قرار می‌گیرند.</p></div></div></section><section class="section section-tint" id="team"><div class="wrap"><div class="section-heading members-heading"><div><span class="eyebrow">اعضا</span><h2>آدم‌های باشگاه</h2></div><div class="member-actions"><a class="text-link all-members" href="/members">همهٔ اعضا</a><div class="rail-controls" aria-label="حرکت میان اعضا"><button class="rail-button" type="button" data-rail-prev aria-controls="members-rail" aria-label="اعضای قبلی"><svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><button class="rail-button" type="button" data-rail-next aria-controls="members-rail" aria-label="اعضای بعدی"><svg class="i" aria-hidden="true"><use href="#chev"/></svg></button></div></div></div><div class="team members-strip" id="members-rail" tabindex="0" role="region" aria-label="اعضای باشگاه"><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو اول</h3><p>مدیر باشگاه</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو دوم</h3><p>مدیر رویدادها</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو سوم</h3><p>مدیر بازاریابی</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو چهارم</h3><p>مدیر محتوا</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو پنجم</h3><p>عضو باشگاه</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو ششم</h3><p>عضو باشگاه</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو هفتم</h3><p>عضو باشگاه</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو هشتم</h3><p>عضو باشگاه</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو نهم</h3><p>عضو باشگاه</p></div></article><article class="mem"><div class="ph"><span class="portrait-placeholder" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#users"/></svg></span></div><div class="mi"><h3>نام عضو دهم</h3><p>عضو باشگاه</p></div></article></div></div></section><section class="section" id="about"><div class="wrap about-layout"><div class="about-copy"><span class="eyebrow">دربارهٔ باشگاه</span><h2 class="statement">ما جامعه‌ای از طراحان و هنرمندان اصفهانی هستیم؛<span>با رویدادهای منظم رشد کرده‌ایم و حالا برای همکاری با کسب‌وکارها آماده‌ایم</span></h2></div><div class="vals"><div class="val"><svg class="i" aria-hidden="true"><use href="#users"/></svg><h3>جامعه</h3><p>شبکه‌ای فعال از طراحان</p></div><div class="val"><svg class="i" aria-hidden="true"><use href="#bulb"/></svg><h3>خلاقیت</h3><p>فضایی برای ایده‌های تازه</p></div><div class="val"><svg class="i" aria-hidden="true"><use href="#cal"/></svg><h3>رویداد</h3><p>تجربه و یادگیری در کنار هم</p></div><div class="val"><svg class="i" aria-hidden="true"><use href="#pal"/></svg><h3>کیفیت</h3><p>توجه به جزئیات در طراحی</p></div></div></div></section><section class="section sponsors-section" id="sponsors" aria-labelledby="sponsors-title"><div class="wrap"><div class="section-heading sponsor-heading"><div><span class="eyebrow">همراهان ما</span><h2 id="sponsors-title">حامیان باشگاه</h2></div><p data-sponsors-description>همراهانی که مسیر رشد و تجربه‌های تازه را با ما می‌سازند.</p></div><div class="sponsors-grid" tabindex="0" role="region" aria-label="لوگوهای حامیان باشگاه"><div class="sponsors-track"><div class="sponsors-group" aria-hidden="true"><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span></div><div class="sponsors-group sponsors-clone" aria-hidden="true"><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span><span class="sponsor-card sponsor-placeholder"></span></div></div></div></div></section></main><footer class="club-footer" id="club-footer"><div class="wrap"><div class="footer-top"><div><span class="eyebrow" data-footer-eyebrow>در ارتباط بمانیم</span><h2 data-footer-title>ایده‌های خوب، از یک گفت‌وگو شروع می‌شوند.</h2><p data-footer-description>برای همکاری، ساختن و تجربه‌کردن کنار هم هستیم.</p></div><a class="footer-cta" data-footer-action href="https://t.me/igdc_ir">شروع گفت‌وگو <svg class="i" aria-hidden="true"><use href="#chev"/></svg></a></div><div class="footer-columns"><div class="footer-identity"><img src="/assets/img/Logo.png" alt="" width="30" height="46"><div><p data-footer-brand>باشگاه طراحان گرافیک اصفهان</p><p data-footer-tagline>شبکه توسعه و راهبری فرایند هنر و دیزاین</p></div></div><div><h3 data-footer-links-title>در باشگاه</h3><nav class="footer-links" aria-label="پیوندهای پایین صفحه"><a href="/#events">رویدادها</a><a href="/gallery">گالری</a><a href="/members">اعضا</a><a href="/#about">دربارهٔ باشگاه</a></nav></div><div><h3 data-footer-social-title>ما را دنبال کنید</h3><div class="footer-networks"><a href="https://t.me/igdcir">کانال تلگرام <svg class="i" aria-hidden="true"><use href="#chev"/></svg></a><a href="https://t.me/igdc_ir">گفت‌وگو در تلگرام <svg class="i" aria-hidden="true"><use href="#chev"/></svg></a><a href="https://www.instagram.com/igdc.ir/" target="_blank" rel="noopener noreferrer">اینستاگرام <svg class="i" aria-hidden="true"><use href="#chev"/></svg></a></div></div></div><div class="footer-bottom"><p data-footer-copyright>© ۱۴۰۵ IGDC — باشگاه طراحان گرافیک اصفهان</p><a href="#main">بازگشت به بالا <svg class="i" aria-hidden="true"><use href="#chev"/></svg></a></div></div></footer><dialog class="membership-dialog" id="membership-dialog" aria-labelledby="membership-title"><button type="button" class="dialog-close" data-close-membership aria-label="بستن">×</button><div class="membership-art" data-membership-art aria-hidden="true"></div><div class="membership-content"><span class="eyebrow">عضویت در باشگاه</span><h2 id="membership-title">دیدار بعدی ما، به‌زودی.</h2><span class="membership-state"><span></span>عضویت فعلاً بسته است</span><p>زمان شروع عضویت در شبکه‌های اجتماعی باشگاه اعلام می‌شود.</p><div class="dialog-socials"><a class="social-link" href="https://t.me/igdcir" data-channel-link target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#tg"/></svg>کانال تلگرام</a><a class="social-link" href="https://www.instagram.com/igdc.ir/" data-instagram-link target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#ig"/></svg>اینستاگرام</a></div></div></dialog><div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="نمایش تصویر"><button class="lb-x" id="lbx" type="button" aria-label="بستن تصویر">×</button><img id="lbimg" alt=""></div><script src="/assets/main.js" defer></script><script src="/assets/cms.js?v=4" defer></script><script src="/assets/gallery.js?v=4" defer></script></body></html>
