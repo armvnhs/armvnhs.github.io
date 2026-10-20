@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "name": "LogoSVG",
+      "type": "Website",
+      "description": "An open-source library of Iranian logos in SVG.",
+      "logo": "",
+      "link": "https://logosvg.ir"
+    },
+    {
+      "name": "PostChi",
+      "type": "App",
+      "description": "A Persian app for tracking parcels across Iranian postal carriers.",
+      "logo": "",
+      "link": ""
+    },
+    {
+      "name": "Ofogh Studio",
+      "type": "Website",
+      "description": "Website for my independent animation studio.",
+      "logo": "",
+      "link": ""
+    }
+  ]
+}
