@@ -5,7 +5,8 @@
       "slug": "entekhab-group",
       "role": "Graphic Designer",
       "period": "Present",
-      "cover": "assets/img/Experience/Entekhab-Group.jpg",
+      "logo": "assets/img/Experience/Entekhab-Group.jpg",
+      "cover": "",
       "summary": "Selected work from my time at Entekhab Group.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     },
@@ -14,7 +15,8 @@
       "slug": "vira-holding",
       "role": "Graphic Designer",
       "period": "",
-      "cover": "assets/img/Experience/Vira-Holding.jpg",
+      "logo": "assets/img/Experience/Vira-Holding.jpg",
+      "cover": "",
       "summary": "Selected work from my time at Vira Holding.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     },
@@ -23,7 +25,8 @@
       "slug": "davin-pack",
       "role": "Graphic Designer",
       "period": "",
-      "cover": "assets/img/Experience/Davin-Pack.jpg",
+      "logo": "assets/img/Experience/Davin-Pack.jpg",
+      "cover": "",
       "summary": "Selected work from my time at Davin Pack.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     },
@@ -32,7 +35,8 @@
       "slug": "aseman-farda",
       "role": "Graphic Designer",
       "period": "",
-      "cover": "assets/img/Experience/Aseman-Farda.jpg",
+      "logo": "assets/img/Experience/Aseman-Farda.jpg",
+      "cover": "",
       "summary": "Selected work from my time at Chap Aseman Farda.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     }
