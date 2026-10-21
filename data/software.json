@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "name": "Illustrator", "short": "Ai", "bg": "#330000", "color": "#FF9A00" },
+    { "name": "Photoshop", "short": "Ps", "bg": "#001E36", "color": "#31A8FF" },
+    { "name": "After Effects", "short": "Ae", "bg": "#00005B", "color": "#9999FF" },
+    { "name": "Figma", "short": "Fi", "bg": "#1E1E1E", "color": "#A259FF" }
+  ]
+}
