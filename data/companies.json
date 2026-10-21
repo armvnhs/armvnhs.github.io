@@ -3,40 +3,33 @@
     {
       "name": "Entekhab Group",
       "slug": "entekhab-group",
+      "logo": "/assets/img/CRXleLxVWA7e8cUeoehw58gwlPM-k7Q2aJDuQmKg0qXwbobB8A.png",
       "role": "Graphic Designer",
       "period": "Present",
-      "logo": "assets/img/Experience/Entekhab-Group.jpg",
-      "cover": "",
       "summary": "Selected work from my time at Entekhab Group.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     },
     {
       "name": "Vira Holding",
       "slug": "vira-holding",
+      "logo": "/assets/img/Experience/Vira-Holding.jpg",
       "role": "Graphic Designer",
-      "period": "",
-      "logo": "assets/img/Experience/Vira-Holding.jpg",
-      "cover": "",
       "summary": "Selected work from my time at Vira Holding.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     },
     {
       "name": "Davin Pack",
       "slug": "davin-pack",
+      "logo": "/assets/img/Experience/Davin-Pack.jpg",
       "role": "Graphic Designer",
-      "period": "",
-      "logo": "assets/img/Experience/Davin-Pack.jpg",
-      "cover": "",
       "summary": "Selected work from my time at Davin Pack.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     },
     {
       "name": "Chap Aseman Farda",
       "slug": "aseman-farda",
+      "logo": "/assets/img/Experience/Aseman-Farda.jpg",
       "role": "Graphic Designer",
-      "period": "",
-      "logo": "assets/img/Experience/Aseman-Farda.jpg",
-      "cover": "",
       "summary": "Selected work from my time at Chap Aseman Farda.",
       "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     }
