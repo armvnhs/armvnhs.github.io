@@ -1,12 +1,14 @@
 {
   "items": [
     {
-      "name": "Entekhab Group",
-      "slug": "entekhab-group",
+      "name": "Daewoo",
+      "slug": "daewoo",
+      "logo": "/assets/img/Daewoo Logo.png",
       "role": "Graphic Designer",
       "period": "Present",
-      "summary": "Selected work from my time at Entekhab Group.",
-      "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
+      "cover": "/assets/img/cover1-1.avif",
+      "summary": "Selected work from my time at Daewoo Entekhab Group.",
+      "body": "<p></p>"
     },
     {
       "name": "Vira Holding",
