@@ -9,30 +9,6 @@
       "cover": "/assets/img/cover1-1.avif",
       "summary": "Selected work from my time at Daewoo Entekhab Group.",
       "body": "<p></p>"
-    },
-    {
-      "name": "Vira Holding",
-      "slug": "vira-holding",
-      "logo": "/assets/img/Experience/Vira-Holding.jpg",
-      "role": "Graphic Designer",
-      "summary": "Selected work from my time at Vira Holding.",
-      "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
-    },
-    {
-      "name": "Davin Pack",
-      "slug": "davin-pack",
-      "logo": "/assets/img/Experience/Davin-Pack.jpg",
-      "role": "Graphic Designer",
-      "summary": "Selected work from my time at Davin Pack.",
-      "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
-    },
-    {
-      "name": "Chap Aseman Farda",
-      "slug": "aseman-farda",
-      "logo": "/assets/img/Experience/Aseman-Farda.jpg",
-      "role": "Graphic Designer",
-      "summary": "Selected work from my time at Chap Aseman Farda.",
-      "body": "<p>Write the story of this work here. Add text, headings and images from the CMS.</p>"
     }
   ]
 }
