@@ -4,19 +4,29 @@ nav: resume
 title: Resume — Arman Haghshenas
 ---
 {%- assign r = site.data.resume -%}
-{%- assign ch = 0 -%}
-<h1 class="page-title">Resume</h1>
+{%- assign s = site.data.site -%}
+{%- assign hues = '205,265,30,330,160,45' | split: ',' -%}
+<div class="bn">
+<section class="bn-tile bn-hero">
+{%- if s.avatar.size > 0 %}
+<div class="bn-orb"><img src="{{ s.avatar | uri_escape }}" alt="{{ s.name }}"></div>
+{%- endif %}
+<h1 class="bn-title">Resume</h1>
 {%- if r.summary.size > 0 %}
-<p class="lead">{{ r.summary }}</p>
+<p class="bn-lead">{{ r.summary }}</p>
 {%- endif %}
 {%- if r.pdf.size > 0 %}
 <a class="btn" href="{{ r.pdf | uri_escape }}" target="_blank" rel="noopener" download>Download resume<span class="arrow">{% include icon.html name="download" %}</span></a>
 {%- endif %}
+</section>
 {%- if r.experience.size > 0 %}
-{%- assign ch = ch | plus: 1 %}
-<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Worked with</span><span class="chapter-count">{{ r.experience.size }}</span></h2>
-<ul class="rs-cos">
+<section class="bn-tile bn-collab">
+<div class="bn-head"><h2 class="bn-h">Collaborated with</h2><span class="bn-n">{{ r.experience.size }}</span></div>
+<ul class="bn-stickers">
 {%- for e in r.experience %}
+{%- assign hi = forloop.index0 | modulo: hues.size -%}
+{%- assign h1 = hues[hi] | plus: 0 -%}
+{%- assign h2 = h1 | plus: 55 | modulo: 360 -%}
 {%- assign pd = e.period | downcase -%}
 {%- assign is_now = false -%}
 {%- if pd contains 'present' or pd contains 'now' or pd contains 'current' or pd contains 'حال' -%}{%- assign is_now = true -%}{%- endif -%}
@@ -25,54 +35,56 @@ title: Resume — Arman Haghshenas
 {%- assign match = site.companies | where: 'title', e.company | first -%}
 {%- assign logo = match.logo -%}
 {%- endunless %}
-<li class="rs-co{% if is_now %} is-now{% endif %}">
-{%- if logo.size > 0 %}<span class="rs-co-logo"><img src="{{ logo | uri_escape }}" alt="" loading="lazy"></span>{% endif %}
-<div class="rs-co-main">
-<p class="rs-co-name">{{ e.company }}</p>
-{%- if e.details.size > 0 %}<p class="rs-co-text">{{ e.details }}</p>{% endif %}
-</div>
-{%- if e.period.size > 0 %}<span class="pill">{{ e.period }}</span>{% endif %}
+<li class="bn-sticker" style="--h1: {{ h1 }}; --h2: {{ h2 }}">
+<span class="bn-disc">{%- if logo.size > 0 -%}<img src="{{ logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ e.company | slice: 0 | upcase }}</b>{%- endif -%}</span>
+<span class="bn-sticker-name">{{ e.company }}</span>
+{%- if is_now %}<span class="bn-live"><i></i>{{ e.period }}</span>{% elsif e.period.size > 0 %}<span class="bn-live">{{ e.period }}</span>{% endif %}
 </li>
 {%- endfor %}
 </ul>
+</section>
 {%- endif %}
 {%- if site.data.software.items.size > 0 %}
-{%- assign ch = ch | plus: 1 %}
-<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Software</span><span class="chapter-count">{{ site.data.software.items.size }}</span></h2>
-<ul class="rs-apps">
+<section class="bn-tile bn-soft">
+<div class="bn-head"><h2 class="bn-h">Software</h2><span class="bn-n">{{ site.data.software.items.size }}</span></div>
+<ul class="bn-apps">
 {%- for t in site.data.software.items %}
-<li class="rs-app">
-<span class="rs-app-icon" style="--bg: {{ t.bg | default: '#1b1b1b' }}; --c: {{ t.color | default: '#ffffff' }}">{{ t.short | default: t.name | slice: 0, 2 }}</span>
-<p class="rs-app-name">{{ t.name }}</p>
+<li class="bn-app">
+<span class="bn-app-icon" style="--bg: {{ t.bg | default: '#1b1b1b' }}; --c: {{ t.color | default: '#ffffff' }}">{{ t.short | default: t.name | slice: 0, 2 }}</span>
+<span class="bn-app-name">{{ t.name }}</span>
 {%- if t.level and t.level > 0 %}
 <span class="dots">{% for i in (1..5) %}<i{% if i <= t.level %} class="on"{% endif %}></i>{% endfor %}</span>
 {%- endif %}
 </li>
 {%- endfor %}
 </ul>
+</section>
 {%- endif %}
 {%- if r.education.size > 0 %}
-{%- assign ch = ch | plus: 1 %}
-<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Education</span><span class="chapter-count">{{ r.education.size }}</span></h2>
-<ul class="rs-edu">
+<section class="bn-tile bn-edu">
+<div class="bn-head"><h2 class="bn-h">Education</h2><span class="bn-n">{{ r.education.size }}</span></div>
+<ul class="bn-edu-list">
 {%- for e in r.education %}
-<li class="rs-edu-card">
-<span class="rs-edu-mark">{{ e.school | slice: 0 | upcase }}</span>
-<div class="rs-edu-main">
-<p class="rs-edu-school">{{ e.school }}</p>
-{%- if e.degree.size > 0 %}<p class="rs-edu-degree">{{ e.degree }}</p>{% endif %}
+<li class="bn-edu-card">
+<span class="bn-edu-mark">{{ e.school | slice: 0 | upcase }}</span>
+<div class="bn-edu-main">
+<p class="bn-edu-school">{{ e.school }}</p>
+{%- if e.degree.size > 0 %}<p class="bn-edu-degree">{{ e.degree }}</p>{% endif %}
 </div>
 {%- if e.period.size > 0 %}<span class="pill">{{ e.period }}</span>{% endif %}
 </li>
 {%- endfor %}
 </ul>
+</section>
 {%- endif %}
 {%- if r.skills.size > 0 %}
-{%- assign ch = ch | plus: 1 %}
-<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Skills</span><span class="chapter-count">{{ r.skills.size }}</span></h2>
-<ul class="rs-cloud">
+<section class="bn-tile bn-skills">
+<div class="bn-head"><h2 class="bn-h">Skills</h2><span class="bn-n">{{ r.skills.size }}</span></div>
+<ul class="bn-cloud">
 {%- for t in r.skills %}
-<li class="rs-chip">{{ t }}</li>
+<li class="bn-chip">{{ t }}</li>
 {%- endfor %}
 </ul>
+</section>
 {%- endif %}
+</div>
