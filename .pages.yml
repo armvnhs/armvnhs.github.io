@@ -121,7 +121,7 @@ content:
               values:
                 - Website
                 - App
-                - Product
+                - Software
           - name: description
             label: Description
             type: string
