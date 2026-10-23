@@ -2,10 +2,8 @@
 title: Daewoo
 order: 1
 logo: /assets/img/Daewoo Logo.png
-role: Graphic Designer
-period: Present
-cover: /assets/img/cover1-1.avif
-summary: Selected work from my time at Daewoo Entekhab Group.
+images:
+  - /assets/img/cover1-1.avif
+  - /assets/img/CRXleLxVWA7e8cUeoehw58gwlPM-k7Q2aJDuQmKg0qXwbobB8A.png
 ---
-<img src="/assets/img/cover1-1.avif">
-<img src="/assets/img/CRXleLxVWA7e8cUeoehw58gwlPM-k7Q2aJDuQmKg0qXwbobB8A.png">
+Selected work from my time at Daewoo Entekhab Group.

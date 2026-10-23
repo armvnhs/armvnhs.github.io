@@ -2,17 +2,40 @@
 layout: default
 ---
 <a class="back" href="/">← Work</a>
-{%- if page.cover.size > 0 %}
-<img class="post-cover" src="{{ page.cover | uri_escape }}" alt="{{ page.title }}">
-{%- endif %}
-<article class="post-body">
+<h1 class="sr-only">{{ page.title }}</h1>
 {%- if page.logo.size > 0 %}
-<img class="post-logo" src="{{ page.logo | uri_escape }}" alt="">
+<div class="co-card"><img src="{{ page.logo | uri_escape }}" alt="{{ page.title }}"></div>
 {%- endif %}
-<p class="post-meta">{{ page.role }}{% if page.role.size > 0 and page.period.size > 0 %} · {% endif %}{{ page.period }}</p>
-<h1 class="post-title">{{ page.title }}</h1>
-<p class="post-lead">{{ page.summary }}</p>
-<div class="prose">
+{%- assign body = content | strip %}
+{%- if body.size > 0 %}
+<div class="co-text">
 {{ content }}
 </div>
-</article>
+{%- endif %}
+{%- if page.tools.size > 0 %}
+<details class="co-tools">
+<summary>
+<span class="co-stack">
+{%- for name in page.tools %}
+{%- assign t = site.data.software.items | where: 'name', name | first %}
+<span class="co-tool" style="--bg: {{ t.bg | default: '#1b1b1b' }}; --c: {{ t.color | default: '#ffffff' }}">{{ t.short | default: name | slice: 0, 2 }}</span>
+{%- endfor %}
+</span>
+<span class="co-tools-label">Used {{ page.tools.size }} {% if page.tools.size == 1 %}tool{% else %}tools{% endif %}</span>
+<span class="co-chev">{% include icon.html name="chevron-down" %}</span>
+</summary>
+<ul class="co-tool-list">
+{%- for name in page.tools %}
+{%- assign t = site.data.software.items | where: 'name', name | first %}
+<li><span class="co-tool" style="--bg: {{ t.bg | default: '#1b1b1b' }}; --c: {{ t.color | default: '#ffffff' }}">{{ t.short | default: name | slice: 0, 2 }}</span>{{ name }}</li>
+{%- endfor %}
+</ul>
+</details>
+{%- endif %}
+{%- if page.images.size > 0 %}
+<div class="co-gallery">
+{%- for img in page.images %}
+<img src="{{ img | uri_escape }}" alt="" loading="lazy">
+{%- endfor %}
+</div>
+{%- endif %}
