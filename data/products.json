@@ -2,10 +2,8 @@
   "items": [
     {
       "name": "LogoSVG",
-      "type": "Website",
       "description": "An open-source library of Iranian logos in SVG.",
-      "logo": "/assets/img/logo1.png",
-      "cover": "/assets/img/cover1.avif",
+      "logo": "/assets/img/Products/LogoSVG-Icon.webp",
       "link": "https://logosvg.ir"
     },
     {
