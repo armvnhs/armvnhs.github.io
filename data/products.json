@@ -9,7 +9,7 @@
     },
     {
       "name": "FireBlock",
-      "type": "App",
+      "type": "Software",
       "description": "A practical software tool for blocking applications from accessing the internet through the firewall.",
       "logo": "/assets/img/Products/FireBlock-Icon.webp",
       "link": "https://armvnhs.github.io/fireblock/"
