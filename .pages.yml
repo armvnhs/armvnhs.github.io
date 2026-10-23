@@ -87,8 +87,6 @@ content:
     view:
       fields:
         - title
-        - role
-        - period
       primary: title
     fields:
       - name: title
@@ -100,20 +98,16 @@ content:
       - name: logo
         label: Logo
         type: image
-      - name: role
-        label: Role
+      - name: tools
+        label: Tools
         type: string
-      - name: period
-        label: Period
-        type: string
-      - name: cover
-        label: Cover
+        list: true
+      - name: images
+        label: Images
         type: image
-      - name: summary
-        label: Summary
-        type: string
+        list: true
       - name: body
-        label: Post
+        label: Description
         type: rich-text
   - name: products
     label: Products
