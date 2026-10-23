@@ -81,40 +81,40 @@ content:
             type: string
   - name: companies
     label: Companies
-    type: file
-    path: data/companies.json
+    type: collection
+    path: _companies
+    format: yaml-frontmatter
+    view:
+      fields:
+        - title
+        - role
+        - period
+      primary: title
     fields:
-      - name: items
-        label: Companies
-        type: object
-        list: true
-        fields:
-          - name: name
-            label: Name
-            type: string
-          - name: slug
-            label: Slug
-            type: string
-          - name: logo
-            label: Logo
-            type: image
-          - name: role
-            label: Role
-            type: string
-          - name: period
-            label: Period
-            type: string
-          - name: cover
-            label: Cover
-            type: image
-          - name: summary
-            label: Summary
-            type: string
-          - name: body
-            label: Post
-            type: rich-text
-            options:
-              format: html
+      - name: title
+        label: Name
+        type: string
+      - name: order
+        label: Order
+        type: number
+      - name: logo
+        label: Logo
+        type: image
+      - name: role
+        label: Role
+        type: string
+      - name: period
+        label: Period
+        type: string
+      - name: cover
+        label: Cover
+        type: image
+      - name: summary
+        label: Summary
+        type: string
+      - name: body
+        label: Post
+        type: rich-text
   - name: products
     label: Products
     type: file
