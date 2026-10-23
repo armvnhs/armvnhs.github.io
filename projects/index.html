@@ -3,10 +3,33 @@ layout: default
 nav: work
 title: Projects — Arman Haghshenas
 ---
+{%- assign items = site.data.projects.items -%}
+{%- assign cats = items | map: 'category' | compact | uniq -%}
 <a class="back" href="/">← Work</a>
 <h1 class="page-title">Projects</h1>
+{%- if cats.size > 1 %}
+<style>
+{%- for c in cats %}
+#f-{{ forloop.index }}:checked ~ .grid .card:not([data-cat="{{ c | slugify }}"]) { display: none; }
+#f-{{ forloop.index }}:checked ~ .filters label[for="f-{{ forloop.index }}"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+#f-{{ forloop.index }}:focus-visible ~ .filters label[for="f-{{ forloop.index }}"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+{%- endfor %}
+#f-0:checked ~ .filters label[for="f-0"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+#f-0:focus-visible ~ .filters label[for="f-0"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+</style>
+<input class="fr" type="radio" name="cat" id="f-0" checked>
+{%- for c in cats %}
+<input class="fr" type="radio" name="cat" id="f-{{ forloop.index }}">
+{%- endfor %}
+<div class="filters">
+<label class="chip" for="f-0">All</label>
+{%- for c in cats %}
+<label class="chip" for="f-{{ forloop.index }}">{{ c }}</label>
+{%- endfor %}
+</div>
+{%- endif %}
 <div class="grid grid-all">
-{%- for p in site.data.projects.items %}
-{% include card.html href=p.link title=p.title category=p.category cover=p.cover %}
+{%- for p in items %}
+{% include card.html href=p.link title=p.title category=p.category cat=p.category cover=p.cover %}
 {%- endfor %}
 </div>
