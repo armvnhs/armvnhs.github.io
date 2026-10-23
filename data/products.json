@@ -7,14 +7,11 @@
       "link": "https://logosvg.ir"
     },
     {
-      "name": "PostChi",
+      "name": "FireBlock",
       "type": "App",
-      "description": "A Persian app for tracking parcels across Iranian postal carriers."
-    },
-    {
-      "name": "Ofogh Studio",
-      "type": "Website",
-      "description": "Website for my independent animation studio."
+      "description": "A practical software tool for blocking applications from accessing the internet through the firewall.",
+      "logo": "/assets/img/Products/FireBlock-Icon.webp",
+      "link": "https://armvnhs.github.io/fireblock/"
     }
   ]
 }
