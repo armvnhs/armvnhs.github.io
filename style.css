@@ -10,7 +10,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 [hidden] { display: none !important; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+a, button, label, summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 body {
   font-family: var(--text);
   color: var(--ink);
@@ -53,7 +54,7 @@ svg { display: block; }
   border-radius: 999px;
   color: #4a4a4f;
   text-decoration: none;
-  transition: background .45s var(--ease), color .3s, padding .45s var(--ease), box-shadow .45s var(--ease);
+  transition: background .45s var(--ease), color .3s, padding .45s var(--ease), box-shadow .45s var(--ease), transform .25s var(--ease);
 }
 .nav svg { width: 23px; height: 23px; flex: none; }
 .nav .label {
@@ -67,6 +68,7 @@ svg { display: block; }
   transition: max-width .45s var(--ease), margin .45s var(--ease), opacity .3s;
 }
 .nav a:hover { color: var(--ink); }
+.nav a:active { transform: scale(.94); }
 .nav a.active, .nav a.active:hover {
   padding: 0 20px 0 16px;
   color: #fff;
@@ -523,24 +525,7 @@ div.product .product-bottom { display: none; }
 .dots i.on { background: var(--ink); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.co-card { display: grid; place-items: center; aspect-ratio: 2 / 1; max-height: 320px; margin-top: 22px; padding: 34px; border: 1px solid var(--line); border-radius: 30px; background: #fff; }
-.co-card img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
-.co-text { max-width: 62ch; margin-top: 24px; font-size: 1rem; line-height: 1.7; color: #333; unicode-bidi: plaintext; }
-.co-text > * + * { margin-top: .8em; }
-.co-text a { text-underline-offset: 3px; }
-.co-tools { margin-top: 18px; }
-.co-tools summary { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; color: var(--muted); font-size: .9rem; font-weight: 500; }
-.co-tools summary::-webkit-details-marker { display: none; }
-.co-tools summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 12px; }
-.co-stack { display: inline-flex; }
-.co-stack .co-tool + .co-tool { margin-left: -9px; }
-.co-tool { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border: 2px solid #fff; border-radius: 11px; background: var(--bg); color: var(--c); font-family: var(--display); font-size: .8rem; font-weight: 700; box-shadow: 0 0 0 1px var(--line); }
-.co-chev svg { width: 16px; height: 16px; transition: transform .35s var(--ease); }
-.co-tools[open] .co-chev svg { transform: rotate(180deg); }
-.co-tool-list { display: grid; gap: 10px; margin: 16px 0 0; padding: 0; list-style: none; }
-.co-tool-list li { display: flex; align-items: center; gap: 12px; font-size: .95rem; font-weight: 500; color: var(--ink); }
-.co-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; margin-top: 26px; }
-.co-gallery img { display: block; width: 100%; height: auto; border-radius: 22px; background: #f2f2f2; }
+.co-body { margin-top: 28px; }
 
 .bn { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 40px; }
 .bn-tile { position: relative; padding: 26px; border-radius: 42px; overflow: hidden; }
@@ -657,8 +642,6 @@ div.product .product-bottom { display: none; }
   .grid.grid-all { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-inline: 0; padding-inline: 0; overflow: visible; }
   .grid-all .card { flex: none; max-width: none; border-radius: 26px; }
 }
-@view-transition { navigation: auto; }
-.nav { view-transition-name: nav; }
 .tile-mail { grid-column: 1 / -1; min-height: 0; }
 .back + .page-title { margin-top: 20px; }
 
@@ -672,7 +655,7 @@ div.product .product-bottom { display: none; }
 
 
 @media (prefers-reduced-motion: reduce) {
-  .card, .card > img, .arrow, .nav a, .nav .label, .social-link, .logo-tile, .tip, .row, .tile, .product, .product .arrow, .product-cover img, .product-cover::after, .bn-sticker, .bn-app-icon, .chip, .co-chev svg { transition: none; }
+  .card, .card > img, .arrow, .nav a, .nav .label, .social-link, .logo-tile, .tip, .row, .tile, .product, .product .arrow, .product-cover img, .product-cover::after, .bn-sticker, .bn-app-icon, .chip { transition: none; }
   .bn-orb::before { animation: none; }
   a.card:hover, a.card:hover > img, a.card:hover .arrow, .logo-tile:hover, .social-link:hover, a.product:hover, a.product:hover .product-cover img, a.product:hover .product-cover::after, .bn-app:hover .bn-app-icon, .bn-sticker:hover { transform: none; }
 }
