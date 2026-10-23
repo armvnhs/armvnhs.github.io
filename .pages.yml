@@ -98,16 +98,8 @@ content:
       - name: logo
         label: Logo
         type: image
-      - name: tools
-        label: Tools
-        type: string
-        list: true
-      - name: images
-        label: Images
-        type: image
-        list: true
       - name: body
-        label: Description
+        label: Content
         type: rich-text
   - name: products
     label: Products
