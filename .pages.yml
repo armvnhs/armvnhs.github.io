@@ -197,9 +197,9 @@ content:
           - name: company
             label: Company
             type: string
-          - name: role
-            label: Role
-            type: string
+          - name: logo
+            label: Logo
+            type: image
           - name: period
             label: Period
             type: string
