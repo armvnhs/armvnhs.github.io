@@ -1,0 +1,23 @@
+<div class="socials">
+{%- for l in site.data.site.social -%}
+{%- if l.url.size > 0 -%}
+{%- assign u = l.url | downcase -%}
+{%- assign parts = u | split: '/' -%}
+{%- assign host = parts[2] | default: u -%}
+{%- assign icon = 'link' -%}
+{%- if host contains 'instagram' -%}{%- assign icon = 'brand-instagram' -%}
+{%- elsif host contains 'behance' -%}{%- assign icon = 'brand-behance' -%}
+{%- elsif host contains 'dribbble' -%}{%- assign icon = 'brand-dribbble' -%}
+{%- elsif host contains 'linkedin' -%}{%- assign icon = 'brand-linkedin' -%}
+{%- elsif host contains 't.me' or host contains 'telegram' -%}{%- assign icon = 'brand-telegram' -%}
+{%- elsif host contains 'twitter' or host contains 'x.com' -%}{%- assign icon = 'brand-x' -%}
+{%- elsif host contains 'github' -%}{%- assign icon = 'brand-github' -%}
+{%- elsif host contains 'pinterest' -%}{%- assign icon = 'brand-pinterest' -%}
+{%- endif -%}
+<a class="social-link" href="{{ l.url }}" target="_blank" rel="noopener" aria-label="{{ l.label | default: l.url }}">{% include icon.html name=icon %}</a>
+{%- endif -%}
+{%- endfor -%}
+{%- if include.email and site.data.site.email.size > 0 -%}
+<span class="sep"></span><a class="social-link is-mail" href="mailto:{{ site.data.site.email }}" title="{{ site.data.site.email }}" aria-label="Email">{% include icon.html name="mail" %}</a>
+{%- endif -%}
+</div>

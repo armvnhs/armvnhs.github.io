@@ -1,0 +1,4 @@
+{%- if include.href.size > 0 -%}<a class="card" href="{{ include.href }}" target="_blank" rel="noopener">{%- else -%}<div class="card">{%- endif -%}
+{%- if include.cover.size > 0 -%}<img src="{{ include.cover | uri_escape }}" alt="" loading="lazy">{%- endif -%}
+<span class="card-bottom"><span class="card-text"><span class="card-title">{{ include.title }}</span><span class="card-cat">{{ include.category }}</span></span>{% include arrow.html %}</span>
+{%- if include.href.size > 0 -%}</a>{%- else -%}</div>{%- endif -%}

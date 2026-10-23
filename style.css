@@ -136,6 +136,10 @@ h1 {
 }
 .block + .block { margin-top: 56px; }
 .section-title { margin-bottom: 20px; font-family: var(--display); font-size: 1.35rem; font-weight: 500; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.section-head .section-title { margin-bottom: 0; }
+.more { font-size: .9rem; font-weight: 500; color: #9a9a9a; text-decoration: none; transition: color .3s; }
+.more:hover, .more:focus-visible { color: var(--ink); }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
 .card {
@@ -549,7 +553,15 @@ div.product .product-bottom { display: none; }
   .tile { flex: 0 0 72vw; max-width: 290px; min-height: 190px; scroll-snap-align: start; }
   .form-row { grid-template-columns: 1fr; }
   .hero { padding-top: 48px; }
+  .grid.grid-all { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-inline: 0; padding-inline: 0; overflow: visible; }
+  .grid-all .card { flex: none; max-width: none; border-radius: 26px; }
 }
+@view-transition { navigation: auto; }
+.nav { view-transition-name: nav; }
+.tile-mail { grid-column: 1 / -1; min-height: 0; }
+.back + .page-title { margin-top: 20px; }
+.page-title + .grid-all { margin-top: 32px; }
+
 @media (prefers-reduced-motion: reduce) {
   .card, .card > img, .arrow, .nav a, .nav .label, .social-link, .logo-tile, .tip, .row, .tile, .product, .product .arrow, .product-cover img, .product-cover::after { transition: none; }
   a.card:hover, a.card:hover > img, a.card:hover .arrow, .logo-tile:hover, .social-link:hover, a.product:hover, a.product:hover .product-cover img, a.product:hover .product-cover::after { transform: none; }

@@ -1,0 +1,78 @@
+---
+layout: default
+nav: resume
+title: Resume — Arman Haghshenas
+---
+{%- assign r = site.data.resume -%}
+{%- assign ch = 0 -%}
+<h1 class="page-title">Resume</h1>
+{%- if r.summary.size > 0 %}
+<p class="lead">{{ r.summary }}</p>
+{%- endif %}
+{%- if r.pdf.size > 0 %}
+<a class="btn" href="{{ r.pdf | uri_escape }}" target="_blank" rel="noopener" download>Download resume<span class="arrow">{% include icon.html name="download" %}</span></a>
+{%- endif %}
+{%- if r.experience.size > 0 %}
+{%- assign ch = ch | plus: 1 %}
+<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Experience</span><span class="chapter-count">{{ r.experience.size }}</span></h2>
+<ul class="rows">
+{%- for e in r.experience %}
+{%- assign match = site.companies | where: 'title', e.company | first %}
+<li class="row">
+<span class="row-lead">{%- if match.logo.size > 0 -%}<img src="{{ match.logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ e.company | slice: 0 | upcase }}</b>{%- endif -%}</span>
+<div class="row-main">
+<p class="row-title">{{ e.company }}</p>
+{%- if e.role.size > 0 %}<p class="row-sub">{{ e.role }}</p>{% endif %}
+{%- if e.details.size > 0 %}<p class="row-text">{{ e.details }}</p>{% endif %}
+</div>
+{%- if e.period.size > 0 %}
+{%- assign pd = e.period | downcase %}
+<span class="pill{% if pd contains 'present' or pd contains 'now' or pd contains 'current' or pd contains 'حال' %} is-now{% endif %}">{{ e.period }}</span>
+{%- endif %}
+</li>
+{%- endfor %}
+</ul>
+{%- endif %}
+{%- if site.data.software.items.size > 0 %}
+{%- assign ch = ch | plus: 1 %}
+<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Software</span><span class="chapter-count">{{ site.data.software.items.size }}</span></h2>
+<ul class="rows">
+{%- for t in site.data.software.items %}
+<li class="row">
+<span class="row-lead has-icon" style="--bg: {{ t.bg | default: '#1b1b1b' }}; --c: {{ t.color | default: '#ffffff' }}">{{ t.short | default: t.name | slice: 0, 2 }}</span>
+<div class="row-main"><p class="row-title">{{ t.name }}</p></div>
+{%- if t.level and t.level > 0 %}
+<span class="dots">{% for i in (1..5) %}<i{% if i <= t.level %} class="on"{% endif %}></i>{% endfor %}</span>
+{%- endif %}
+</li>
+{%- endfor %}
+</ul>
+{%- endif %}
+{%- if r.education.size > 0 %}
+{%- assign ch = ch | plus: 1 %}
+<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Education</span><span class="chapter-count">{{ r.education.size }}</span></h2>
+<ul class="rows">
+{%- for e in r.education %}
+<li class="row">
+<span class="row-lead"><b>{{ e.school | slice: 0 | upcase }}</b></span>
+<div class="row-main">
+<p class="row-title">{{ e.school }}</p>
+{%- if e.degree.size > 0 %}<p class="row-sub">{{ e.degree }}</p>{% endif %}
+</div>
+{%- if e.period.size > 0 %}
+{%- assign pd = e.period | downcase %}
+<span class="pill{% if pd contains 'present' or pd contains 'now' or pd contains 'current' or pd contains 'حال' %} is-now{% endif %}">{{ e.period }}</span>
+{%- endif %}
+</li>
+{%- endfor %}
+</ul>
+{%- endif %}
+{%- if r.skills.size > 0 %}
+{%- assign ch = ch | plus: 1 %}
+<h2 class="chapter"><span class="chapter-no">{% if ch < 10 %}0{% endif %}{{ ch }}</span><span class="chapter-title">Skills</span><span class="chapter-count">{{ r.skills.size }}</span></h2>
+<ul class="rows">
+{%- for t in r.skills %}
+<li class="row row-slim"><div class="row-main"><p class="row-title">{{ t }}</p></div></li>
+{%- endfor %}
+</ul>
+{%- endif %}

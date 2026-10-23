@@ -1,0 +1,44 @@
+---
+layout: default
+nav: contact
+title: Contact — Arman Haghshenas
+---
+{%- assign s = site.data.site -%}
+{%- assign status_text = site.status_labels[s.status] -%}
+{%- assign tg = s.telegram | default: 'armvnpv' | remove: 'https://' | remove: 'http://' | remove: 't.me/' | remove: '@' -%}
+{%- assign phone = s.phone | default: '+989135957196' -%}
+{%- if phone.size == 13 and phone contains '+98' -%}
+{%- capture phone_label -%}{{ phone | slice: 0, 3 }} {{ phone | slice: 3, 3 }} {{ phone | slice: 6, 3 }} {{ phone | slice: 9, 4 }}{%- endcapture -%}
+{%- else -%}
+{%- assign phone_label = phone -%}
+{%- endif -%}
+{%- assign tg_url = 'https://t.me/' | append: tg -%}
+{%- assign phone_url = 'tel:' | append: phone -%}
+{%- assign mail_url = 'mailto:' | append: s.email -%}
+{%- assign has_form = false -%}
+{%- if s.formEndpoint contains 'http' -%}{%- assign has_form = true -%}{%- endif -%}
+<h1 class="page-title">Contact</h1>
+{%- if s.contactText.size > 0 %}
+<p class="lead">{{ s.contactText }}</p>
+{%- endif %}
+{%- if status_text.size > 0 %}
+<span class="status-pill is-{{ s.status }}"><i></i>{{ status_text }}</span>
+{%- endif %}
+<div class="bento">
+{% include tile.html cls="tile-tg" icon="brand-telegram" label="Telegram" value=tg href=tg_url hint="Message me directly" external=true %}
+{% include tile.html cls="tile-phone" icon="phone" label="Phone" value=phone_label href=phone_url %}
+{%- unless has_form %}
+{% include tile.html cls="tile-mail" icon="mail" label="Email" value=s.email href=mail_url %}
+{%- endunless %}
+</div>
+{%- if has_form %}
+<form class="form" action="{{ s.formEndpoint }}" method="post">
+<div class="form-row">
+<label class="field"><span>Name</span><input name="name" type="text" required autocomplete="name" placeholder="Your name" dir="auto"></label>
+<label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+</div>
+<label class="field"><span>Message</span><textarea name="message" required rows="5" placeholder="Tell me about your project" dir="auto"></textarea></label>
+<button class="btn" type="submit">Send message<span class="arrow">{% include icon.html name="send" %}</span></button>
+</form>
+{%- endif %}
+{% include socials.html %}

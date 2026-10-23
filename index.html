@@ -1,32 +1,80 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script>
-(function (l) {
-  if (l.search[1] === "/") {
-    var d = l.search.slice(1).split("&").map(function (s) { return s.replace(/~and~/g, "&"); }).join("?");
-    window.history.replaceState(null, null, l.pathname.slice(0, -1) + d + l.hash);
-  }
-})(window.location);
-</script>
-<title>Arman Haghshenas — Logo and brand designer</title>
-<meta name="description" content="Arman Haghshenas crafts logos, brands and visual identities.">
-<link rel="icon" href="/assets/img/Icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&amp;family=Funnel+Sans:wght@300..800&amp;family=Vazirmatn:wght@100..900&amp;display=swap">
-<link rel="stylesheet" href="/style.css">
-</head>
-<body>
-<main class="wrap" id="app"></main>
-<nav class="nav" aria-label="Main">
-  <a href="/" data-route="work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" /> <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /> <path d="M12 12l0 .01" /> <path d="M3 13a20 20 0 0 0 18 0" /></svg><span class="label">Work</span></a>
-  <a href="/resume" data-route="resume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" /></svg><span class="label">Resume</span></a>
-  <a href="/contact" data-route="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /> <path d="M3 7l9 6l9 -6" /></svg><span class="label">Contact</span></a>
-</nav>
-<noscript><p style="text-align:center;padding:40px">Please enable JavaScript to view this site.</p></noscript>
-<script src="/app.js" defer></script>
-</body>
-</html>
+---
+layout: default
+nav: work
+title: Arman Haghshenas — Logo and brand designer
+---
+{%- assign s = site.data.site -%}
+{%- assign status_text = site.status_labels[s.status] -%}
+{%- assign projects = site.data.projects.items -%}
+{%- assign companies = site.companies | sort: 'order' -%}
+{%- assign products = site.data.products.items -%}
+<header class="hero">
+<div class="avatar-wrap">
+<img class="avatar" src="{{ s.avatar | uri_escape }}" alt="{{ s.name }}" width="92" height="92">
+{%- if status_text.size > 0 %}
+<span class="status is-{{ s.status }}" tabindex="0" aria-label="{{ status_text }}"><span class="tip">{{ status_text }}</span></span>
+{%- endif %}
+</div>
+<h1>{{ s.name }}</h1>
+<p class="tagline">{{ s.tagline }}</p>
+{% include socials.html email=true %}
+</header>
+<hr class="rule">
+{%- if projects.size > 0 %}
+<section class="block">
+<div class="section-head">
+<h2 class="section-title">Projects</h2>
+<a class="more" href="/projects/">View more</a>
+</div>
+<div class="grid">
+{%- for p in projects limit: site.home_projects %}
+{% include card.html href=p.link title=p.title category=p.category cover=p.cover %}
+{%- endfor %}
+</div>
+</section>
+{%- endif %}
+{%- if companies.size > 0 %}
+{%- assign n = companies.size -%}
+{%- if n > 6 -%}{%- assign n = 6 -%}{%- endif %}
+<section class="block">
+<h2 class="section-title">Companies</h2>
+<div class="logos" style="--n: {{ n }}">
+{%- for c in companies %}
+<a class="logo-tile" href="{{ c.url }}" title="{{ c.title }}" aria-label="{{ c.title }}">
+{%- if c.logo.size > 0 -%}<img src="{{ c.logo | uri_escape }}" alt="{{ c.title }}" loading="lazy">{%- else -%}<span>{{ c.title }}</span>{%- endif -%}
+</a>
+{%- endfor %}
+</div>
+</section>
+{%- endif %}
+{%- if products.size > 0 %}
+<section class="block">
+<h2 class="section-title">Things I’ve built</h2>
+<div class="products">
+{%- for p in products %}
+{%- assign h1 = forloop.index0 | times: 67 | plus: 210 | modulo: 360 -%}
+{%- assign h2 = h1 | plus: 55 | modulo: 360 -%}
+{%- assign type_icon = 'package' -%}
+{%- if p.type == 'Website' -%}{%- assign type_icon = 'world' -%}{%- elsif p.type == 'App' -%}{%- assign type_icon = 'device-mobile' -%}{%- endif -%}
+{%- if p.link.size > 0 -%}
+{%- assign link_parts = p.link | split: '/' -%}
+{%- assign link_host = link_parts[2] | remove_first: 'www.' -%}
+<a class="product" href="{{ p.link }}" target="_blank" rel="noopener">
+{%- else -%}
+{%- assign link_host = '' -%}
+<div class="product">
+{%- endif %}
+<span class="product-cover{% if p.cover.size > 0 %} has-cover{% endif %}" style="--h1: {{ h1 }}; --h2: {{ h2 }}">
+{%- if p.cover.size > 0 -%}<img src="{{ p.cover | uri_escape }}" alt="" loading="lazy">{%- endif -%}
+{%- if p.type.size > 0 -%}<span class="product-type"><span class="pt-icon">{% include icon.html name=type_icon %}</span>{{ p.type }}</span>{%- endif -%}
+</span>
+<span class="product-body">
+<span class="product-logo">{%- if p.logo.size > 0 -%}<img src="{{ p.logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ p.name | slice: 0 | upcase }}</b>{%- endif -%}</span>
+<span class="product-text"><span class="product-name">{{ p.name }}</span><span class="product-desc">{{ p.description }}</span></span>
+<span class="product-bottom"><span class="product-host">{{ link_host }}</span>{% include arrow.html %}</span>
+</span>
+{%- if p.link.size > 0 -%}</a>{%- else -%}</div>{%- endif %}
+{%- endfor %}
+</div>
+</section>
+{%- endif %}

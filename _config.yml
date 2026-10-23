@@ -1,0 +1,23 @@
+title: Arman Haghshenas
+description: Arman Haghshenas crafts logos, brands and visual identities.
+url: https://armvnhs.ir
+data_dir: data
+home_projects: 6
+status_labels:
+  available: Available for new projects
+  busy: Busy right now
+plugins:
+  - jekyll-sitemap
+collections:
+  companies:
+    output: true
+    permalink: /company/:name/
+defaults:
+  - scope:
+      path: ""
+      type: companies
+    values:
+      layout: company
+      nav: work
+exclude:
+  - README.md

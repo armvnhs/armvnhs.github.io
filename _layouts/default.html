@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+{%- if page.collection == 'companies' -%}
+{%- assign doc_title = page.title | append: ' — ' | append: site.data.site.name -%}
+{%- else -%}
+{%- assign doc_title = page.title | default: site.title -%}
+{%- endif -%}
+{%- assign doc_desc = page.summary | default: site.description -%}
+{%- assign doc_image = page.cover | default: site.data.site.avatar -%}
+<title>{{ doc_title }}</title>
+<meta name="description" content="{{ doc_desc | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ doc_title | escape }}">
+<meta property="og:description" content="{{ doc_desc | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+{%- if doc_image.size > 0 %}
+<meta property="og:image" content="{{ doc_image | uri_escape | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+{%- endif %}
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/assets/img/Icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&amp;family=Funnel+Sans:wght@300..800&amp;family=Vazirmatn:wght@100..900&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="wrap">
+{{ content }}
+</main>
+<nav class="nav" aria-label="Main">
+<a href="/" aria-label="Work"{% if page.nav == 'work' %} class="active" aria-current="page"{% endif %}>{% include icon.html name="briefcase" %}<span class="label">Work</span></a>
+<a href="/resume/" aria-label="Resume"{% if page.nav == 'resume' %} class="active" aria-current="page"{% endif %}>{% include icon.html name="file-text" %}<span class="label">Resume</span></a>
+<a href="/contact/" aria-label="Contact"{% if page.nav == 'contact' %} class="active" aria-current="page"{% endif %}>{% include icon.html name="mail" %}<span class="label">Contact</span></a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,12 @@
+---
+layout: default
+nav: work
+title: Projects — Arman Haghshenas
+---
+<a class="back" href="/">← Work</a>
+<h1 class="page-title">Projects</h1>
+<div class="grid grid-all">
+{%- for p in site.data.projects.items %}
+{% include card.html href=p.link title=p.title category=p.category cover=p.cover %}
+{%- endfor %}
+</div>

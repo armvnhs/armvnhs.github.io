@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://armvnhs.ir/sitemap.xml
