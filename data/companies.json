@@ -2,13 +2,17 @@
   "items": [
     {
       "name": "Daewoo",
-      "slug": "Daewoo",
-      "role": "Graphic Designer",
+      "slug": "daewoo",
+      "role": "Graphic designer",
       "period": "1403",
       "cover": "/assets/img/Experience/Daewoo-Logo.png",
       "body": "<p></p>"
     },
     {
+      "name": "Snowa",
+      "slug": "snowa",
+      "logo": "/assets/img/Experience/Snowa-Logo.png",
+      "role": "Graphic designer",
       "body": "<p></p>"
     }
   ]
