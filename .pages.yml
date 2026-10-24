@@ -43,6 +43,9 @@ content:
       - name: phone
         label: Phone
         type: string
+      - name: whatsapp
+        label: WhatsApp
+        type: string
       - name: formEndpoint
         label: Form endpoint
         type: string
