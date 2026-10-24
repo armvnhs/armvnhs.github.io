@@ -117,14 +117,6 @@ content:
           - name: name
             label: Name
             type: string
-          - name: type
-            label: Type
-            type: select
-            options:
-              values:
-                - Website
-                - App
-                - Software
           - name: description
             label: Description
             type: string
@@ -150,21 +142,6 @@ content:
           - name: icon
             label: Icon
             type: image
-          - name: short
-            label: Abbreviation
-            type: string
-          - name: bg
-            label: Background
-            type: string
-          - name: color
-            label: Color
-            type: string
-          - name: level
-            label: Level
-            type: number
-            options:
-              min: 1
-              max: 5
   - name: resume
     label: Resume
     type: file
