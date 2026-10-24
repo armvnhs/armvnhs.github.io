@@ -1,31 +1,19 @@
 {
   "items": [
     {
-      "name": "Illustrator",
-      "short": "Ai",
-      "bg": "#330000",
-      "color": "#FF9A00",
-      "icon": "/assets/img/Software/illustrator.svg"
+      "name": "Adobe Photoshop",
+      "icon": "/assets/img/Software/Photoshop-Icon.svg"
     },
     {
-      "name": "Photoshop",
-      "short": "Ps",
-      "bg": "#001E36",
-      "color": "#31A8FF",
-      "icon": "/assets/img/Software/photoshop.svg"
+      "name": "Adobe Illustrator",
+      "icon": "/assets/img/Software/Illustrator- Icon.svg"
     },
     {
-      "name": "After Effects",
-      "short": "Ae",
-      "bg": "#00005B",
-      "color": "#9999FF",
-      "icon": "/assets/img/Software/after-effects.svg"
+      "name": "Claude",
+      "icon": "/assets/img/Software/Claude-Icon.svg"
     },
     {
       "name": "Figma",
-      "short": "Fi",
-      "bg": "#1E1E1E",
-      "color": "#A259FF",
       "icon": "/assets/img/Software/figma.svg"
     }
   ]
