@@ -579,7 +579,7 @@ div.product .product-bottom { display: none; }
   a.card:hover, a.card:hover > img, a.card:hover .arrow, .logo-tile:hover, .social-link:hover, a.product:hover, .rv-app:hover .rv-app-icon, .rv-logo:hover { transform: none; }
 }
 
-.ch { position: relative; margin-top: 40px; overflow: hidden; border: 1px solid var(--line); border-radius: 34px; background: #fff; box-shadow: 0 30px 70px rgba(0, 0, 0, .09); }
+.ch { position: relative; margin-top: 14px; overflow: hidden; border: 1px solid var(--line); border-radius: 34px; background: #fff; box-shadow: 0 30px 70px rgba(0, 0, 0, .09); }
 .ch-head {
   position: relative;
   display: flex;
@@ -601,7 +601,8 @@ div.product .product-bottom { display: none; }
 .ch-who small i { width: 8px; height: 8px; border-radius: 50%; }
 .ch-who small.is-available i { background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, .28); }
 .ch-who small.is-busy i { background: #f97316; box-shadow: 0 0 0 3px rgba(249, 115, 22, .28); }
-.ch-thread { display: flex; flex-direction: column; gap: 8px; height: clamp(340px, 54vh, 470px); padding: 22px 18px; overflow-y: auto; background: radial-gradient(rgba(0, 0, 0, .075) 1px, transparent 1.4px) 0 0 / 18px 18px, #f6f6f7; scrollbar-width: thin; }
+.ch-thread { display: flex; flex-direction: column; gap: 8px; height: clamp(340px, 54vh, 470px); padding: 22px 18px; overflow-y: auto; background: radial-gradient(rgba(0, 0, 0, .075) 1px, transparent 1.4px) 0 0 / 18px 18px, #f6f6f7; scrollbar-width: none; -ms-overflow-style: none; }
+.ch-thread::-webkit-scrollbar { display: none; }
 .ch-msg { max-width: 84%; animation: ch-pop .4s var(--ease) both; }
 .ch-msg p { padding: 11px 16px; border-radius: 22px; font-size: 1rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; unicode-bidi: plaintext; }
 .ch-msg.is-bot { align-self: flex-start; transform-origin: left bottom; }
@@ -624,7 +625,7 @@ div.product .product-bottom { display: none; }
 .ch-send svg { width: 21px; height: 21px; }
 .ch-send:hover:not(:disabled) { transform: scale(1.08) rotate(-8deg); }
 .ch-send:disabled { opacity: .3; cursor: default; }
-.ch-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.ch-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 40px; }
 .ch-link { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 26px; background: #fafafa; color: var(--ink); text-decoration: none; transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s; }
 .ch-link:hover { transform: translateY(-3px); border-color: var(--ink); box-shadow: 0 14px 30px rgba(0, 0, 0, .1); }
 .ch-link-icon { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; }
@@ -634,15 +635,18 @@ div.product .product-bottom { display: none; }
 .ch-link-text { display: flex; flex-direction: column; min-width: 0; }
 .ch-link-text small { font-size: .78rem; font-weight: 500; color: var(--muted); }
 .ch-link-text b { overflow: hidden; font-size: .95rem; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
-.ch-links + .socials { margin-top: 28px; }
 @keyframes ch-pop { from { opacity: 0; transform: translateY(10px) scale(.94); } }
 @keyframes ch-dot { 40% { transform: translateY(-5px); background: #7a7a7a; } }
 @media (max-width: 760px) {
-  .ch { margin-top: 24px; border-radius: 28px; }
+  .ch { margin-top: 12px; border-radius: 28px; }
   .ch-thread { height: min(58vh, 460px); }
-  .ch-links { grid-template-columns: 1fr; }
+  .ch-links { grid-template-columns: 1fr; margin-top: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ch-msg, .ch-chips, .ch-msg.is-typing i { animation: none; }
   .ch-chip, .ch-link, .ch-send { transition: none; }
 }
+.ch-avatar { overflow: hidden; }
+.ch-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ch-badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; background: rgba(255, 255, 255, .18); font-family: var(--text); font-size: .68rem; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; vertical-align: 2px; }
+.ch-note { padding: 9px 20px; border-bottom: 1px solid var(--line); background: #fff; font-size: .8rem; line-height: 1.4; color: var(--muted); }

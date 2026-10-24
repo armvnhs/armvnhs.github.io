@@ -21,23 +21,24 @@ title: Contact — Arman Haghshenas
 {%- assign has_form = false -%}
 {%- if s.formEndpoint contains 'http' -%}{%- assign has_form = true -%}{%- endif -%}
 <h1 class="sr-only">Contact</h1>
+<div class="ch-links">
+<a class="ch-link is-phone" href="{{ phone_url }}"><span class="ch-link-icon">{% include icon.html name="phone" %}</span><span class="ch-link-text"><small>Phone</small><b>{{ phone_label }}</b></span></a>
+<a class="ch-link is-tg" href="{{ tg_url }}" target="_blank" rel="noopener"><span class="ch-link-icon">{% include icon.html name="brand-telegram" %}</span><span class="ch-link-text"><small>Telegram</small><b>{{ tg }}</b></span></a>
+<a class="ch-link is-wa" href="{{ wa_url }}" target="_blank" rel="noopener"><span class="ch-link-icon">{% include icon.html name="brand-whatsapp" %}</span><span class="ch-link-text"><small>WhatsApp</small><b>{{ phone_label }}</b></span></a>
+</div>
 <section class="ch" id="chat" data-endpoint="{% if has_form %}{{ s.formEndpoint }}{% endif %}" data-wa="{{ wa_num }}" data-tg="{{ tg }}" data-mail="{{ s.email }}" data-owner="{{ first_name | escape }}" data-intro="{{ s.contactText | escape }}">
 <header class="ch-head">
-<span class="ch-avatar">{{ s.name | slice: 0 }}</span>
-<span class="ch-who"><b>{{ s.name }}</b>{%- if status_text.size > 0 %}<small class="is-{{ s.status }}"><i></i>{{ status_text }}</small>{%- endif %}</span>
+<span class="ch-avatar">{%- if s.avatar.size > 0 -%}<img src="{{ s.avatar | uri_escape }}" alt="{{ s.name }}" width="48" height="48">{%- else -%}{{ s.name | slice: 0 }}{%- endif -%}</span>
+<span class="ch-who"><b>{{ s.name }}<em class="ch-badge">Bot</em></b>{%- if status_text.size > 0 %}<small class="is-{{ s.status }}"><i></i>{{ status_text }}</small>{%- endif %}</span>
 </header>
+<p class="ch-note">Automated assistant, not a live chat. {{ first_name }} reads every message and replies personally.</p>
 <div class="ch-thread" id="ch-thread" role="log" aria-live="polite"></div>
 <form class="ch-composer" id="ch-form" autocomplete="off">
 <textarea id="ch-input" rows="1" dir="auto" placeholder="Say hi…" aria-label="Message" disabled></textarea>
 <button class="ch-send" type="submit" aria-label="Send" disabled>{% include icon.html name="send" %}</button>
 </form>
 </section>
-<div class="ch-links">
-<a class="ch-link is-phone" href="{{ phone_url }}"><span class="ch-link-icon">{% include icon.html name="phone" %}</span><span class="ch-link-text"><small>Phone</small><b>{{ phone_label }}</b></span></a>
-<a class="ch-link is-tg" href="{{ tg_url }}" target="_blank" rel="noopener"><span class="ch-link-icon">{% include icon.html name="brand-telegram" %}</span><span class="ch-link-text"><small>Telegram</small><b>{{ tg }}</b></span></a>
-<a class="ch-link is-wa" href="{{ wa_url }}" target="_blank" rel="noopener"><span class="ch-link-icon">{% include icon.html name="brand-whatsapp" %}</span><span class="ch-link-text"><small>WhatsApp</small><b>{{ phone_label }}</b></span></a>
-</div>
-{% include socials.html email=true %}
+
 <script>
 (function () {
   var root = document.getElementById('chat');
@@ -189,8 +190,10 @@ title: Contact — Arman Haghshenas
     if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); }
   });
 
-  var intro = ['Hi, I’m ' + (d.owner || 'here') + '.'];
-  intro.push(d.intro || 'Have a project in mind? Let’s talk.');
+  var owner = d.owner || 'the owner';
+  var intro = ['Hi, I’m ' + owner + '’s assistant bot.'];
+  if (d.intro) intro.push(d.intro);
+  intro.push('This isn’t a live chat. I’ll collect your message and pass it on, so you’ll hear back from the real ' + owner + '.');
   intro.push('First, what should I call you?');
   say(intro, function () {
     st.step = 1;
