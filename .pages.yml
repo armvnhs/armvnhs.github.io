@@ -163,25 +163,6 @@ content:
         type: file
         options:
           media: files
-      - name: experience
-        label: Experience
-        type: object
-        list:
-          collapsible:
-            summary: "{company}"
-        fields:
-          - name: company
-            label: Company
-            type: string
-          - name: logo
-            label: Logo
-            type: image
-          - name: period
-            label: Period
-            type: string
-          - name: details
-            label: Details
-            type: text
       - name: education
         label: Education
         type: object
