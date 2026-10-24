@@ -1,5 +1,5 @@
 ---
 title: Daewoo
 order: 1
-logo: /assets/img/Daewoo Logo.png
+logo: /assets/img/Experience/Daewoo-Logo.png
 ---
