@@ -579,7 +579,7 @@ div.product .product-bottom { display: none; }
   a.card:hover, a.card:hover > img, a.card:hover .arrow, .logo-tile:hover, .social-link:hover, a.product:hover, .rv-app:hover .rv-app-icon, .rv-logo:hover { transform: none; }
 }
 
-.ch { position: relative; margin-top: 14px; overflow: hidden; border: 1px solid var(--line); border-radius: 34px; background: #fff; box-shadow: 0 30px 70px rgba(0, 0, 0, .09); }
+.ch { position: relative; margin-top: 40px; overflow: hidden; border: 1px solid var(--line); border-radius: 34px; background: #fff; box-shadow: 0 30px 70px rgba(0, 0, 0, .09); }
 .ch-head {
   position: relative;
   display: flex;
@@ -625,28 +625,30 @@ div.product .product-bottom { display: none; }
 .ch-send svg { width: 21px; height: 21px; }
 .ch-send:hover:not(:disabled) { transform: scale(1.08) rotate(-8deg); }
 .ch-send:disabled { opacity: .3; cursor: default; }
-.ch-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 40px; }
-.ch-link { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 26px; background: #fafafa; color: var(--ink); text-decoration: none; transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s; }
-.ch-link:hover { transform: translateY(-3px); border-color: var(--ink); box-shadow: 0 14px 30px rgba(0, 0, 0, .1); }
-.ch-link-icon { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; }
-.ch-link-icon svg { width: 21px; height: 21px; }
-.ch-link.is-tg .ch-link-icon { background: #229ed9; }
-.ch-link.is-wa .ch-link-icon { background: #25d366; }
-.ch-link-text { display: flex; flex-direction: column; min-width: 0; }
-.ch-link-text small { font-size: .78rem; font-weight: 500; color: var(--muted); }
-.ch-link-text b { overflow: hidden; font-size: .95rem; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
 @keyframes ch-pop { from { opacity: 0; transform: translateY(10px) scale(.94); } }
 @keyframes ch-dot { 40% { transform: translateY(-5px); background: #7a7a7a; } }
 @media (max-width: 760px) {
-  .ch { margin-top: 12px; border-radius: 28px; }
+  .ch { margin-top: 24px; border-radius: 28px; }
   .ch-thread { height: min(58vh, 460px); }
-  .ch-links { grid-template-columns: 1fr; margin-top: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ch-msg, .ch-chips, .ch-msg.is-typing i { animation: none; }
-  .ch-chip, .ch-link, .ch-send { transition: none; }
+  .ch-chip, .ch-send { transition: none; }
 }
 .ch-avatar { overflow: hidden; }
 .ch-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ch-badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; background: rgba(255, 255, 255, .18); font-family: var(--text); font-size: .68rem; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; vertical-align: 2px; }
 .ch-note { padding: 9px 20px; border-bottom: 1px solid var(--line); background: #fff; font-size: .8rem; line-height: 1.4; color: var(--muted); }
+.ch-actions { position: relative; z-index: 1; display: flex; gap: 8px; margin-left: auto; }
+.ch-act { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, .42); border-radius: 50%; background: rgba(255, 255, 255, .18); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #fff; transition: background .3s, color .3s, border-color .3s, transform .35s var(--ease); }
+.ch-act svg { width: 19px; height: 19px; }
+.ch-act:hover, .ch-act:focus-visible { transform: translateY(-2px); border-color: transparent; background: #fff; color: var(--ink); }
+.ch-act.is-tg:hover, .ch-act.is-tg:focus-visible { background: #229ed9; color: #fff; }
+.ch-act.is-wa:hover, .ch-act.is-wa:focus-visible { background: #25d366; color: #fff; }
+@media (max-width: 760px) {
+  .ch-head { gap: 10px; padding: 16px 16px; }
+  .ch-actions { gap: 6px; }
+  .ch-act { width: 38px; height: 38px; }
+  .ch-badge { margin-left: 5px; }
+}
+@media (prefers-reduced-motion: reduce) { .ch-act { transition: none; } }
