@@ -22,6 +22,9 @@ content:
       - name: avatar
         label: Photo
         type: image
+      - name: favicon
+        label: Favicon
+        type: image
       - name: status
         label: Status
         type: select
