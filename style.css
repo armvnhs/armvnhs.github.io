@@ -378,54 +378,7 @@ button.btn { border: 0; cursor: pointer; font-family: inherit; }
   transition: transform .45s var(--ease), border-color .3s, box-shadow .45s var(--ease);
 }
 a.product:hover { transform: translateY(-4px); border-color: var(--ink); box-shadow: 0 16px 36px rgba(0, 0, 0, .1); }
-.product-cover {
-  --h1: 220;
-  --h2: 275;
-  position: relative;
-  aspect-ratio: 16 / 10;
-  border-radius: 27px;
-  overflow: hidden;
-  isolation: isolate;
-  background:
-    radial-gradient(120% 95% at 12% 8%, hsl(var(--h1) 88% 62%) 0, transparent 62%),
-    radial-gradient(100% 90% at 92% 92%, hsl(var(--h2) 92% 56%) 0, transparent 64%),
-    hsl(var(--h1) 52% 12%);
-}
-.product-cover::after {
-  content: "";
-  position: absolute;
-  right: -16%;
-  bottom: -48%;
-  z-index: -1;
-  width: 66%;
-  aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 50%;
-  box-shadow: 0 0 0 22px rgba(255, 255, 255, .06), 0 0 0 46px rgba(255, 255, 255, .04);
-  transition: transform .9s var(--ease);
-}
-.product-cover.has-cover::after { display: none; }
-.product-cover img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
-a.product:hover .product-cover img, a.product:hover .product-cover::after { transform: scale(1.07); }
-.product-type {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px 6px 9px;
-  border: 1px solid rgba(255, 255, 255, .4);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .2);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  backdrop-filter: blur(12px) saturate(160%);
-  color: #fff;
-  font-size: .78rem;
-  font-weight: 600;
-}
-.pt-icon svg { width: 15px; height: 15px; }
-.product-body { display: flex; flex: 1; flex-direction: column; gap: 10px; padding: 0 12px 8px; }
+.product-body { display: flex; flex: 1; flex-direction: column; gap: 14px; padding: 12px 12px 8px; }
 .product-logo {
   position: relative;
   z-index: 2;
@@ -433,9 +386,7 @@ a.product:hover .product-cover img, a.product:hover .product-cover::after { tran
   place-items: center;
   width: 56px;
   height: 56px;
-  margin-top: -42px;
-  border: 4px solid #fafafa;
-  border-radius: 21px;
+  border-radius: 18px;
   overflow: hidden;
   background: var(--ink);
   color: #fff;
@@ -624,6 +575,6 @@ div.product .product-bottom { display: none; }
 
 
 @media (prefers-reduced-motion: reduce) {
-  .card, .card > img, .arrow, .nav a, .nav .label, .social-link, .logo-tile, .tip, .row, .tile, .product, .product .arrow, .product-cover img, .product-cover::after, .rv-logo, .rv-app-icon, .chip { transition: none; animation: none; }
-  a.card:hover, a.card:hover > img, a.card:hover .arrow, .logo-tile:hover, .social-link:hover, a.product:hover, a.product:hover .product-cover img, a.product:hover .product-cover::after, .rv-app:hover .rv-app-icon, .rv-logo:hover { transform: none; }
+  .card, .card > img, .arrow, .nav a, .nav .label, .social-link, .logo-tile, .tip, .row, .tile, .product, .product .arrow, .rv-logo, .rv-app-icon, .chip { transition: none; animation: none; }
+  a.card:hover, a.card:hover > img, a.card:hover .arrow, .logo-tile:hover, .social-link:hover, a.product:hover, .rv-app:hover .rv-app-icon, .rv-logo:hover { transform: none; }
 }

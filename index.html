@@ -52,10 +52,6 @@ title: Arman Haghshenas — Logo and brand designer
 <h2 class="section-title">Things I’ve built</h2>
 <div class="products">
 {%- for p in products %}
-{%- assign h1 = forloop.index0 | times: 67 | plus: 210 | modulo: 360 -%}
-{%- assign h2 = h1 | plus: 55 | modulo: 360 -%}
-{%- assign type_icon = 'package' -%}
-{%- if p.type == 'Website' -%}{%- assign type_icon = 'world' -%}{%- elsif p.type == 'App' -%}{%- assign type_icon = 'device-mobile' -%}{%- endif -%}
 {%- if p.link.size > 0 -%}
 {%- assign link_parts = p.link | split: '/' -%}
 {%- assign link_host = link_parts[2] | remove_first: 'www.' -%}
@@ -64,10 +60,6 @@ title: Arman Haghshenas — Logo and brand designer
 {%- assign link_host = '' -%}
 <div class="product">
 {%- endif %}
-<span class="product-cover{% if p.cover.size > 0 %} has-cover{% endif %}" style="--h1: {{ h1 }}; --h2: {{ h2 }}">
-{%- if p.cover.size > 0 -%}<img src="{{ p.cover | uri_escape }}" alt="" loading="lazy">{%- endif -%}
-{%- if p.type.size > 0 -%}<span class="product-type"><span class="pt-icon">{% include icon.html name=type_icon %}</span>{{ p.type }}</span>{%- endif -%}
-</span>
 <span class="product-body">
 <span class="product-logo">{%- if p.logo.size > 0 -%}<img src="{{ p.logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ p.name | slice: 0 | upcase }}</b>{%- endif -%}</span>
 <span class="product-text"><span class="product-name">{{ p.name }}</span><span class="product-desc">{{ p.description }}</span></span>
