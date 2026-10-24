@@ -22,6 +22,9 @@ content:
       - name: avatar
         label: Photo
         type: image
+      - name: chatAvatar
+        label: Chat photo
+        type: image
       - name: favicon
         label: Favicon
         type: image
