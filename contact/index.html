@@ -21,6 +21,7 @@ title: Contact — Arman Haghshenas
 {%- assign has_form = false -%}
 {%- if s.formEndpoint contains 'http' -%}{%- assign has_form = true -%}{%- endif -%}
 <h1 class="sr-only">Contact</h1>
+<div class="ch-stage">
 <section class="ch" id="chat" data-endpoint="{% if has_form %}{{ s.formEndpoint }}{% endif %}" data-wa="{{ wa_num }}" data-tg="{{ tg }}" data-mail="{{ s.email }}" data-owner="{{ first_name | escape }}" data-intro="{{ s.contactText | escape }}">
 <header class="ch-head">
 <span class="ch-avatar">{%- assign chat_img = s.chatAvatar | default: s.avatar -%}{%- if chat_img.size > 0 -%}<img src="{{ chat_img | uri_escape }}" alt="{{ s.name }}" width="48" height="48">{%- else -%}{{ s.name | slice: 0 }}{%- endif -%}</span>
@@ -38,7 +39,7 @@ title: Contact — Arman Haghshenas
 <button class="ch-send" type="submit" aria-label="Send" disabled>{% include icon.html name="send" %}</button>
 </form>
 </section>
-
+</div>
 <script>
 (function () {
   var root = document.getElementById('chat');
@@ -190,10 +191,8 @@ title: Contact — Arman Haghshenas
     if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); submit(); }
   });
 
-  var owner = d.owner || 'the owner';
-  var intro = ['Hi, I’m ' + owner + '’s assistant bot.'];
+  var intro = ['Hi there.'];
   if (d.intro) intro.push(d.intro);
-  intro.push('This isn’t a live chat. I’ll collect your message and pass it on, so you’ll hear back from the real ' + owner + '.');
   intro.push('First, what should I call you?');
   say(intro, function () {
     st.step = 1;
