@@ -131,9 +131,6 @@ content:
           - name: logo
             label: Logo
             type: image
-          - name: cover
-            label: Cover
-            type: image
           - name: link
             label: Link
             type: string
