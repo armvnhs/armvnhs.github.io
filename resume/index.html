@@ -26,9 +26,6 @@ title: Resume — Arman Haghshenas
 {%- endcapture -%}
 <div class="rv">
 <header class="rv-head">
-{%- if s.avatar.size > 0 %}
-<img class="rv-avatar" src="{{ s.avatar | uri_escape }}" alt="{{ s.name }}" width="68" height="68">
-{%- endif %}
 <h1 class="rv-title">Resume</h1>
 {%- if r.summary.size > 0 %}
 <p class="rv-lead">{{ r.summary }}</p>
@@ -51,7 +48,11 @@ title: Resume — Arman Haghshenas
 <ul class="rv-apps">
 {%- for t in site.data.software.items %}
 <li class="rv-app">
+{%- if t.icon.size > 0 %}
+<span class="rv-app-icon has-img"><img src="{{ t.icon | uri_escape }}" alt="" width="52" height="52" loading="lazy"></span>
+{%- else %}
 <span class="rv-app-icon" style="--bg: {{ t.bg | default: '#1b1b1b' }}; --c: {{ t.color | default: '#ffffff' }}">{{ t.short | default: t.name | slice: 0, 2 }}</span>
+{%- endif %}
 <span class="rv-app-name">{{ t.name }}</span>
 </li>
 {%- endfor %}
