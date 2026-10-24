@@ -147,6 +147,9 @@ content:
           - name: name
             label: Name
             type: string
+          - name: icon
+            label: Icon
+            type: image
           - name: short
             label: Abbreviation
             type: string
