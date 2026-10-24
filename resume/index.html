@@ -14,15 +14,6 @@ title: Resume — Arman Haghshenas
 <li class="rv-logo"><a href="{{ c.url }}" aria-label="{{ c.title }}"><img src="{{ c.logo | uri_escape }}" alt="" loading="lazy"></a></li>
 {%- endif -%}
 {%- endfor -%}
-{%- for e in r.experience -%}
-{%- if e.logo.size > 0 -%}
-{%- assign match = site.companies | where: 'title', e.company | first -%}
-{%- unless match -%}
-{%- assign brand_n = brand_n | plus: 1 -%}
-<li class="rv-logo"><span aria-label="{{ e.company }}"><img src="{{ e.logo | uri_escape }}" alt="" loading="lazy"></span></li>
-{%- endunless -%}
-{%- endif -%}
-{%- endfor -%}
 {%- endcapture -%}
 <div class="rv">
 <header class="rv-head">
