@@ -52,7 +52,9 @@ content:
       - name: social
         label: Social links
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{label}"
         fields:
           - name: label
             label: Label
@@ -68,7 +70,9 @@ content:
       - name: items
         label: Projects
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{title}"
         fields:
           - name: title
             label: Title
@@ -112,7 +116,9 @@ content:
       - name: items
         label: Products
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{name}"
         fields:
           - name: name
             label: Name
@@ -134,7 +140,9 @@ content:
       - name: items
         label: Software
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{name}"
         fields:
           - name: name
             label: Name
@@ -158,7 +166,9 @@ content:
       - name: experience
         label: Experience
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{company}"
         fields:
           - name: company
             label: Company
@@ -175,7 +185,9 @@ content:
       - name: education
         label: Education
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{school}"
         fields:
           - name: school
             label: School
