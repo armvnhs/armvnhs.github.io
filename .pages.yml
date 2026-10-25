@@ -26,6 +26,9 @@ content:
       - name: avatar
         label: Photo
         type: image
+      - name: ogImage
+        label: Link preview image
+        type: image
       - name: chatAvatar
         label: Chat photo
         type: image
@@ -212,6 +215,9 @@ content:
         type: string
       - name: avatar
         label: Photo
+        type: image
+      - name: ogImage
+        label: Link preview image
         type: image
       - name: chatAvatar
         label: Chat photo
