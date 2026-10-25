@@ -657,12 +657,6 @@ div.product .product-bottom { display: none; }
 @keyframes ch-flow { 0%, 100% { background-position: 0% 0%, 100% 100%, 0 0; } 50% { background-position: 60% 50%, 40% 50%, 0 0; } }
 @media (max-height: 760px) { .ch-stage { min-height: 0; margin-bottom: 0; padding-block: 24px 0; } }
 @media (prefers-reduced-motion: reduce) { .ch-head { animation: none; } }
-@property --ch-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.ch::before, .ch::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; background: conic-gradient(from var(--ch-angle), transparent 0 55%, #3aa0ff 72%, #8b2cf5 86%, #ff5ca8 95%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; animation: ch-spin 6s linear infinite; }
-.ch::before { padding: 2px; }
-.ch::after { padding: 7px; filter: blur(9px); opacity: .55; }
-@keyframes ch-spin { to { --ch-angle: 360deg; } }
-@media (prefers-reduced-motion: reduce) { .ch::before, .ch::after { animation: none; } }
 .ch-who { flex: 1; }
 .ch-composer textarea { font-size: 16px; }
 @media (max-width: 760px) {
