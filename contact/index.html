@@ -194,9 +194,11 @@ title: Contact — Arman Haghshenas
   var intro = ['Hi there.'];
   if (d.intro) intro.push(d.intro);
   intro.push('First, what should I call you?');
-  say(intro, function () {
-    st.step = 1;
-    setInput(true, 'Your name');
-  });
+  setTimeout(function () {
+    say(intro, function () {
+      st.step = 1;
+      setInput(true, 'Your name');
+    });
+  }, reduce ? 0 : 900);
 })();
 </script>

@@ -678,3 +678,32 @@ div.product .product-bottom { display: none; }
   .ch-send { width: 44px; height: 44px; }
   .ch-chip { padding: 9px 14px 9px 12px; font-size: .9rem; }
 }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .nav { view-transition-name: nav; }
+  ::view-transition-old(root) { animation: vt-out .2s ease both; }
+  ::view-transition-new(root) { animation: vt-in .3s ease both; }
+  ::view-transition-group(nav) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+  @keyframes vt-out { to { opacity: 0; transform: translateY(-8px); filter: blur(4px); } }
+  @keyframes vt-in { from { opacity: 0; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes pop-in { from { opacity: 0; transform: translateY(16px) scale(.93); } to { opacity: 1; transform: none; } }
+  @keyframes avatar-in { from { opacity: 0; transform: scale(.4) rotate(-12deg); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes rule-draw { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: none; } }
+  @keyframes chat-in { from { opacity: 0; transform: translateY(30px) scale(.95); filter: blur(10px); } to { opacity: 1; transform: none; filter: none; } }
+  .wrap > :not(input, .ch-stage, .hero, .rv) { animation: rise .85s var(--ease) calc(var(--i, 0) * 110ms + 60ms) both; }
+  .hero > *, .rv > * { animation: rise .85s var(--ease) calc(var(--i, 0) * 110ms + 60ms) both; }
+  .hero > .avatar-wrap { animation: avatar-in 1s cubic-bezier(.34, 1.56, .64, 1) .05s both; }
+  .wrap > .rule { animation: rule-draw 1s var(--ease) .45s both; }
+  .grid > *, .products > *, .logos > * { animation: pop-in .7s var(--ease) calc(var(--i, 0) * 70ms + 380ms) both; }
+  .ch { animation: chat-in .95s var(--ease) .1s both; }
+  .wrap > :not(input):nth-child(1), .hero > *:nth-child(1), .rv > *:nth-child(1), .grid > *:nth-child(1), .products > *:nth-child(1), .logos > *:nth-child(1) { --i: 0; }
+  .wrap > :not(input):nth-child(2), .hero > *:nth-child(2), .rv > *:nth-child(2), .grid > *:nth-child(2), .products > *:nth-child(2), .logos > *:nth-child(2) { --i: 1; }
+  .wrap > :not(input):nth-child(3), .hero > *:nth-child(3), .rv > *:nth-child(3), .grid > *:nth-child(3), .products > *:nth-child(3), .logos > *:nth-child(3) { --i: 2; }
+  .wrap > :not(input):nth-child(4), .hero > *:nth-child(4), .rv > *:nth-child(4), .grid > *:nth-child(4), .products > *:nth-child(4), .logos > *:nth-child(4) { --i: 3; }
+  .wrap > :not(input):nth-child(5), .hero > *:nth-child(5), .rv > *:nth-child(5), .grid > *:nth-child(5), .products > *:nth-child(5), .logos > *:nth-child(5) { --i: 4; }
+  .wrap > :not(input):nth-child(6), .hero > *:nth-child(6), .rv > *:nth-child(6), .grid > *:nth-child(6), .products > *:nth-child(6), .logos > *:nth-child(6) { --i: 5; }
+  .wrap > :not(input):nth-child(7), .hero > *:nth-child(7), .rv > *:nth-child(7), .grid > *:nth-child(7), .products > *:nth-child(7), .logos > *:nth-child(7) { --i: 6; }
+  .wrap > :not(input):nth-child(8), .hero > *:nth-child(8), .rv > *:nth-child(8), .grid > *:nth-child(8), .products > *:nth-child(8), .logos > *:nth-child(8) { --i: 7; }
+  .wrap > :not(input):nth-child(9), .hero > *:nth-child(9), .rv > *:nth-child(9), .grid > *:nth-child(9), .products > *:nth-child(9), .logos > *:nth-child(9) { --i: 8; }
+}
