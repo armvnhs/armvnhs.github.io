@@ -707,3 +707,24 @@ div.product .product-bottom { display: none; }
   .wrap > :not(input):nth-child(8), .hero > *:nth-child(8), .rv > *:nth-child(8), .grid > *:nth-child(8), .products > *:nth-child(8), .logos > *:nth-child(8) { --i: 7; }
   .wrap > :not(input):nth-child(9), .hero > *:nth-child(9), .rv > *:nth-child(9), .grid > *:nth-child(9), .products > *:nth-child(9), .logos > *:nth-child(9) { --i: 8; }
 }
+
+/* image loading: skeleton shimmer + smooth fade-in */
+.js .card > img, .js .logo-tile img, .js .product-logo img, .js .row-lead img, .js .rv-logo img, .js .rv-app-icon img, .js .avatar, .js .ch-avatar img, .js .prose img, .js .post-cover {
+  opacity: 0;
+  transition: opacity .7s var(--ease), transform .9s var(--ease);
+}
+.js .card > img.is-loaded, .js .logo-tile img.is-loaded, .js .product-logo img.is-loaded, .js .row-lead img.is-loaded, .js .rv-logo img.is-loaded, .js .rv-app-icon img.is-loaded, .js .avatar.is-loaded, .js .ch-avatar img.is-loaded, .js .prose img.is-loaded, .js .post-cover.is-loaded { opacity: 1; }
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background: linear-gradient(110deg, #1b1b1b 30%, #2c2c2c 50%, #1b1b1b 70%) 0 0 / 220% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+.js .avatar { background: #efefef; }
+@keyframes shimmer { to { background-position: -220% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .card::before { animation: none; }
+  .js .card > img, .js .logo-tile img, .js .product-logo img, .js .row-lead img, .js .rv-logo img, .js .rv-app-icon img, .js .avatar, .js .ch-avatar img, .js .prose img, .js .post-cover { transition: opacity .2s; }
+}

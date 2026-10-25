@@ -10,7 +10,7 @@ title: Arman Haghshenas — Logo and brand designer
 {%- assign products = site.data.products.items -%}
 <header class="hero">
 <div class="avatar-wrap">
-<img class="avatar" src="{{ s.avatar | uri_escape }}" alt="{{ s.name }}" width="92" height="92">
+<img class="avatar" src="{{ s.avatar | uri_escape }}" alt="{{ s.name }}" width="92" height="92" fetchpriority="high" decoding="async">
 {%- if status_text.size > 0 %}
 <span class="status is-{{ s.status }}" tabindex="0" aria-label="{{ status_text }}"><span class="tip">{{ status_text }}</span></span>
 {%- endif %}
@@ -28,7 +28,7 @@ title: Arman Haghshenas — Logo and brand designer
 </div>
 <div class="grid">
 {%- for p in projects limit: site.home_projects %}
-{% include card.html href=p.link title=p.title category=p.category cover=p.cover %}
+{% include card.html href=p.link title=p.title category=p.category cover=p.cover eager=forloop.first %}
 {%- endfor %}
 </div>
 </section>

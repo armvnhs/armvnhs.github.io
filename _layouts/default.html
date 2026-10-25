@@ -9,7 +9,7 @@
 {%- assign doc_title = page.title | default: site.title -%}
 {%- endif -%}
 {%- assign doc_desc = page.summary | default: site.description -%}
-{%- assign doc_image = page.cover | default: page.logo | default: site.data.site.avatar -%}
+{%- assign doc_image = page.cover | default: page.logo | default: site.data.site.ogImage | default: '/assets/img/og-cover.jpg' -%}
 <title>{{ doc_title }}</title>
 <meta name="description" content="{{ doc_desc | escape }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
@@ -17,9 +17,17 @@
 <meta property="og:title" content="{{ doc_title | escape }}">
 <meta property="og:description" content="{{ doc_desc | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="{{ site.data.site.name | escape }}">
 {%- if doc_image.size > 0 %}
 <meta property="og:image" content="{{ doc_image | uri_escape | absolute_url }}">
+{%- unless page.cover.size > 0 or page.logo.size > 0 %}
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{%- endunless %}
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ doc_title | escape }}">
+<meta name="twitter:description" content="{{ doc_desc | escape }}">
+<meta name="twitter:image" content="{{ doc_image | uri_escape | absolute_url }}">
 {%- endif %}
 <meta name="theme-color" content="#ffffff">
 {%- assign fav = site.data.site.favicon | default: '/assets/img/Favicon.svg' %}
@@ -28,6 +36,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300..800&amp;family=Vazirmatn:wght@100..900&amp;display=swap">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -39,5 +48,14 @@
 <a href="/resume/" aria-label="Resume"{% if page.nav == 'resume' %} class="active" aria-current="page"{% endif %}>{% include icon.html name="file-text" %}<span class="label">Resume</span></a>
 <a href="/contact/" aria-label="Contact"{% if page.nav == 'contact' %} class="active" aria-current="page"{% endif %}>{% include icon.html name="mail" %}<span class="label">Contact</span></a>
 </nav>
+<script>
+(function(){
+  function ok(e){e.classList.add("is-loaded")}
+  document.querySelectorAll("img").forEach(function(e){
+    if(e.complete){ok(e)}
+    else{e.addEventListener("load",function(){ok(e)},{once:true});e.addEventListener("error",function(){ok(e)},{once:true})}
+  });
+})();
+</script>
 </body>
 </html>
