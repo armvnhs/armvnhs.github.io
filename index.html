@@ -34,10 +34,10 @@ title: Arman Haghshenas — Logo and brand designer
 </div>
 </div>
 </div>
-<div class="block-foot"><a class="more" href="/projects/">View all projects</a></div>
 </section>
 {%- endif %}
 {%- if companies.size > 0 %}
+<div class="chgap" aria-hidden="true"><i></i><b></b><i></i></div>
 <section class="block" id="experience">
 <div class="brands" style="--n:{{ companies.size }}">
 {%- for c in companies %}
@@ -47,6 +47,7 @@ title: Arman Haghshenas — Logo and brand designer
 </section>
 {%- endif %}
 {%- if products.size > 0 %}
+<div class="chgap" aria-hidden="true"><i></i><b></b><i></i></div>
 <section class="block" id="built">
 <div class="papps">
 {%- for p in products %}
@@ -69,6 +70,7 @@ title: Arman Haghshenas — Logo and brand designer
 {%- endif %}
 {%- if posts.size > 0 %}
 {%- assign lead = posts | first -%}
+<div class="chgap" aria-hidden="true"><i></i><b></b><i></i></div>
 <section class="block" id="blog">
 <a class="pfeat" href="{{ lead.url }}">
 <span class="pfeat-media">{%- if lead.cover.size > 0 -%}<img src="{{ lead.cover | uri_escape }}" alt="" loading="lazy" decoding="async">{%- endif -%}</span>

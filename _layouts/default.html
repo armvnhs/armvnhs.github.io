@@ -33,9 +33,6 @@
 {%- assign fav = site.data.site.favicon | default: '/assets/img/Favicon.svg' %}
 <link rel="icon" href="{{ fav | uri_escape }}">
 <link rel="apple-touch-icon" href="{{ fav | uri_escape }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400..700&amp;display=swap">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="/style.css">
 <script>document.documentElement.className+=" js";try{if(localStorage.getItem("lang")==="fa")document.documentElement.dataset.lang="fa"}catch(e){}</script>
@@ -70,7 +67,7 @@
     addEventListener("scroll",function(){if(!tk&&scrollY<1400){tk=true;requestAnimationFrame(spin)}},{passive:true});
     spin();
   }
-  var els=document.querySelectorAll(".block,.hero > *,.foot,.htl,.rs-stats");
+  var els=document.querySelectorAll(".block,.chgap,.hero > *,.foot,.htl,.rs-stats");
   els.forEach(function(e,n){e.classList.add("rvl");e.style.setProperty("--d",(e.parentNode.classList.contains("hero")?n*0.07:0)+"s")});
   document.querySelectorAll(".block .grid,.block .prods,.block .wlist,.block .logos,.block .logo-wall,.block .shelf,.htl,.apps").forEach(function(p){
     Array.prototype.forEach.call(p.children,function(c,n){c.classList.add("stg");c.style.setProperty("--i",n)});

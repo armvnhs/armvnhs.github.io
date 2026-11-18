@@ -68,41 +68,9 @@
       c.el.style.setProperty("--veil", sp.veil.toFixed(3));
     });
     var f = mod(Math.round(turn), slots.length);
-    if (f !== shown) { shown = f; caption(slots[f]); mark(mod(f, count)); }
+    if (f !== shown) { shown = f; caption(slots[f]); }
   }
 
-  /* One dot per project, so the stack says how many there are and can be jumped to. */
-  var dots = null;
-  function mark(f) {
-    if (!dots) return;
-    Array.prototype.forEach.call(dots.children, function (d, i) {
-      d.classList.toggle("is-on", i === f);
-      if (i === f) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
-    });
-  }
-  function buildDots() {
-    if (dots) dots.remove();
-    dots = document.createElement("div");
-    dots.className = "car-dots";
-    slots.slice(0, count).forEach(function (c, i) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "car-dot";
-      b.setAttribute("aria-label", "Show " + (c.title || "project " + (i + 1)));
-      b.addEventListener("click", function () {
-        /* A short ring repeats cards, so aim at the copy of this project nearest the front. */
-        var n = slots.length, at = Math.round(turn), pick = i, far = Infinity;
-        for (var k = 0; k < n; k++) {
-          if (mod(k, count) !== i) continue;
-          var gap = Math.abs(k - at);
-          if (gap < far) { far = gap; pick = k; }
-        }
-        glide(pick);
-      });
-      dots.appendChild(b);
-    });
-    root.insertAdjacentElement("afterend", dots);
-  }
 
   function caption(c) {
     if (!cap || !c) return;
@@ -155,7 +123,6 @@
       return c;
     });
     turn = Math.floor((slots.length - 1) / 2);
-    buildDots();
   }
 
   /* A cover that fails to load keeps its place, showing the project's initial instead of a broken image. */
@@ -176,7 +143,6 @@
     if (count > slots.length) count = slots.length;
     turn = Math.round(turn);
     shown = -1;
-    buildDots();
     paint();
   }
 
