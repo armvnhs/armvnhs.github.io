@@ -23,19 +23,16 @@ title: Arman Haghshenas — Logo and brand designer
 </header>
 {%- if projects.size > 0 %}
 <section class="block" id="projects">
-<div class="pgrid">
+<div class="car-fit" data-carousel>
+<div class="car">
+<div class="car-track" role="group" aria-roledescription="carousel" aria-label="Selected projects" tabindex="0">
 {%- for p in projects limit: site.home_projects %}
-{%- if p.link.size > 0 -%}
-<a class="plg" href="{{ p.link }}" target="_blank" rel="noopener" data-mono="{{ p.title | slice: 0 | upcase }}">
-{%- else -%}
-<div class="plg" data-mono="{{ p.title | slice: 0 | upcase }}">
-{%- endif %}
-<img src="{{ p.cover | uri_escape }}" alt="" loading="lazy" decoding="async">
-<span class="plg-shade" aria-hidden="true"></span>
-<span class="plg-text"><b>{{ p.title }}</b><span>{{ p.category }}</span></span>
-<span class="plg-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
-{%- if p.link.size > 0 -%}</a>{%- else -%}</div>{%- endif %}
+<div class="car-slot" data-title="{{ p.title }}" data-cat="{{ p.category }}" data-href="{{ p.link }}">
+<div class="car-float"><a class="car-card"{% if p.link.size > 0 %} href="{{ p.link }}" target="_blank" rel="noopener"{% endif %} aria-label="{{ p.title }}"><img src="{{ p.cover | uri_escape }}" alt="" draggable="false" decoding="async"><span class="car-shade" aria-hidden="true"></span><span class="car-label"><b>{{ p.title }}</b><span>{{ p.category }}</span></span><span class="car-sheen" aria-hidden="true"></span></a></div>
+</div>
 {%- endfor %}
+</div>
+</div>
 </div>
 <div class="block-foot"><a class="more" href="/projects/">View all projects</a></div>
 </section>

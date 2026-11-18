@@ -60,13 +60,6 @@
     if(e.complete){ok(e)}
     else{e.addEventListener("load",function(){ok(e)},{once:true});e.addEventListener("error",function(){ok(e)},{once:true})}
   });
-  document.querySelectorAll(".plg").forEach(function(c){
-    var img=c.querySelector("img");
-    if(!img)return;
-    var miss=function(){c.classList.add("is-empty");img.hidden=true};
-    if(img.complete&&!img.naturalWidth)miss();
-    else img.addEventListener("error",miss,{once:true});
-  });
 })();
 </script>
 <script>
@@ -134,5 +127,6 @@
   document.querySelectorAll("time[datetime]:not([data-raw])").forEach(function(e){var d=new Date(e.getAttribute("datetime"));if(!isNaN(d))e.textContent=df.format(d)});
 })();
 </script>
+<script src="/assets/carousel.js" defer></script>
 </body>
 </html>

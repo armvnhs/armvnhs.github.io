@@ -1305,6 +1305,66 @@ html { scrollbar-gutter: stable; }
 .brand:hover .brand-name, .brand:focus-visible .brand-name { opacity: 1; transform: translate(-50%, 0); }
 @media (hover: none) { .brand-name { opacity: 1; transform: translate(-50%, 0); } }
 
+/* Adapted from Bencho's "Carousel" (MIT, bencho.dev/licence). Its tokens are mapped to this site's own and defined on the root so nothing leaks out. */
+.car-fit { position: relative; width: 100%; height: calc(340px * var(--k, 1)); }
+.car {
+  --bg: #fff;
+  --font-ui: var(--text);
+  --ink-rgb: 10, 10, 10;
+  --shadow-rgb: 10, 10, 10;
+  position: absolute; top: 0; left: 50%; width: 476px; height: 340px; margin-left: -238px;
+  transform: scale(var(--k, 1)); transform-origin: top center; font-family: var(--font-ui);
+}
+.car-track { position: absolute; inset: 0; touch-action: pan-y; }
+.car-track:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(var(--ink-rgb), .4); border-radius: 24px; }
+.car-slot { position: absolute; left: 50%; top: 50%; width: 206px; height: 292px; transform-origin: center; will-change: transform, opacity; }
+.car-float { width: 100%; height: 100%; perspective: 760px; animation: car-bob 5s ease-in-out infinite; --lift: 2.4px; --sway: .21deg; }
+.car-card { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 20px; background: #efefef; box-shadow: 0 12px 28px -10px rgba(var(--shadow-rgb), .28); -webkit-user-drag: none; }
+.car-card img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.car-sheen { position: absolute; inset: 0; display: block; pointer-events: none; }
+@keyframes car-bob {
+  0%, 100% { transform: translateY(calc(var(--lift, 4px) * -1)) rotate(calc(var(--sway, 1deg) * -1)); }
+  50% { transform: translateY(var(--lift, 4px)) rotate(var(--sway, 1deg)); }
+}
+@media (prefers-reduced-motion: reduce) { .car-float { animation: none; } }
+.car-cap { margin-top: 18px; text-align: center; }
+.car-cap-link { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.car-cap-link b { font-size: 1rem; font-weight: 600; }
+.car-cap-link span { font-size: .88rem; color: var(--muted); }
+.car-cap-link[aria-disabled] { pointer-events: none; }
+
+/* Dragging the project ring must not select text or paint a highlight over the cards. */
+.car-fit, .car-slot, .car-card, .car-cap { -webkit-user-select: none; user-select: none; }
+.car-card img { -webkit-user-drag: none; }
+.car-fit ::selection, .car-cap ::selection { background: transparent; color: inherit; }
+
+/* Portfolio stack: one tall card in front, two smaller ones tucked behind it on each side, dots in a pill. */
+.car { width: var(--stage, 720px); height: 372px; margin-left: calc(var(--stage, 720px) / -2); }
+.car-fit { height: calc(372px * var(--k, 1)); overflow-x: clip; }
+.car-slot { width: 210px; height: 312px; }
+.car-float { animation: none; }
+.car-card { border: 0; border-radius: 24px; background: #ededed; box-shadow: 0 22px 44px -26px rgba(var(--shadow-rgb), .55), 0 2px 8px rgba(var(--shadow-rgb), .05); }
+.car-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: #fff; opacity: var(--veil, 0); transition: opacity .35s var(--ease); pointer-events: none; }
+.car-dots { display: flex; align-items: center; gap: 0; width: max-content; margin: 22px auto 0; padding: 3px 4px; border-radius: 999px; background: rgba(10, 10, 10, .24); }
+.car-dot { box-sizing: content-box; width: 4.5px; height: 4.5px; padding: 6px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .45); background-clip: content-box; cursor: pointer; transition: background .3s; }
+.car-dot.is-on { background: #fff; }
+.car-dot:hover { background: rgba(255, 255, 255, .8); }
+.car-dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.car-cap { margin-top: 12px; }
+
+/* The name and the category ride on the card itself, not in a line underneath it. */
+.car-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8, 8, 12, .72) 0%, rgba(8, 8, 12, .26) 26%, rgba(8, 8, 12, 0) 54%); pointer-events: none; }
+.car-label { position: absolute; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; gap: 1px; padding: 13px 15px; color: #fff; pointer-events: none; }
+.car-label b { font-family: var(--display); font-size: .95rem; font-weight: 600; line-height: 1.2; letter-spacing: -.01em; unicode-bidi: plaintext; }
+.car-label span { font-size: .76rem; font-weight: 500; color: rgba(255, 255, 255, .74); unicode-bidi: plaintext; }
+#projects .block-foot { justify-content: center; margin-top: 22px; }
+/* A project without a cover shows its initial rather than a broken image. */
+.car-card.is-empty { background: linear-gradient(145deg, #f2f2f2, #e4e4e4); }
+.car-card.is-empty::before { content: attr(data-mono); position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-size: 4rem; font-weight: 600; color: #d3d3d3; }
+.car-card.is-empty .car-shade, .car-card.is-empty .car-sheen { display: none; }
+.car-card.is-empty .car-label { color: var(--ink); }
+.car-card.is-empty .car-label span { color: #8a8a8a; }
+
 /* Funnel Sans is served from this site, so a blocked font CDN can never fall back to another face. */
 @font-face {
   font-family: "Funnel Sans";
@@ -1327,40 +1387,6 @@ html { scrollbar-gutter: stable; }
 .block-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 18px; }
 .block-foot .more { font-size: .86rem; }
 .block-foot .lang-toggle { order: 2; }
-
-/* Projects: covers only. Title and category live inside the card, over the artwork. */
-.pgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.plg {
-  position: relative; display: block; aspect-ratio: 1 / 1.12; overflow: hidden;
-  border-radius: 26px; background: #f0f0f0; text-decoration: none;
-  box-shadow: 0 0 0 1px rgba(10, 10, 10, .06), 0 26px 40px -34px rgba(10, 10, 10, .85);
-  transform: translateZ(0);
-}
-.plg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-/* A cover that fails to load becomes a quiet monogram card instead of a broken-image icon. */
-.plg.is-empty { background: linear-gradient(145deg, #f2f2f2, #e4e4e4); box-shadow: 0 0 0 1px rgba(10, 10, 10, .06); }
-.plg.is-empty::before { content: attr(data-mono); position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-size: 5.6rem; font-weight: 600; color: #d3d3d3; }
-.plg.is-empty .plg-shade { display: none; }
-.plg.is-empty .plg-text { color: var(--ink); }
-.plg.is-empty .plg-text span { color: #8a8a8a; }
-.plg-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8, 8, 12, .74) 0%, rgba(8, 8, 12, .3) 24%, rgba(8, 8, 12, 0) 52%); }
-.plg-text { position: absolute; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; gap: 2px; padding: 18px 20px; color: #fff; }
-.plg-text b { font-family: var(--display); font-size: 1.05rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.2; unicode-bidi: plaintext; }
-.plg-text span { font-size: .82rem; font-weight: 500; color: rgba(255, 255, 255, .74); unicode-bidi: plaintext; }
-.plg-go { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, .92); color: #111; opacity: 0; transform: translateY(-8px) scale(.88); transition: opacity .35s, transform .55s var(--ease); }
-.plg-go svg { width: 17px; height: 17px; }
-@media (hover: hover) {
-  .plg:hover img { transform: scale(1.055); }
-  .plg:hover .plg-go { opacity: 1; transform: none; }
-}
-@media (hover: none) { .plg-go { display: none; } }
-@media (max-width: 520px) {
-  .pgrid { gap: 10px; }
-  .plg { border-radius: 20px; }
-  .plg-text { padding: 12px 13px; }
-  .plg-text b { font-size: .9rem; }
-  .plg-text span { font-size: .74rem; }
-}
 
 /* Things I've built: an app tile rather than a list row. */
 .papps { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); gap: 12px; }
