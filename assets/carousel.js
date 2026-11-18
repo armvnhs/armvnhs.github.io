@@ -10,7 +10,7 @@
   /* The deck never scrolls: it clicks from one card to the next, so the geometry is a pure function of the turn. */
   var STAGE_W = 720, NARROW_W = 400, THRESH = 700;
   var NEAR = 132, FAR = 236, NARROW_STEP = 104;
-  var BASE = 560;
+  var BASE = 760;
   var wide = true;
 
   var track = root.querySelector(".car-track");
@@ -57,7 +57,11 @@
   function paint() {
     slots.forEach(function (c, i) {
       var sp = spot(i);
-      c.el.style.transform = "translate(-50%, -50%) translate(" + sp.x.toFixed(2) + "px, " + sp.y.toFixed(2) + "px) scale(" + sp.s.toFixed(4) + ")";
+      /* The ring is drawn in 3D: cards away from the front turn their faces outwards, so the deck reads as a curve. */
+      var ad = Math.abs(i - turn - Math.round((i - turn) / slots.length) * slots.length);
+      var side = i - turn < 0 ? -1 : 1;
+      var ry = wide ? side * (ad <= 1 ? ad * 11 : 11 + (Math.min(ad, 2) - 1) * 9 + Math.max(0, ad - 2) * 7) : 0;
+      c.el.style.transform = "translate(-50%, -50%) translate(" + sp.x.toFixed(2) + "px, " + sp.y.toFixed(2) + "px) scale(" + sp.s.toFixed(4) + ") rotateY(" + ry.toFixed(2) + "deg)";
       c.el.style.zIndex = String(sp.z);
       c.el.style.opacity = sp.o.toFixed(3);
       c.el.style.pointerEvents = sp.o > 0.45 ? "" : "none";
@@ -116,7 +120,7 @@
     var t0 = performance.now();
     var tick = function (now) {
       var p = Math.min(1, (now - t0) / BASE);
-      turn = mix(from, to, 1 - Math.pow(1 - p, 4));
+      turn = mix(from, to, 1 - Math.pow(1 - p, 5));
       paint();
       if (p < 1) raf = requestAnimationFrame(tick);
     };
@@ -204,18 +208,48 @@
       root.classList.add("is-dragging");
       try { root.setPointerCapture(e.pointerId); } catch (err) {}
     }
+    var now = performance.now();
+    if (drag.lx !== undefined && now - drag.lt > 0) drag.vx = mix(drag.vx || 0, (e.clientX - drag.lx) / (now - drag.lt), 0.6);
+    drag.lx = e.clientX; drag.lt = now;
     turn = clamp(drag.t0 - dx / DRAG_STEP, Math.round(drag.t0) - 3, Math.round(drag.t0) + 3);
     paint();
   });
 
+  /* The card in front leans towards the pointer, so the stack behaves like a solid object in the page. */
+  function lean(el, x, y) {
+    var r = el.getBoundingClientRect();
+    if (x < r.left || x > r.right || y < r.top || y > r.bottom) return false;
+    var px = (x - r.left) / r.width - 0.5, py = (y - r.top) / r.height - 0.5;
+    el.style.setProperty("--hx", (-py * 9).toFixed(2) + "deg");
+    el.style.setProperty("--hy", (px * 12).toFixed(2) + "deg");
+    return true;
+  }
+  function flat(el) {
+    if (!el) return;
+    el.style.setProperty("--hx", "0deg");
+    el.style.setProperty("--hy", "0deg");
+  }
+  var leaned = null;
+  root.addEventListener("pointermove", function (e) {
+    if (drag && drag.moved) { flat(leaned); return; }
+    var f = slots[mod(Math.round(turn), slots.length)];
+    if (!f || !f.link) return;
+    if (lean(f.link, e.clientX, e.clientY)) leaned = f.link;
+    else if (leaned !== f.link) { flat(leaned); leaned = null; }
+    else flat(leaned);
+  });
+  root.addEventListener("pointerleave", function () { flat(leaned); });
+
   function endDrag(e) {
     if (!drag || (e && e.pointerId !== drag.id)) return;
-    var moved = drag.moved;
+    var moved = drag.moved, thrown = drag.vx || 0;
     drag = null;
     root.classList.remove("is-dragging");
     if (!moved) return;
     suppressed = Date.now();
-    glide(Math.round(turn));
+    /* A flick carries on for a card or two instead of stopping dead under the pointer. */
+    var carry = clamp(-thrown * 0.22, -1.4, 1.4);
+    glide(Math.round(turn + carry));
   }
   root.addEventListener("pointerup", endDrag);
   root.addEventListener("pointercancel", endDrag);
