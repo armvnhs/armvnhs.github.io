@@ -8,9 +8,8 @@
   var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   /* The numbers keep Bencho's tuned values: knobs at 50 are the middle of every range. */
-  var STAGE_W = 476, ORBIT = 138, DEPTH = 100, LEAN = 38, PULL = 140, TOSS = 150, MOST = 2, BASE = 620;
+  var STAGE_W = 400, GAP = 116, PULL = 140, TOSS = 150, MOST = 2, BASE = 620;
   var FLOAT = 15, SINK = 50, CORNER = 20;
-  var ANGLE = [-4.2, 2.6, -1.4, 3.8, 1.7];
   var PERIOD = [4.7, 5.9, 6.7, 5.3, 7.1, 6.1];
   /* Spring at tune 50: stiffness 0.16, decay 0.72, zeta about 0.41 — an overshoot you can see, not one that rings. */
   var K = 0.16, D = 0.72;
@@ -22,21 +21,62 @@
 
   function mod(n, m) { return ((n % m) + m) % m; }
 
-  /* Where a card sits is ONE function: first paint and drag both read it. `f` is 1 at the front and 0 at the back,
-     and drives size, lean and paint order together. The angle is never wrapped, or a card would take the long way round. */
+  /* Where a card sits is ONE function: first paint and drag both read it. `d` is how many spots the card is
+     from the front, taken the short way round so a drag never sends a card across the whole stack.
+     The front card stands tall and square-on; the ones behind shrink, tuck underneath it and go pale. */
   function spot(i) {
-    var n = slots.length, th = (i - turn) * ((Math.PI * 2) / n), f = (Math.cos(th) + 1) / 2;
-    return { x: Math.sin(th) * ORBIT, y: -(1 - f) * LEAN, s: mix(1 - DEPTH / 200, 1, f), z: Math.round(f * 100) };
+    var n = slots.length, raw = i - turn;
+    var d = raw - Math.round(raw / n) * n;
+    var ad = Math.abs(d), near = Math.min(ad, 1);
+    return {
+      x: d * GAP,
+      y: near * 8,
+      s: 1 - near * 0.3,
+      z: Math.round(100 - ad * 10),
+      o: ad < 1 ? 1 : Math.max(0, Math.min(1, 1.9 - ad)),
+      veil: Math.min(0.35, ad * 0.35)
+    };
   }
 
   function paint() {
     slots.forEach(function (c, i) {
       var sp = spot(i);
-      c.el.style.transform = "translate(-50%, -50%) translate(" + sp.x.toFixed(2) + "px, " + sp.y.toFixed(2) + "px) rotate(" + c.angle + "deg) scale(" + sp.s.toFixed(4) + ")";
+      c.el.style.transform = "translate(-50%, -50%) translate(" + sp.x.toFixed(2) + "px, " + sp.y.toFixed(2) + "px) scale(" + sp.s.toFixed(4) + ")";
       c.el.style.zIndex = String(sp.z);
+      c.el.style.opacity = sp.o.toFixed(3);
+      c.el.style.pointerEvents = sp.o > 0.5 ? "" : "none";
+      c.el.style.setProperty("--veil", sp.veil.toFixed(3));
     });
     var f = mod(Math.round(turn), slots.length);
-    if (f !== shown) { shown = f; caption(slots[f]); }
+    if (f !== shown) { shown = f; caption(slots[f]); mark(f); }
+  }
+
+  /* One dot per project, so the stack says how many there are and can be jumped to. */
+  var dots = null;
+  function mark(f) {
+    if (!dots) return;
+    Array.prototype.forEach.call(dots.children, function (d, i) {
+      d.classList.toggle("is-on", i === f);
+      if (i === f) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
+    });
+  }
+  function buildDots() {
+    if (dots) dots.remove();
+    dots = document.createElement("div");
+    dots.className = "car-dots";
+    slots.forEach(function (c, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "car-dot";
+      b.setAttribute("aria-label", "Show " + (c.title || "project " + (i + 1)));
+      b.addEventListener("click", function () {
+        var n = slots.length, d = i - Math.round(turn);
+        d -= Math.round(d / n) * n;
+        glide(Math.round(turn) + d);
+      });
+      dots.appendChild(b);
+    });
+    root.insertAdjacentElement("afterend", dots);
   }
 
   function caption(c) {
@@ -102,7 +142,7 @@
     var els = Array.prototype.slice.call(track.querySelectorAll(".car-slot"));
     slots = els.map(function (el, i) {
       var link = el.querySelector(".car-card"), img = link.querySelector("img"), sheen = link.querySelector(".car-sheen");
-      var c = { el: el, link: link, angle: ANGLE[i % ANGLE.length], title: el.dataset.title, cat: el.dataset.cat, href: el.dataset.href, tilt: new Tilt(link, sheen) };
+      var c = { el: el, link: link, title: el.dataset.title, cat: el.dataset.cat, href: el.dataset.href, tilt: new Tilt(link, sheen) };
       el.querySelector(".car-float").style.animationDuration = PERIOD[i % PERIOD.length] + "s";
       img.addEventListener("error", function () { drop(c); });
       link.addEventListener("pointermove", function (e) {
@@ -121,6 +161,7 @@
       return c;
     });
     turn = Math.floor((slots.length - 1) / 2);
+    buildDots();
   }
 
   /* A cover that fails to load takes its card with it, rather than leaving a blank one on the ring. */
@@ -132,6 +173,7 @@
     if (!slots.length) { root.closest("section").hidden = true; return; }
     turn = Math.round(turn);
     shown = -1;
+    buildDots();
     paint();
   }
 

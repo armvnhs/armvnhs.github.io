@@ -8,7 +8,7 @@ title: Contact — Arman Haghshenas
 {%- assign phone = s.phone -%}
 {%- assign wa = s.whatsapp | default: phone | remove: '+' | remove: ' ' | remove: '-' -%}
 {%- assign fa = "۰,۱,۲,۳,۴,۵,۶,۷,۸,۹" | split: "," -%}
-<a class="back" href="/">← Home</a>
+<a class="back" href="/" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4.5"/><path d="M11 5.5 4.5 12l6.5 6.5"/></svg></a>
 <div class="page-head">
 <h1 class="page-title">Let’s talk</h1>
 <p class="page-lead">{{ s.contactText }}</p>
