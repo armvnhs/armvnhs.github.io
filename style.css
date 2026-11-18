@@ -1448,7 +1448,6 @@ html { scrollbar-gutter: stable; }
 .foot li a { font-size: .9rem; }
 .foot-meta { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .8rem; }
 .foot-place { color: #a3a3a3; }
-.foot-clock { font-variant-numeric: tabular-nums; color: #6b6b6b; }
 .foot-top { color: #6b6b6b; text-decoration: none; transition: color .3s; }
 .foot-top:hover { color: var(--ink); }
 @media (max-width: 560px) {

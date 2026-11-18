@@ -35,7 +35,7 @@
 </div>
 <div class="foot-meta">
 <span class="foot-copy">© {{ 'now' | date: '%Y' }} {{ s.name }}</span>
-<span class="foot-place">{% if s.city.size > 0 %}{{ s.city }} · {% endif %}<span class="foot-clock" data-clock>—</span></span>
+<span class="foot-place">{% if s.city.size > 0 %}{{ s.city }}{% endif %}</span>
 <a class="foot-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
 </div>
 </footer>
