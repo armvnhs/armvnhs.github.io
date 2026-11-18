@@ -5,8 +5,6 @@ title: Arman Haghshenas — Logo and brand designer
 ---
 {%- assign s = site.data.site -%}
 {%- assign status_text = site.status_labels[s.status] -%}
-{%- assign fa = "۰,۱,۲,۳,۴,۵,۶,۷,۸,۹" | split: "," -%}
-{%- assign tags = s.tagline | split: "•" -%}
 {%- assign projects = site.data.projects.items -%}
 {%- assign companies = site.companies | sort: 'order' -%}
 {%- assign products = site.data.products.items -%}
@@ -23,31 +21,28 @@ title: Arman Haghshenas — Logo and brand designer
 {%- endif %}
 {% include socials.html email=true %}
 </header>
-{%- assign n = 0 -%}
 {%- if projects.size > 0 %}
-{%- assign n = n | plus: 1 %}
 <section class="block" id="projects">
-<div class="block-end"><a class="more" href="/projects/">View all</a></div>
-<div class="car-fit" data-carousel>
-<div class="car">
-<div class="car-track" role="group" aria-roledescription="carousel" aria-label="Selected projects" tabindex="0">
+<div class="pgrid">
 {%- for p in projects limit: site.home_projects %}
-<div class="car-slot" data-title="{{ p.title }}" data-cat="{{ p.category }}" data-href="{{ p.link }}">
-<div class="car-float"><a class="car-card"{% if p.link.size > 0 %} href="{{ p.link }}" target="_blank" rel="noopener"{% endif %} aria-label="{{ p.title }}"><img src="{{ p.cover | uri_escape }}" alt="" draggable="false" decoding="async"><span class="car-sheen" aria-hidden="true"></span></a></div>
-</div>
+{%- if p.link.size > 0 -%}
+<a class="plg" href="{{ p.link }}" target="_blank" rel="noopener" data-mono="{{ p.title | slice: 0 | upcase }}">
+{%- else -%}
+<div class="plg" data-mono="{{ p.title | slice: 0 | upcase }}">
+{%- endif %}
+<img src="{{ p.cover | uri_escape }}" alt="" loading="lazy" decoding="async">
+<span class="plg-shade" aria-hidden="true"></span>
+<span class="plg-text"><b>{{ p.title }}</b><span>{{ p.category }}</span></span>
+<span class="plg-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+{%- if p.link.size > 0 -%}</a>{%- else -%}</div>{%- endif %}
 {%- endfor %}
 </div>
-</div>
-</div>
-<p class="car-cap"><a class="car-cap-link" target="_blank" rel="noopener"><b></b><span></span></a></p>
+<div class="block-foot"><a class="more" href="/projects/">View all projects</a></div>
 </section>
 {%- endif %}
 {%- if companies.size > 0 %}
-{%- assign n = n | plus: 1 -%}
-{%- assign cn = companies.size -%}
-{%- if cn > 4 -%}{%- assign cn = 4 -%}{%- endif %}
 <section class="block" id="experience">
-<div class="brands">
+<div class="brands" style="--n:{{ companies.size }}">
 {%- for c in companies %}
 <a class="brand" href="{{ c.url }}" aria-label="{{ c.title }}" title="{{ c.title }}"><span class="brand-mark">{%- if c.logo.size > 0 -%}<img src="{{ c.logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ c.title | slice: 0 }}</b>{%- endif -%}</span><span class="brand-name">{{ c.title }}</span></a>
 {%- endfor %}
@@ -55,34 +50,44 @@ title: Arman Haghshenas — Logo and brand designer
 </section>
 {%- endif %}
 {%- if products.size > 0 %}
-{%- assign n = n | plus: 1 %}
 <section class="block" id="built">
-<div class="wlist">
+<div class="papps">
 {%- for p in products %}
 {%- if p.link.size > 0 -%}
 {%- assign link_parts = p.link | split: '/' -%}
 {%- assign link_host = link_parts[2] | remove_first: 'www.' -%}
-<a class="wrow" href="{{ p.link }}" target="_blank" rel="noopener">
+<a class="papp" href="{{ p.link }}" target="_blank" rel="noopener">
 {%- else -%}
 {%- assign link_host = '' -%}
-<div class="wrow">
+<div class="papp">
 {%- endif %}
-<span class="wr-thumb is-app">{%- if p.logo.size > 0 -%}<img src="{{ p.logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ p.name | slice: 0 | upcase }}</b>{%- endif -%}</span>
-<span class="wr-text"><span class="wr-title">{{ p.name }}</span><span class="wr-sub">{{ p.description }}</span></span>
-<span class="wr-dots" aria-hidden="true"></span>
-<span class="wr-end">{{ link_host }}</span>
+<span class="papp-top"><span class="papp-icon">{%- if p.logo.size > 0 -%}<img src="{{ p.logo | uri_escape }}" alt="" loading="lazy">{%- else -%}<b>{{ p.name | slice: 0 | upcase }}</b>{%- endif -%}</span>{%- if p.type.size > 0 -%}<span class="papp-type">{{ p.type }}</span>{%- endif -%}</span>
+<span class="papp-name">{{ p.name }}</span>
+<span class="papp-desc">{{ p.description }}</span>
+<span class="papp-foot"><span class="papp-host">{{ link_host }}</span><span class="papp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
 {%- if p.link.size > 0 -%}</a>{%- else -%}</div>{%- endif %}
 {%- endfor %}
 </div>
 </section>
 {%- endif %}
 {%- if posts.size > 0 %}
-{%- assign n = n | plus: 1 %}
+{%- assign lead = posts | first -%}
 <section class="block" id="blog">
-<div class="block-end">{% include lang-toggle.html %}<a class="more" href="/blog/">View all</a></div>
-<div class="wlist">
-{%- for p in posts limit: 5 %}{% include post.html p=p %}{%- endfor %}
+<a class="pfeat" href="{{ lead.url }}">
+<span class="pfeat-media">{%- if lead.cover.size > 0 -%}<img src="{{ lead.cover | uri_escape }}" alt="" loading="lazy" decoding="async">{%- endif -%}</span>
+<span class="pfeat-body">
+<span class="pfeat-tag">Latest writing</span>
+<span class="pfeat-title" dir="auto">{% include bi.html en=lead.title fa=lead.title_fa %}</span>
+<span class="pfeat-sum" dir="auto">{% include bi.html en=lead.summary fa=lead.summary_fa %}</span>
+<span class="pfeat-meta"><time datetime="{{ lead.date | date_to_xmlschema }}">{{ lead.date | date: "%d %b %Y" }}</time><span class="pfeat-go">Read</span></span>
+</span>
+</a>
+{%- if posts.size > 1 %}
+<div class="wlist post-more">
+{%- for p in posts offset: 1 limit: 4 %}{% include post.html p=p %}{%- endfor %}
 </div>
+{%- endif %}
+<div class="block-foot">{% include lang-toggle.html %}<a class="more" href="/blog/">View all posts</a></div>
 </section>
 {%- endif %}
 {% include footer.html %}

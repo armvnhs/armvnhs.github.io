@@ -35,7 +35,7 @@
 <link rel="apple-touch-icon" href="{{ fav | uri_escape }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300..800&amp;family=Vazirmatn:wght@400..700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400..700&amp;display=swap">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="/style.css">
 <script>document.documentElement.className+=" js";try{if(localStorage.getItem("lang")==="fa")document.documentElement.dataset.lang="fa"}catch(e){}</script>
@@ -59,6 +59,13 @@
   document.querySelectorAll("img").forEach(function(e){
     if(e.complete){ok(e)}
     else{e.addEventListener("load",function(){ok(e)},{once:true});e.addEventListener("error",function(){ok(e)},{once:true})}
+  });
+  document.querySelectorAll(".plg").forEach(function(c){
+    var img=c.querySelector("img");
+    if(!img)return;
+    var miss=function(){c.classList.add("is-empty");img.hidden=true};
+    if(img.complete&&!img.naturalWidth)miss();
+    else img.addEventListener("error",miss,{once:true});
   });
 })();
 </script>
@@ -127,6 +134,5 @@
   document.querySelectorAll("time[datetime]:not([data-raw])").forEach(function(e){var d=new Date(e.getAttribute("datetime"));if(!isNaN(d))e.textContent=df.format(d)});
 })();
 </script>
-<script src="/assets/carousel.js" defer></script>
 </body>
 </html>

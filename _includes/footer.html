@@ -1,30 +1,41 @@
 {%- assign s = site.data.site -%}
 <footer class="foot">
+<div class="foot-lead">
+<span class="foot-kicker">{{ s.contactText | default: "Have a project in mind? Let's talk." }}</span>
+<a class="foot-mail" href="mailto:{{ s.email }}">{{ s.email }}</a>
+</div>
 <div class="foot-cols">
 <div class="foot-col">
-<h2 class="foot-label">Contact</h2>
-<ul>
-{%- for l in s.social %}{%- if l.url.size > 0 %}
-<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>
-{%- endif %}{%- endfor %}
-{%- if s.email.size > 0 %}<li><a href="mailto:{{ s.email }}">Email</a></li>{%- endif %}
-</ul>
-</div>
-<div class="foot-col">
-<h2 class="foot-label">Index</h2>
+<h2 class="foot-label">Pages</h2>
 <ul>
 <li><a href="/">Home</a></li>
 <li><a href="/projects/">Projects</a></li>
 <li><a href="/blog/">Blog</a></li>
 <li><a href="/favorites/">Favorites</a></li>
 <li><a href="/resume/">Resume</a></li>
-<li><a href="/contact/">Contact</a></li>
 <li><a href="/feed.xml">RSS</a></li>
+</ul>
+</div>
+<div class="foot-col">
+<h2 class="foot-label">Elsewhere</h2>
+<ul>
+{%- for l in s.social %}{%- if l.url.size > 0 %}
+<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>
+{%- endif %}{%- endfor %}
+</ul>
+</div>
+<div class="foot-col">
+<h2 class="foot-label">Contact</h2>
+<ul>
+{%- if s.email.size > 0 %}<li><a href="mailto:{{ s.email }}">Email</a></li>{%- endif %}
+{%- if s.telegram.size > 0 %}<li><a href="{{ s.telegram }}" target="_blank" rel="noopener">Telegram</a></li>{%- endif %}
+<li><a href="/contact/">Contact form</a></li>
 </ul>
 </div>
 </div>
 <div class="foot-meta">
 <span class="foot-copy">© {{ 'now' | date: '%Y' }} {{ s.name }}</span>
-
+<span class="foot-place">{% if s.city.size > 0 %}{{ s.city }} · {% endif %}<span class="foot-clock" data-clock>—</span></span>
+<a class="foot-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
 </div>
 </footer>
