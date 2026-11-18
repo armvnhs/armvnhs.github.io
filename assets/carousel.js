@@ -140,6 +140,8 @@
       /* The cover may already have failed before this script ran, so check the finished image too. */
       if (img.complete && !img.naturalWidth) empty(c);
       link.addEventListener("click", function (e) {
+        /* The click that ends a drag must not navigate away. */
+        if (Date.now() - suppressed < 400) { e.preventDefault(); return; }
         var i = slots.indexOf(c);
         if (i === mod(Math.round(turn), slots.length) && c.href) return;
         e.preventDefault();
@@ -180,6 +182,43 @@
     e.preventDefault();
     glide(Math.round(turn) + d);
   });
+
+  /* Dragging across the deck turns the ring: the cards follow the pointer and settle on the nearest one.
+     A small movement still counts as a click/navigation, so the front card keeps opening its project. */
+  var DRAG_STEP = 150, drag = null, suppressed = 0;
+
+  root.addEventListener("dragstart", function (e) { e.preventDefault(); });
+
+  root.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    cancelAnimationFrame(raf);
+    drag = { id: e.pointerId, x0: e.clientX, t0: turn, moved: false };
+  });
+
+  root.addEventListener("pointermove", function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.x0;
+    if (!drag.moved) {
+      if (Math.abs(dx) < 6) return;
+      drag.moved = true;
+      root.classList.add("is-dragging");
+      try { root.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    turn = clamp(drag.t0 - dx / DRAG_STEP, Math.round(drag.t0) - 3, Math.round(drag.t0) + 3);
+    paint();
+  });
+
+  function endDrag(e) {
+    if (!drag || (e && e.pointerId !== drag.id)) return;
+    var moved = drag.moved;
+    drag = null;
+    root.classList.remove("is-dragging");
+    if (!moved) return;
+    suppressed = Date.now();
+    glide(Math.round(turn));
+  }
+  root.addEventListener("pointerup", endDrag);
+  root.addEventListener("pointercancel", endDrag);
 
   /* The stage is a fixed width per layout so the geometry never changes; a narrower screen scales the whole thing. */
   function fit() {
