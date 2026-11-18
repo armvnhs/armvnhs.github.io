@@ -1303,9 +1303,9 @@ html { scrollbar-gutter: stable; }
 .car-card img { -webkit-user-drag: none; }
 .car-fit ::selection, .car-cap ::selection { background: transparent; color: inherit; }
 
-/* Portfolio stack: one tall card in front, two smaller ones tucked behind it, dots in a pill. */
-.car { width: 400px; height: 372px; margin-left: -200px; }
-.car-fit { height: calc(372px * var(--k, 1)); }
+/* Portfolio stack: one tall card in front, two smaller ones tucked behind it on each side, dots in a pill. */
+.car { width: var(--stage, 720px); height: 372px; margin-left: calc(var(--stage, 720px) / -2); }
+.car-fit { height: calc(372px * var(--k, 1)); overflow-x: clip; }
 .car-slot { width: 210px; height: 312px; }
 .car-float { animation: none; }
 .car-card { border: 0; border-radius: 24px; background: #ededed; box-shadow: 0 22px 44px -26px rgba(var(--shadow-rgb), .55), 0 2px 8px rgba(var(--shadow-rgb), .05); }

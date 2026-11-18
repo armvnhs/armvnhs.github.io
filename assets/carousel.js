@@ -8,7 +8,8 @@
   var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   /* The numbers keep Bencho's tuned values: knobs at 50 are the middle of every range. */
-  var STAGE_W = 400, GAP = 116, PULL = 140, TOSS = 150, MOST = 2, BASE = 620;
+  var STAGE_W = 720, NARROW_W = 400, THRESH = 700, STEP = 150, GAP = 116, PULL = 140, TOSS = 150, MOST = 2, BASE = 620;
+  var wide = true;
   var FLOAT = 15, SINK = 50, CORNER = 20;
   var PERIOD = [4.7, 5.9, 6.7, 5.3, 7.1, 6.1];
   /* Spring at tune 50: stiffness 0.16, decay 0.72, zeta about 0.41 — an overshoot you can see, not one that rings. */
@@ -16,7 +17,7 @@
 
   var track = root.querySelector(".car-track");
   var cap = document.querySelector(".car-cap-link");
-  var slots = [];
+  var slots = [], count = 0;
   var turn = 0, raf = 0, held = false, drag = null, shown = -1;
 
   function mod(n, m) { return ((n % m) + m) % m; }
@@ -24,17 +25,29 @@
   /* Where a card sits is ONE function: first paint and drag both read it. `d` is how many spots the card is
      from the front, taken the short way round so a drag never sends a card across the whole stack.
      The front card stands tall and square-on; the ones behind shrink, tuck underneath it and go pale. */
+  /* Wide screens show two cards each side so the row fills the column; narrow ones fall back to one each side. */
   function spot(i) {
     var n = slots.length, raw = i - turn;
     var d = raw - Math.round(raw / n) * n;
-    var ad = Math.abs(d), near = Math.min(ad, 1);
+    var ad = Math.abs(d), near = Math.min(ad, 1), side = d < 0 ? -1 : 1;
+    if (!wide) {
+      return {
+        x: d * GAP,
+        y: near * 8,
+        s: 1 - near * 0.3,
+        z: Math.round(100 - ad * 10),
+        o: ad < 1 ? 1 : Math.max(0, Math.min(1, 1.9 - ad)),
+        veil: Math.min(0.35, ad * 0.35)
+      };
+    }
+    var far = ad >= 2;
     return {
-      x: d * GAP,
-      y: near * 8,
-      s: 1 - near * 0.3,
+      x: side * Math.min(ad, 3) * STEP,
+      y: far ? 24 : near * 10,
+      s: ad < 1 ? 1 : far ? 0.56 : 0.72,
       z: Math.round(100 - ad * 10),
-      o: ad < 1 ? 1 : Math.max(0, Math.min(1, 1.9 - ad)),
-      veil: Math.min(0.35, ad * 0.35)
+      o: far ? 0.55 : ad < 1 ? 1 : 0.94,
+      veil: far ? 0.4 : near * 0.2
     };
   }
 
@@ -48,7 +61,7 @@
       c.el.style.setProperty("--veil", sp.veil.toFixed(3));
     });
     var f = mod(Math.round(turn), slots.length);
-    if (f !== shown) { shown = f; caption(slots[f]); mark(f); }
+    if (f !== shown) { shown = f; caption(slots[f]); mark(mod(f, count)); }
   }
 
   /* One dot per project, so the stack says how many there are and can be jumped to. */
@@ -64,15 +77,20 @@
     if (dots) dots.remove();
     dots = document.createElement("div");
     dots.className = "car-dots";
-    slots.forEach(function (c, i) {
+    slots.slice(0, count).forEach(function (c, i) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "car-dot";
       b.setAttribute("aria-label", "Show " + (c.title || "project " + (i + 1)));
       b.addEventListener("click", function () {
-        var n = slots.length, d = i - Math.round(turn);
-        d -= Math.round(d / n) * n;
-        glide(Math.round(turn) + d);
+        /* A short ring repeats cards, so aim at the copy of this project nearest the front. */
+        var n = slots.length, at = Math.round(turn), pick = i, far = Infinity;
+        for (var k = 0; k < n; k++) {
+          if (mod(k, count) !== i) continue;
+          var gap = Math.abs(k - at);
+          if (gap < far) { far = gap; pick = k; }
+        }
+        glide(pick);
       });
       dots.appendChild(b);
     });
@@ -140,6 +158,14 @@
 
   function build() {
     var els = Array.prototype.slice.call(track.querySelectorAll(".car-slot"));
+    count = els.length;
+    /* Four projects cannot pad a five-card desktop row on their own, so the ring repeats a card rather than
+       showing an empty side. The copies are decoration only: they add no dots and share their original's data. */
+    while (els.length < Math.max(count, 5)) {
+      var copy = els[els.length - count].cloneNode(true);
+      track.appendChild(copy);
+      els.push(copy);
+    }
     slots = els.map(function (el, i) {
       var link = el.querySelector(".car-card"), img = link.querySelector("img"), sheen = link.querySelector(".car-sheen");
       var c = { el: el, link: link, title: el.dataset.title, cat: el.dataset.cat, href: el.dataset.href, tilt: new Tilt(link, sheen) };
@@ -171,6 +197,7 @@
     c.el.remove();
     slots.splice(i, 1);
     if (!slots.length) { root.closest("section").hidden = true; return; }
+    if (count > slots.length) count = slots.length;
     turn = Math.round(turn);
     shown = -1;
     buildDots();
@@ -211,8 +238,14 @@
     glide(Math.round(turn) + d);
   });
 
-  /* The stage is a fixed 476 wide so the ring's geometry never changes; a narrow screen scales the whole thing. */
-  function fit() { root.style.setProperty("--k", Math.min(1, root.clientWidth / STAGE_W).toFixed(4)); }
+  /* The stage is a fixed width per layout so the geometry never changes; a narrower screen scales the whole thing. */
+  function fit() {
+    wide = root.clientWidth >= THRESH;
+    var stage = wide ? STAGE_W : NARROW_W;
+    root.style.setProperty("--stage", stage + "px");
+    root.style.setProperty("--k", Math.min(1, root.clientWidth / stage).toFixed(4));
+    if (slots.length) paint();
+  }
   fit();
   addEventListener("resize", fit);
 
