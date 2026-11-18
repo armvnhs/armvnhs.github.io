@@ -1,3 +1,10 @@
 {
-  "items": []
+  "items": [
+    {
+      "title": "12 Angry Men",
+      "by": " Sidney Lumet",
+      "cover": "/assets/img/images.jpg",
+      "link": "https://www.imdb.com/title/tt0050083/"
+    }
+  ]
 }
